@@ -1,13 +1,15 @@
 from fastapi import FastAPI
+
 from meter.api import (
     alert_rule,
     auth,
     comment,
+    group,
     issue,
     upload,
     user,
-    group,
 )
+from meter.domain import create_db_and_tables
 
 app = FastAPI()
 
@@ -26,6 +28,11 @@ def health_check():
 @app.get('/readyz')
 def readiness_check():
     return 'ok'
+
+
+@app.on_event('startup')
+def on_startup():
+    create_db_and_tables()
 
 
 apis = (

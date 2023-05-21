@@ -1,11 +1,25 @@
-from fastapi import APIRouter
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, status
+from pydantic import BaseModel
+
+from meter.api import get_user_service
+from meter.domain.user import UserService, UserSignup
 
 router = APIRouter()
 
 
-@router.post('/signup')
-async def signup():
-    pass
+class SignupResponse(BaseModel):
+    id: str
+
+
+@router.post('/signup', status_code=status.HTTP_201_CREATED)
+async def signup(
+    input: UserSignup,
+    svc: Annotated[UserService, Depends(get_user_service)],
+):
+    id = svc.signup(input)
+    return SignupResponse(id=id)
 
 
 @router.get('/')

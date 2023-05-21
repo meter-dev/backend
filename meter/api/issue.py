@@ -16,3 +16,8 @@ async def get_issue():
 @router.post('/')
 async def new_issue():
     pass
+
+
+@router.patch('/{id}')
+async def update_issue(id: str):
+    pass

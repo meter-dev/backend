@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Path
+from fastapi import APIRouter
 
 router = APIRouter()
 
@@ -10,4 +10,9 @@ async def get_comments():
 
 @router.post('/')
 async def new_comments():
+    pass
+
+
+@router.patch('/{id}')
+async def update_comment():
     pass

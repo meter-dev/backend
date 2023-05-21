@@ -6,3 +6,5 @@ htmlcov/
 logs.json
 tmp/
 .idea/
+
+database.db
