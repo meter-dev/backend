@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Setup Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "poetry"
+      - name: Install Dependency
+        run: poetry install
+      - name: Format
+        run: poetry run yapf -- --recursive --parallel --diff .
+      - name: Unit test
+        run: poetry run pytest -- --cov=./ --cov-config=.coveragerc
