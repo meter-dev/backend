@@ -14,7 +14,7 @@ ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 # builder-base is used to build dependencies
 FROM python-base as builder-base
-RUN apt-get update && apt-get install --no-install-recommends -y curl
+RUN apt update && apt install --no-install-recommends -y curl
 
 # Install Poetry - respects $POETRY_VERSION & $POETRY_HOME
 ENV POETRY_VERSION=1.4.2
@@ -42,8 +42,8 @@ RUN mkdir /app
 WORKDIR /app
 COPY . .
 
-EXPOSE 8080
-CMD ["uvicron", "vote.main:app"]
+EXPOSE 8000
+CMD ["uvicorn", "meter.main:app", "--host", "0.0.0.0"]
 
 # 'production' stage uses the clean 'python-base' stage and copyies
 # in only our runtime deps that were installed in the 'builder-base'
@@ -53,5 +53,5 @@ COPY --from=builder-base $VENV_PATH $VENV_PATH
 COPY ./ /app
 
 WORKDIR /app
-EXPOSE 8080
-CMD ["uvicron", "vote.main:app"]
+EXPOSE 8000
+CMD ["uvicorn", "meter.main:app", "--host", "0.0.0.0"]
