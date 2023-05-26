@@ -19,8 +19,10 @@ class Token(BaseModel):
 
 @router.post('/token')
 async def new_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm,
-                         Depends(), ],
+    form_data: Annotated[
+        OAuth2PasswordRequestForm,
+        Depends(),
+    ],
     user_svc: Annotated[UserService, Depends(get_user_service)],
     auth_svc: Annotated[AuthService, Depends(get_auth_service)],
 ):

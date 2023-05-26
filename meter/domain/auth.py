@@ -12,6 +12,7 @@ class AuthConfig(BaseModel):
 
 
 class AuthService:
+
     def __init__(self, config: AuthConfig) -> None:
         self.config = config
 
