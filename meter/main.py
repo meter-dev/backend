@@ -4,12 +4,13 @@ from meter.api import (
     alert_rule,
     auth,
     comment,
+    get_config,
     group,
     issue,
     upload,
     user,
 )
-from meter.domain import create_db_and_tables
+from meter.domain import create_db_and_tables, get_engine
 
 app = FastAPI()
 
@@ -32,7 +33,9 @@ def readiness_check():
 
 @app.on_event('startup')
 def on_startup():
-    create_db_and_tables()
+    # FIXME: we might need to mock the config, but startup event can't use Depends
+    cfg = get_config()
+    create_db_and_tables(get_engine(cfg.sql))
 
 
 apis = (

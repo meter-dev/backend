@@ -1,19 +1,19 @@
+from pydantic import BaseModel
+from sqlalchemy.engine import Engine
 from sqlmodel import SQLModel, create_engine
 
 
-def get_engine():
-    # TODO: read config
-    sqlite_file_name = 'database.db'
-    sqlite_url = f'sqlite:///{sqlite_file_name}'
-    connect_args = {'check_same_thread': False}
+class SQLEngineParam(BaseModel):
+    url: str
+    connect_args: dict
 
-    engine = create_engine(
-        sqlite_url,
-        echo=True,
-        connect_args=connect_args,
-    )
+
+def get_engine(param: SQLEngineParam):
+    engine = create_engine(**param.dict())
     return engine
 
 
-def create_db_and_tables():
-    SQLModel.metadata.create_all(get_engine())
+# TODO: this might not be the correct type?
+# https://github.com/tiangolo/sqlmodel/blob/43a689d369f52b72aac60efd71111aba7d84714d/sqlmodel/engine/create.py#L78
+def create_db_and_tables(engine: Engine):
+    SQLModel.metadata.create_all(engine)

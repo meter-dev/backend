@@ -1,0 +1,31 @@
+import toml
+from pydantic import BaseSettings
+
+from meter.domain import SQLEngineParam
+from meter.domain.auth import AuthConfig
+
+
+def toml_settings(settings: BaseSettings) -> dict:
+    return toml.load(open(settings.__config__.path))
+
+
+class MeterConfig(BaseSettings):
+    sql: SQLEngineParam
+    auth: AuthConfig
+
+    class Config:
+        path = 'meter.toml'
+
+        @classmethod
+        def customise_sources(
+            cls,
+            init_settings,
+            env_settings,
+            file_secret_settings,
+        ):
+            return (
+                init_settings,
+                toml_settings,
+                env_settings,
+                file_secret_settings,
+            )
