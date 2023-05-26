@@ -22,6 +22,19 @@ def test_signup_and_login(test_client: TestClient):
         },
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
+    token = resp.json()
+
+    resp = test_client.get('/user',
+                           headers={
+                               'Authorization':
+                               f'{token["token_type"]} {token["access_token"]}'
+                           })
+    assert resp.status_code == status.HTTP_200_OK, resp.json()
+    assert resp.json()['name'] == 'foo', resp.json()
+
+    resp = test_client.get(
+        '/user', headers={'Authorization': f'{token["token_type"]} lol'})
+    assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
 
 
 def test_signup_multiple_users(test_client: TestClient):

@@ -30,3 +30,9 @@ class AuthService:
             self.config.secret_key,
             algorithm=self.config.algorithm,
         )
+
+    def decode_jwt(self, token):
+        payload = jwt.decode(token,
+                             self.config.secret_key,
+                             algorithms=self.config.algorithm)
+        return payload
