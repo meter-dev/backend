@@ -17,12 +17,12 @@ def get_password_digest(password: str):
 
 
 class UserBase(SQLModel):
-    name: str = Field(index=True, unique=True)
+    name: str = Field(index=True, unique=True, regex='^[a-zA-Z0-9_-]{2,32}$')
     email: EmailStr = Field(unique=True)
 
 
 class User(UserBase, table=True):
-    id: Optional[str] = Field(primary_key=True, default=True)
+    id: Optional[int] = Field(primary_key=True, default=None)
     password_digest: str
 
 
@@ -40,7 +40,6 @@ class UserLogin(SQLModel):
 
 
 class UserService:
-
     def __init__(self, session: Session) -> None:
         self.session = session
 
@@ -51,7 +50,11 @@ class UserService:
             password_digest=get_password_digest(input.password),
         )
         self.session.add(user)
-        self.session.commit()
+        try:
+            self.session.commit()
+        except Exception as e:
+            self.session.rollback()
+            raise e
         self.session.refresh(user)
         return user.id
 

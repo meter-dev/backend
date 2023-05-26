@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+import sqlalchemy
 
 from meter.api import (
     alert_rule,
@@ -33,6 +35,15 @@ def readiness_check():
 @app.on_event('startup')
 def on_startup():
     create_db_and_tables()
+
+
+@app.exception_handler(sqlalchemy.exc.IntegrityError)
+async def unicorn_exception_handler(request: Request,
+                                    exc: sqlalchemy.exc.IntegrityError):
+    return JSONResponse(
+        status_code=422,
+        content={"message": str(exc)},
+    )
 
 
 apis = (

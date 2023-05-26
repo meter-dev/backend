@@ -25,7 +25,6 @@ def test_session():
 
 @pytest.fixture
 def test_client(test_session: Session):
-
     def get_session_override():
         return test_session
 

@@ -43,3 +43,74 @@ def test_signup_multiple_users(test_client: TestClient):
             json=i.dict(),
         )
         assert resp.status_code == status.HTTP_201_CREATED, resp.json()
+
+
+def test_signup_wrong_password(test_client: TestClient):
+    resp = test_client.post(
+        '/user/signup',
+        json={
+            'name': 'foo',
+            'email': 'foooooo',
+            'password': 'foo',
+        },
+    )
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
+
+
+def test_signup_wrong_name(test_client: TestClient):
+    resp = test_client.post(
+        '/user/signup',
+        json={
+            'name': '台灣人',
+            'email': 'baz@bar.com',
+            'password': 'foo',
+        },
+    )
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
+
+    resp = test_client.post(
+        '/user/signup',
+        json={
+            'name': 'a' * 33,
+            'email': 'baz@bar.com',
+            'password': 'foo',
+        },
+    )
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
+
+
+def test_signup_duplicated(test_client: TestClient):
+    resp = test_client.post(
+        '/user/signup',
+        json={
+            'name': 'Tai-uan-lang',
+            'email': 'baz@bar.com',
+            'password': 'foo',
+        },
+    )
+    assert resp.status_code == status.HTTP_201_CREATED, resp.json()
+
+    resp = test_client.post(
+        '/user/signup',
+        json={
+            'name': 'Tai-uan-lang',
+            'email': 'bak@bar.com',
+            'password': 'foo',
+        },
+    )
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
+
+    resp = test_client.post(
+        '/user/signup',
+        json={
+            'name': 'Tiong-kok-lang',
+            'email': 'baz@bar.com',
+            'password': 'foo',
+        },
+    )
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
