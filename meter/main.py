@@ -1,6 +1,6 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
-import sqlalchemy
+from sqlalchemy.exc import IntegrityError
 
 from meter.api import (
     alert_rule,
@@ -16,7 +16,7 @@ from meter.domain import create_db_and_tables
 app = FastAPI()
 
 
-@app.get("/")
+@app.get('/')
 def index():
     # TODO: maybe return some information about this service?
     return ''
@@ -37,12 +37,11 @@ def on_startup():
     create_db_and_tables()
 
 
-@app.exception_handler(sqlalchemy.exc.IntegrityError)
-async def unicorn_exception_handler(request: Request,
-                                    exc: sqlalchemy.exc.IntegrityError):
+@app.exception_handler(IntegrityError)
+async def unicorn_exception_handler(request: Request, exc: IntegrityError):
     return JSONResponse(
-        status_code=422,
-        content={"message": str(exc)},
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={'message': exc.args[0]},
     )
 
 
