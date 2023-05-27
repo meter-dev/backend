@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.engine import Engine
 from sqlmodel import Session
 
-from meter.api.config import MeterConfig
+from meter.config import MeterConfig
 from meter.domain import get_engine as _get_engine
 from meter.domain.auth import AuthService
 from meter.domain.user import UserService
