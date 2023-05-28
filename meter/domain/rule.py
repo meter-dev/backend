@@ -34,6 +34,7 @@ class ReadRule(RuleBase):
 
 
 class RuleService:
+
     def __init__(self, session: Session) -> None:
         self.session = session
 
