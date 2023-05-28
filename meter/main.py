@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
+from fastapi.responses import JSONResponse
+from sqlalchemy.exc import IntegrityError
 
 from meter.api import (
     alert_rule,
@@ -15,7 +17,7 @@ from meter.domain import create_db_and_tables, get_engine
 app = FastAPI()
 
 
-@app.get("/")
+@app.get('/')
 def index():
     # TODO: maybe return some information about this service?
     return ''
@@ -36,6 +38,14 @@ def on_startup():
     # FIXME: we might need to mock the config, but startup event can't use Depends
     cfg = get_config()
     create_db_and_tables(get_engine(cfg.sql))
+
+
+@app.exception_handler(IntegrityError)
+async def unicorn_exception_handler(request: Request, exc: IntegrityError):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={'message': exc.args[0]},
+    )
 
 
 apis = (
