@@ -23,7 +23,7 @@ async def signup(
 
 
 @router.get('/')
-async def get_users(current_user: Annotated[User, Depends(get_current_user)]):
+async def get_user(current_user: Annotated[User, Depends(get_current_user)]):
     return current_user
 
 
