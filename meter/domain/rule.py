@@ -16,7 +16,9 @@ class RuleBase(SQLModel):
 
 class Rule(RuleBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: Optional[int] = Field(index=True, default=None, foreign_key="user.id")
+    user_id: Optional[int] = Field(index=True,
+                                   default=None,
+                                   foreign_key="user.id")
 
 
 class CreateRule(RuleBase):
@@ -59,7 +61,8 @@ class RuleService:
         try:
             self.session.commit()
         except Exception as e:
-            logging.error(f"[create_rule] failed: input = {input}, exception = {e}!")
+            logging.error(
+                f"[create_rule] failed: input = {input}, exception = {e}!")
             self.session.rollback()
             raise e
 
@@ -135,7 +138,8 @@ class RuleService:
         try:
             self.session.commit()
         except Exception as e:
-            logging.error(f"[disable_rule] failed: id = {id}, exception = {e}!")
+            logging.error(
+                f"[disable_rule] failed: id = {id}, exception = {e}!")
             raise e
         self.session.refresh(rule)
 
