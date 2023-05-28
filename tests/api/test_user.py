@@ -69,6 +69,7 @@ def test_signup_wrong_password(test_client: TestClient):
     )
     assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
     )
+    assert resp.json()['detail'][0]['loc'][1] == 'email', resp.json()
 
 
 def test_signup_wrong_name(test_client: TestClient):
@@ -82,6 +83,7 @@ def test_signup_wrong_name(test_client: TestClient):
     )
     assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
     )
+    assert resp.json()['detail'][0]['loc'][1] == 'name', resp.json()
 
     resp = test_client.post(
         '/user/signup',
@@ -93,6 +95,7 @@ def test_signup_wrong_name(test_client: TestClient):
     )
     assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
     )
+    assert resp.json()['detail'][0]['loc'][1] == 'name', resp.json()
 
 
 def test_signup_duplicated(test_client: TestClient):
@@ -116,6 +119,8 @@ def test_signup_duplicated(test_client: TestClient):
     )
     assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
     )
+    assert 'UNIQUE constraint failed: user.name' in resp.json(
+    )['message'], resp.json()
 
     resp = test_client.post(
         '/user/signup',
@@ -127,3 +132,5 @@ def test_signup_duplicated(test_client: TestClient):
     )
     assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
     )
+    assert 'UNIQUE constraint failed: user.email' in resp.json(
+    )['message'], resp.json()

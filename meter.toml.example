@@ -1,0 +1,10 @@
+# example config
+
+[sql]
+url = "sqlite:///database.db"
+connect_args = { check_same_thread = false }
+
+[auth]
+secret_key = "i-am-example-secret-key"
+algorithm = "HS256"
+default_ttl_sec = 900

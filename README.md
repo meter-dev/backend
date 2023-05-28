@@ -3,6 +3,7 @@
 ## TL;DR
 
 ```bash
+cp meter.toml.example meter.toml
 docker build . -t meter-web
 docker run --rm -p 8000:8000 meter-web
 # 然後就能在這邊看到 API 文件了，可以用 swagger 直接戳幾下試試
@@ -20,12 +21,17 @@ docker run --rm -p 8000:8000 meter-web
 ### Setup
 
 ```bash
+cp meter.toml.example meter.toml
 poetry install
 poetry run uvicorn meter.main:app
 # 一樣，文件在 http://127.0.0.1:8000/docs
 ```
 
 > 可以加上 `--reload` 讓 FastAPI 會 hot reloading
+
+### Config
+
+我們使用 `meter.toml` 這個檔案來做 config，開啟 web server 前可以先把 `meter.toml.example` 複製一份出來。
 
 ### Project Architecture
 
