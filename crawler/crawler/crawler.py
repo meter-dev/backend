@@ -13,7 +13,9 @@ class Crawler(metaclass=abc.ABCMeta):
         cls.METHOD = method
         cls.HEADERS = headers
 
-    def __init__(self, queries):
+    def __init__(self, queries=None):
+        if queries is None:
+            queries = [...]
         self.queries = queries
         self.done = []
 
