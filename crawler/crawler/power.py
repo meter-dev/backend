@@ -31,11 +31,8 @@ def timestamp(timestr):
     return int(time.mktime(t.timetuple()))
 
 
-BASEURL = 'https://www.taipower.com.tw/d006/loadGraph/loadGraph/data'
-
-
 class PowerCrawler(Crawler, method='get'):
-    URL = f'{BASEURL}/loadareas.csv'
+    URL = 'https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadareas.csv'
 
     def _url(self, _):
         return self.URL
