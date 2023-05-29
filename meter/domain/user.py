@@ -16,12 +16,6 @@ def get_password_digest(password: str):
     return bcrypt.hash(password)
 
 
-# TODO: return first user in the db now. Please refer to official doc and implment it securely.
-# https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/
-def decode_token(token):
-    pass
-
-
 class UserBase(SQLModel):
     name: str = Field(index=True, unique=True, regex="^[a-zA-Z0-9_-]{2,32}$")
     email: EmailStr = Field(unique=True)
