@@ -22,7 +22,7 @@ async def signup(
     return SignupResponse(id=id)
 
 
-@router.get('/')
+@router.get('/me')
 async def get_user(current_user: Annotated[User, Depends(get_current_user)]):
     return current_user
 

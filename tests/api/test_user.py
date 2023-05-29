@@ -24,7 +24,7 @@ def test_signup_and_login(test_client: TestClient):
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
 
-    resp = test_client.get('/user',
+    resp = test_client.get('/user/me',
                            headers={
                                'Authorization':
                                f'{token["token_type"]} {token["access_token"]}'
@@ -33,7 +33,7 @@ def test_signup_and_login(test_client: TestClient):
     assert resp.json()['name'] == 'foo', resp.json()
 
     resp = test_client.get(
-        '/user', headers={'Authorization': f'{token["token_type"]} lol'})
+        '/user/me', headers={'Authorization': f'{token["token_type"]} lol'})
     assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
 
 
