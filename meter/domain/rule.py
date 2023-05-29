@@ -40,15 +40,16 @@ class RuleService:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    # TODO: check user id after auth done.
-    def __get_rule_by_id(self, id) -> Rule | None:
-        statement = select(Rule).where(Rule.id == id)
+    def __get_rule_by_id_and_user_id(self, id: int,
+                                     userId: int) -> Rule | None:
+        statement = select(Rule).where(Rule.id == id).where(
+            Rule.user_id == userId)
         results = self.session.exec(statement)
         return results.first()
 
     def create(self, input: CreateRule, user: User) -> Rule | None:
         rule = Rule(
-            user_id=1,  # TODO: change to `user.id` after auth done.
+            user_id=user.id,
             name=input.name,
             resource=input.resource,
             operator=input.operator,
@@ -70,14 +71,15 @@ class RuleService:
         return rule
 
     def get(self, user: User) -> list[Rule]:
-        statement = select(Rule).where(
-            Rule.user_id == 1  # TODO: change to `user.id` after auth done.
-        )
+        statement = select(Rule).where(Rule.user_id == user.id)
         results = self.session.exec(statement)
         return results.all()
 
     def update(self, id: int, input: UpdateRule, user: User) -> Rule | None:
-        rule = self.__get_rule_by_id(id)
+        if user.id is None:
+            return None
+
+        rule = self.__get_rule_by_id_and_user_id(id, user.id)
         if rule is None:
             return None
 
@@ -96,8 +98,11 @@ class RuleService:
 
         return rule
 
-    def delete(self, id: int) -> bool:
-        rule = self.__get_rule_by_id(id)
+    def delete(self, id: int, user: User) -> bool:
+        if user.id is None:
+            return False
+
+        rule = self.__get_rule_by_id_and_user_id(id, user.id)
         if rule is None:
             return False
 
@@ -111,7 +116,10 @@ class RuleService:
         return True
 
     def enable(self, id: int, user: User) -> bool:
-        rule = self.__get_rule_by_id(id)
+        if user.id is None:
+            return False
+
+        rule = self.__get_rule_by_id_and_user_id(id, user.id)
         if rule is None:
             return False
 
@@ -128,7 +136,10 @@ class RuleService:
         return rule
 
     def disable(self, id: int, user: User) -> bool:
-        rule = self.__get_rule_by_id(id)
+        if user.id is None:
+            return False
+
+        rule = self.__get_rule_by_id_and_user_id(id, user.id)
         if rule is None:
             return False
 

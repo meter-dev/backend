@@ -38,8 +38,3 @@ async def update_user(id: str):
 @router.post("/verify-email")
 async def verify_email():
     pass
-
-
-async def get_current_user(token: Annotated[str, Depends(oauth2_schema)]):
-    user = decode_token(token)
-    return user

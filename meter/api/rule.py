@@ -2,8 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, status, HTTPException
 
-from meter.api import get_rule_service
-from meter.api.user import get_current_user
+from meter.api import get_rule_service, get_current_user
 from meter.domain.user import User
 from meter.domain.rule import RuleService, CreateRule, UpdateRule, ReadRule
 
