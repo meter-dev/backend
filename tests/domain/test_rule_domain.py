@@ -96,24 +96,24 @@ class TestRuleDomainClass:
 
         assert rules == []
 
-    def test_get_one_no_user_id(self):
+    def test_show_no_user_id(self):
         byUser = User(
             name='foo',
             email='foo@foo.com',
             password_digest='somefakedigest',
         )
-        rules = self.service.getOneById(byUser, 1)
+        rules = self.service.show(byUser, 1)
 
         assert rules == None
 
-    def test_get_one(self):
+    def test_show(self):
         byUser = User(
             id=1,
             name='foo',
             email='foo@foo.com',
             password_digest='somefakedigest',
         )
-        rules = self.service.getOneById(byUser, 1)
+        rules = self.service.show(byUser, 1)
 
         assert rules == None
 
