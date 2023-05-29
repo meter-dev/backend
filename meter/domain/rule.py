@@ -8,6 +8,7 @@ from sqlmodel import Field, Session, SQLModel, select
 
 class RuleBase(SQLModel):
     name: Optional[str] = Field(index=True)
+    position: str = Field(index=True)
     resource: str = Field(index=True)
     operator: str
     value: int
@@ -21,11 +22,17 @@ class Rule(RuleBase, table=True):
                                    foreign_key="user.id")
 
 
-class CreateRule(RuleBase):
-    pass
+class CreateRule(SQLModel):
+    name: Optional[str]
+    position: str
+    resource: str
+    operator: str
+    value: int
 
 
-class UpdateRule(RuleBase):
+class UpdateRule(SQLModel):
+    name: Optional[str]
+    position: Optional[str]
     resource: Optional[str]
     operator: Optional[str]
     value: Optional[int]
@@ -51,12 +58,12 @@ class RuleService:
         rule = Rule(
             user_id=user.id,
             name=input.name,
+            position=input.position,
             resource=input.resource,
             operator=input.operator,
             value=input.value,
             is_enable=True,
         )
-        print(rule)
         self.session.add(rule)
 
         try:
@@ -75,6 +82,12 @@ class RuleService:
         results = self.session.exec(statement)
         return results.all()
 
+    def show(self, user: User, id: int) -> Rule | None:
+        if user.id is None:
+            return None
+
+        return self.__get_rule_by_id_and_user_id(id, user.id)
+
     def update(self, id: int, input: UpdateRule, user: User) -> Rule | None:
         if user.id is None:
             return None
@@ -84,6 +97,7 @@ class RuleService:
             return None
 
         rule.name = input.name or rule.name
+        rule.position = input.position or rule.position
         rule.resource = input.resource or rule.resource
         rule.operator = input.operator or rule.operator
         rule.value = input.value or rule.value
@@ -131,9 +145,8 @@ class RuleService:
         except Exception as e:
             logging.error(f"[enable_rule] failed: id = {id}, exception = {e}!")
             raise e
-        self.session.refresh(rule)
 
-        return rule
+        return True
 
     def disable(self, id: int, user: User) -> bool:
         if user.id is None:
@@ -152,6 +165,5 @@ class RuleService:
             logging.error(
                 f"[disable_rule] failed: id = {id}, exception = {e}!")
             raise e
-        self.session.refresh(rule)
 
-        return rule
+        return True

@@ -37,7 +37,23 @@ async def get_rules(
     return svc.get(user)
 
 
-@router.put(
+@router.get(
+    "/{id}",
+    response_model=ReadRule,
+)
+async def show_rule(
+    svc: Annotated[RuleService, Depends(get_rule_service)],
+    user: Annotated[User, Depends(get_current_user)],
+    id: int,
+):
+    rule = svc.show(user, id)
+    if rule is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+    return rule
+
+
+@router.patch(
     "/{id}",
     response_model=ReadRule,
 )
@@ -65,7 +81,7 @@ async def delete_rule(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
 
-@router.put("/{id}/enable")
+@router.put("/{id}/enable", status_code=status.HTTP_204_NO_CONTENT)
 async def enable_rule(
     svc: Annotated[RuleService, Depends(get_rule_service)],
     user: Annotated[User, Depends(get_current_user)],
@@ -76,7 +92,7 @@ async def enable_rule(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
 
-@router.put("/{id}/disable")
+@router.put("/{id}/disable", status_code=status.HTTP_204_NO_CONTENT)
 async def disable_rule(
     svc: Annotated[RuleService, Depends(get_rule_service)],
     user: Annotated[User, Depends(get_current_user)],
@@ -87,7 +103,7 @@ async def disable_rule(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
 
-@router.put("/{id}/trigger")
+@router.put("/{id}/trigger", status_code=status.HTTP_204_NO_CONTENT)
 async def trigger_alert(
     svc: Annotated[RuleService, Depends(get_rule_service)],
     user: Annotated[User, Depends(get_current_user)],
