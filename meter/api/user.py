@@ -3,8 +3,8 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, status
 from pydantic import BaseModel
 
-from meter.api import get_user_service
-from meter.domain.user import UserService, UserSignup
+from meter.api import get_user_service, get_current_user
+from meter.domain.user import UserService, UserSignup, User
 
 router = APIRouter()
 
@@ -22,9 +22,9 @@ async def signup(
     return SignupResponse(id=id)
 
 
-@router.get('/')
-async def get_users():
-    pass
+@router.get('/me')
+async def get_user(current_user: Annotated[User, Depends(get_current_user)]):
+    return current_user
 
 
 @router.patch('/{id}')
