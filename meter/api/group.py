@@ -3,16 +3,16 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.post('/')
+@router.post("/")
 async def new_group():
     pass
 
 
-@router.get('/')
+@router.get("/")
 async def get_groups():
     pass
 
 
-@router.patch('/{id}')
+@router.patch("/{id}")
 async def update_group():
     pass

@@ -2,17 +2,17 @@ from typing import Annotated
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError
 from sqlalchemy.engine import Engine
 from sqlmodel import Session
 
 from meter.config import MeterConfig
 from meter.domain import get_engine as _get_engine
 from meter.domain.auth import AuthService
-from meter.domain.user import UserService
 from meter.domain.rule import RuleService
-from jose import JWTError
+from meter.domain.user import UserService
 
-oauth2_schema = OAuth2PasswordBearer(tokenUrl='/auth/token', scheme_name="JWT")
+oauth2_schema = OAuth2PasswordBearer(tokenUrl="/auth/token", scheme_name="JWT")
 
 
 def get_config():

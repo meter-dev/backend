@@ -3,16 +3,16 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get('/')
+@router.get("/")
 async def get_comments():
     pass
 
 
-@router.post('/')
+@router.post("/")
 async def new_comments():
     pass
 
 
-@router.patch('/{id}')
+@router.patch("/{id}")
 async def update_comment():
     pass
