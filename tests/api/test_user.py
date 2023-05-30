@@ -124,3 +124,51 @@ def test_signup_duplicated(test_client: TestClient):
     )
     assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
     assert "UNIQUE constraint failed: user.email" in resp.json()["message"], resp.json()
+
+
+def test_login_by_email(test_client: TestClient):
+    resp = test_client.post(
+        "/user/signup",
+        json={
+            "name": "foo",
+            "email": "foo@bar.com",
+            "password": "foo",
+        },
+    )
+    assert resp.status_code == status.HTTP_201_CREATED, resp.json()
+    resp = test_client.post(
+        "/auth/token",
+        data={"username": "foo@bar.com", "password": "foo"},
+    )
+    assert resp.status_code == status.HTTP_200_OK, resp.json()
+    token = resp.json()
+    resp = test_client.get(
+        "/user/me",
+        headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
+    )
+    assert resp.status_code == status.HTTP_200_OK, resp.json()
+    assert resp.json()["name"] == "foo", resp.json()
+
+
+def test_login_by_email_case_insensitive(test_client: TestClient):
+    resp = test_client.post(
+        "/user/signup",
+        json={
+            "name": "foo",
+            "email": "foo@bar.com",
+            "password": "foo",
+        },
+    )
+    assert resp.status_code == status.HTTP_201_CREATED, resp.json()
+    resp = test_client.post(
+        "/auth/token",
+        data={"username": "fOo@bAr.com", "password": "foo"},
+    )
+    assert resp.status_code == status.HTTP_200_OK, resp.json()
+    token = resp.json()
+    resp = test_client.get(
+        "/user/me",
+        headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
+    )
+    assert resp.status_code == status.HTTP_200_OK, resp.json()
+    assert resp.json()["name"] == "foo", resp.json()
