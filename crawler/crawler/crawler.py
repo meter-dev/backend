@@ -2,8 +2,10 @@ from typing import Optional
 from typing import Iterable, Iterator, TypeVar, Generic
 
 from httpx._types import HeaderTypes, RequestContent, URLTypes
+from httpx import Response
 
 import abc
+import asyncio
 
 import httpx
 
@@ -53,11 +55,11 @@ class Crawler(Generic[Report, Query], metaclass=abc.ABCMeta):
             yield from self._report(data)
 
     async def crawl(self):
-        client = httpx.AsyncClient()
-        for url, data in zip(self.urls, self.data):
-            r = await client.request(self.METHOD,
-                                     url,
-                                     content=data,
-                                     headers=self.HEADERS)
-            self.done.append(r.content)
-        await client.aclose()
+        async with httpx.AsyncClient() as client:
+            reqs = (client.request(self.METHOD,
+                                   url,
+                                   content=data,
+                                   headers=self.HEADERS)
+                    for url, data in zip(self.urls, self.data))
+            resps: list[Response] = await asyncio.gather(*reqs)
+            self.done.extend(map(lambda r: r.content, resps))
