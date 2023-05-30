@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import TypedDict
 from urllib.parse import urlencode
 
 from .crawler import Crawler
@@ -8,7 +9,20 @@ import time
 import httpx
 
 
-def getval(data, name):
+class DamReport(TypedDict):
+    name: str
+    timestamp: int
+    storage: float
+    percent: float
+
+
+class DamQuery(TypedDict):
+    year: int
+    month: int
+    day: int
+
+
+def getval(data: str, name: str):
     delim = f'id="{name}" value="'
     val = data[data.find(delim) + len(delim):]
     val = val[:val.find('"')]
@@ -33,39 +47,40 @@ def payload():
 HEADERS = {'content-type': 'application/x-www-form-urlencoded'}
 
 
-def damname(s):
+def damname(s: str):
     return s[s.find('>') + 1:s.find('<')]
 
 
-def timestamp(t):
-    t = t[1:]
-    if t == '--':
+def timestamp(timestr: str):
+    timestr = timestr[1:]
+    if timestr == '--':
         return -1
     return int(
-        time.mktime(datetime.strptime(t, "%Y-%m-%d %H:%M:%S").timetuple()))
+        time.mktime(
+            datetime.strptime(timestr, "%Y-%m-%d %H:%M:%S").timetuple()))
 
 
-def damstorage(c):
+def damstorage(c: str):
     c = c[c.find('>') + 1:]
     if c == '--':
         return -1
     return float(c.replace(',', ''))
 
 
-def dampercent(p):
+def dampercent(p: str):
     p = p[p.find('>') + 1:]
     if p == '--':
         return -1
     return float(p[:-2])
 
 
-class DamCrawler(Crawler, method='post', headers=HEADERS):
+class DamCrawler(Crawler[DamReport, DamQuery], method='post', headers=HEADERS):
     URL = 'https://fhy.wra.gov.tw/ReservoirPage_2011/Statistics.aspx'
 
-    def _url(self, _):
+    def _url(self, query: DamQuery):
         return self.URL
 
-    def _data(self, query):
+    def _data(self, query: DamQuery):
         return payload() + urlencode(
             {
                 'ctl00$cphMain$ucDate$cboYear': query['year'],
@@ -73,13 +88,11 @@ class DamCrawler(Crawler, method='post', headers=HEADERS):
                 'ctl00$cphMain$ucDate$cboDay': query['day']
             })
 
-    def _report(self, data):
-        data = data.split('<a href="ReservoirChart.aspx?key=')[1:]
-        for dam in data:
+    def _report(self, data: bytes):
+        dams = data.decode().split('<a href="ReservoirChart.aspx?key=')[1:]
+        for dam in dams:
             dam = dam.split('</td><td')
-            yield {
-                'name': damname(dam[0]),
-                'timestamp': timestamp(dam[1]),
-                'storage': damstorage(dam[6]),
-                'percent': dampercent(dam[7])
-            }
+            yield DamReport(name=damname(dam[0]),
+                            timestamp=timestamp(dam[1]),
+                            storage=damstorage(dam[6]),
+                            percent=dampercent(dam[7]))

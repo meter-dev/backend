@@ -1,10 +1,25 @@
 from datetime import datetime
+from typing import Any, TypedDict
 
 from .crawler import Crawler
 
 import time
 
 import httpx
+
+
+class PowerAreaReport(TypedDict):
+    load: float
+    max_supply: float
+    recv_rate: float
+
+
+class PowerReport(TypedDict):
+    timestamp: int
+    east: PowerAreaReport
+    south: PowerAreaReport
+    central: PowerAreaReport
+    north: PowerAreaReport
 
 
 def mxpowersply():
@@ -20,7 +35,7 @@ def mxpowersply():
     return list(map(lambda r: r * mxsply, SPLY_RATE))
 
 
-def timestamp(timestr):
+def timestamp(timestr: str):
     t = timestr.split(':')
     if len(t) < 2:
         t.append('0')
@@ -29,46 +44,39 @@ def timestamp(timestr):
     return int(time.mktime(t.timetuple()))
 
 
-class PowerCrawler(Crawler, method='get'):
+IDontCare = Any
+
+
+class PowerCrawler(Crawler[PowerReport, IDontCare], method='get'):
     URL = 'https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadareas.csv'
 
-    def _url(self, _):
+    def _url(self, query: Any):
         return self.URL
 
-    def _data(self, _):
+    def _data(self, query: Any):
         return ''
 
-    def _report(self, data):
-        splyrate = []
-        data = data.split('\r\n')
-        data = list(filter(lambda d: len(d) > 2, data))
-        for line in data:
+    def _report(self, data: bytes):
+        lines = data.decode().split('\r\n')
+        lines = list(filter(lambda d: len(d) > 2, lines))
+        for line in lines:
             d = line.split(',')
             load = list(map(float, d[1:]))
             recv = list(map(lambda s, l: (s - l) / l * 100, self.supply, load))
-            yield {
-                'timestamp': timestamp(d[0]),
-                'east': {
-                    'load': load[0],
-                    'max_supply': round(self.supply[0], 2),
-                    'recv_rate': round(recv[0], 2)
-                },
-                'south': {
-                    'load': load[1],
-                    'max_supply': round(self.supply[1], 2),
-                    'recv_rate': round(recv[1], 2)
-                },
-                'central': {
-                    'load': load[2],
-                    'max_supply': round(self.supply[2], 2),
-                    'recv_rate': round(recv[2], 2)
-                },
-                'north': {
-                    'load': load[3],
-                    'max_supply': round(self.supply[3], 2),
-                    'recv_rate': round(recv[3], 2)
-                }
-            }
+            yield PowerReport(
+                timestamp=timestamp(d[0]),
+                east=PowerAreaReport(load=load[0],
+                                     max_supply=round(self.supply[0], 2),
+                                     recv_rate=round(recv[0], 2)),
+                south=PowerAreaReport(load=load[1],
+                                      max_supply=round(self.supply[1], 2),
+                                      recv_rate=round(recv[1], 2)),
+                central=PowerAreaReport(load=load[2],
+                                        max_supply=round(self.supply[2], 2),
+                                        recv_rate=round(recv[2], 2)),
+                north=PowerAreaReport(load=load[3],
+                                      max_supply=round(self.supply[3], 2),
+                                      recv_rate=round(recv[3], 2)))
 
     async def crawl(self):
         self.supply = mxpowersply()
