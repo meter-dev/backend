@@ -17,9 +17,11 @@ class RuleBase(SQLModel):
 
 class Rule(RuleBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: Optional[int] = Field(index=True,
-                                   default=None,
-                                   foreign_key="user.id")
+    user_id: Optional[int] = Field(
+        index=True,
+        default=None,
+        foreign_key="user.id",
+    )
 
 
 class CreateRule(SQLModel):
@@ -47,10 +49,14 @@ class RuleService:
     def __init__(self, session: Session) -> None:
         self.session = session
 
-    def __get_rule_by_id_and_user_id(self, id: int,
-                                     userId: int) -> Rule | None:
-        statement = select(Rule).where(Rule.id == id).where(
-            Rule.user_id == userId)
+    def __get_rule_by_id_and_user_id(
+        self,
+        id: int,
+        userId: int,
+    ) -> Rule | None:
+        statement = select(Rule) \
+            .where(Rule.id == id) \
+            .where(Rule.user_id == userId)
         results = self.session.exec(statement)
         return results.first()
 
@@ -78,7 +84,8 @@ class RuleService:
         return rule
 
     def get(self, user: User) -> list[Rule]:
-        statement = select(Rule).where(Rule.user_id == user.id)
+        statement = select(Rule) \
+            .where(Rule.user_id == user.id)
         results = self.session.exec(statement)
         return results.all()
 

@@ -40,21 +40,23 @@ class TestRuleDomainClass:
         self.service = RuleService(MockSession())
 
     def test_create(self):
-        resource = CreateRule(name='foo',
-                              position='Taipei',
-                              resource='foo',
-                              operator='>',
-                              value=12)
-        byUser = User(
-            id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+        resource = CreateRule(
+            name="foo",
+            position="Taipei",
+            resource="foo",
+            operator=">",
+            value=12,
         )
-        rule = self.service.create(resource, byUser)
+        by_user = User(
+            id=1,
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
+        )
+        rule = self.service.create(resource, by_user)
 
         assert rule == Rule(
-            user_id=byUser.id,
+            user_id=by_user.id,
             name=resource.name,
             position=resource.position,
             resource=resource.resource,
@@ -65,372 +67,400 @@ class TestRuleDomainClass:
 
     def test_create_failed(self, monkeypatch):
 
-        def mockReturn(arg1):
+        def mock_commit(arg1):
             raise Exception()
 
-        monkeypatch.setattr(MockSession, "commit", mockReturn)
+        monkeypatch.setattr(MockSession, "commit", mock_commit)
         self.service = RuleService(MockSession())
 
-        resource = CreateRule(name='foo',
-                              position='Taipei',
-                              resource='foo',
-                              operator='>',
-                              value=12)
-        byUser = User(
+        resource = CreateRule(
+            name="foo",
+            position="Taipei",
+            resource="foo",
+            operator=">",
+            value=12,
+        )
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
         with pytest.raises(Exception):
-            self.service.create(resource, byUser)
+            self.service.create(resource, by_user)
 
     def test_get(self):
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        rules = self.service.get(byUser)
+        rules = self.service.get(by_user)
 
         assert rules == []
 
     def test_show_no_user_id(self):
-        byUser = User(
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+        by_user = User(
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        rules = self.service.show(byUser, 1)
+        rules = self.service.show(by_user, 1)
 
         assert rules == None
 
     def test_show(self):
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        rules = self.service.show(byUser, 1)
+        rules = self.service.show(by_user, 1)
 
         assert rules == None
 
     def test_update_no_user_id(self):
-        byUser = User(
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+        by_user = User(
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        resource = UpdateRule(name='123',
-                              position='Taipei',
-                              resource='water',
-                              operator='>',
-                              value=50)
-        rules = self.service.update(1, resource, byUser)
+        resource = UpdateRule(
+            name="123",
+            position="Taipei",
+            resource="water",
+            operator=">",
+            value=50,
+        )
+        rules = self.service.update(1, resource, by_user)
 
         assert rules == None
 
     def test_update_no_result(self):
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        resource = UpdateRule(name='123',
-                              position='Taipei',
-                              resource='water',
-                              operator='>',
-                              value=50)
-        rules = self.service.update(1, resource, byUser)
+        resource = UpdateRule(
+            name="123",
+            position="Taipei",
+            resource="water",
+            operator=">",
+            value=50,
+        )
+        rules = self.service.update(1, resource, by_user)
 
         assert rules == None
 
     def test_update_failed(self, monkeypatch):
 
-        def mockReturn(arg1):
+        def mock_commit(arg1):
             raise Exception()
 
-        def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='123',
-                        position='Taipei',
-                        resource='water',
-                        operator='>',
-                        value=50)
+        def mock_first(arg1):
+            return Rule(
+                id=1,
+                user_id=1,
+                name="123",
+                position="Taipei",
+                resource="water",
+                operator=">",
+                value=50,
+            )
 
-        monkeypatch.setattr(MockSession, "commit", mockReturn)
-        monkeypatch.setattr(MockResult, "first", mockGetRule)
+        monkeypatch.setattr(MockSession, "commit", mock_commit)
+        monkeypatch.setattr(MockResult, "first", mock_first)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        resource = UpdateRule(name='123',
-                              position='Taipei',
-                              resource='water',
-                              operator='>',
-                              value=50)
+        resource = UpdateRule(
+            name="123",
+            position="Taipei",
+            resource="water",
+            operator=">",
+            value=50,
+        )
 
         with pytest.raises(Exception):
-            self.service.update(1, resource, byUser)
+            self.service.update(1, resource, by_user)
 
     def test_update(self, monkeypatch):
 
         def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='1234',
-                        position='Taipei2',
-                        resource='water2',
-                        operator='=',
-                        value=60)
+            return Rule(
+                id=1,
+                user_id=1,
+                name="1234",
+                position="Taipei2",
+                resource="water2",
+                operator="=",
+                value=60,
+            )
 
         monkeypatch.setattr(MockResult, "first", mockGetRule)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        resource = UpdateRule(name='123',
-                              position='Taipei',
-                              resource='water',
-                              operator='>',
-                              value=50)
+        resource = UpdateRule(
+            name="123",
+            position="Taipei",
+            resource="water",
+            operator=">",
+            value=50,
+        )
 
-        rule = self.service.update(1, resource, byUser)
-        assert rule == Rule(id=1,
-                            user_id=byUser.id,
-                            name='123',
-                            position='Taipei',
-                            resource='water',
-                            operator='>',
-                            value=50)
+        rule = self.service.update(1, resource, by_user)
+        assert rule == Rule(
+            id=1,
+            user_id=by_user.id,
+            name="123",
+            position="Taipei",
+            resource="water",
+            operator=">",
+            value=50,
+        )
 
     def test_delete_no_user_id(self):
-        byUser = User(
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+        by_user = User(
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        success = self.service.delete(1, byUser)
+        success = self.service.delete(1, by_user)
 
         assert success == False
 
     def test_delete_no_result(self):
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        success = self.service.delete(1, byUser)
+        success = self.service.delete(1, by_user)
 
         assert success == False
 
     def test_delete_failed(self, monkeypatch):
 
-        def mockReturn(arg1):
+        def mock_commit(arg1):
             raise Exception()
 
-        def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='123',
-                        position='Taipei',
-                        resource='water',
-                        operator='>',
-                        value=50)
+        def mock_first(arg1):
+            return Rule(
+                id=1,
+                user_id=1,
+                name="123",
+                position="Taipei",
+                resource="water",
+                operator=">",
+                value=50,
+            )
 
-        monkeypatch.setattr(MockSession, "commit", mockReturn)
-        monkeypatch.setattr(MockResult, "first", mockGetRule)
+        monkeypatch.setattr(MockSession, "commit", mock_commit)
+        monkeypatch.setattr(MockResult, "first", mock_first)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
 
         with pytest.raises(Exception):
-            self.service.delete(1, byUser)
+            self.service.delete(1, by_user)
 
     def test_delete(self, monkeypatch):
 
         def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='1234',
-                        position='Taipei2',
-                        resource='water2',
-                        operator='=',
-                        value=60)
+            return Rule(
+                id=1,
+                user_id=1,
+                name="1234",
+                position="Taipei2",
+                resource="water2",
+                operator="=",
+                value=60,
+            )
 
         monkeypatch.setattr(MockResult, "first", mockGetRule)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
 
-        success = self.service.delete(1, byUser)
+        success = self.service.delete(1, by_user)
         assert success == True
 
     def test_enable_no_user_id(self):
-        byUser = User(
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+        by_user = User(
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        success = self.service.enable(1, byUser)
+        success = self.service.enable(1, by_user)
 
         assert success == False
 
     def test_enable_no_result(self):
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        success = self.service.enable(1, byUser)
+        success = self.service.enable(1, by_user)
 
         assert success == False
 
     def test_enable_failed(self, monkeypatch):
 
-        def mockReturn(arg1):
+        def mock_commit(arg1):
             raise Exception()
 
-        def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='123',
-                        position='Taipei',
-                        resource='water',
-                        operator='>',
-                        value=50)
+        def mock_first(arg1):
+            return Rule(
+                id=1,
+                user_id=1,
+                name="123",
+                position="Taipei",
+                resource="water",
+                operator=">",
+                value=50,
+            )
 
-        monkeypatch.setattr(MockSession, "commit", mockReturn)
-        monkeypatch.setattr(MockResult, "first", mockGetRule)
+        monkeypatch.setattr(MockSession, "commit", mock_commit)
+        monkeypatch.setattr(MockResult, "first", mock_first)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
 
         with pytest.raises(Exception):
-            self.service.enable(1, byUser)
+            self.service.enable(1, by_user)
 
     def test_enable(self, monkeypatch):
 
         def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='1234',
-                        position='Taipei2',
-                        resource='water2',
-                        operator='=',
-                        value=60)
+            return Rule(
+                id=1,
+                user_id=1,
+                name="1234",
+                position="Taipei2",
+                resource="water2",
+                operator="=",
+                value=60,
+            )
 
         monkeypatch.setattr(MockResult, "first", mockGetRule)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
 
-        success = self.service.enable(1, byUser)
+        success = self.service.enable(1, by_user)
         assert success == True
 
     def test_disable_no_user_id(self):
-        byUser = User(
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+        by_user = User(
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        success = self.service.disable(1, byUser)
+        success = self.service.disable(1, by_user)
 
         assert success == False
 
     def test_disable_no_result(self):
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
-        success = self.service.disable(1, byUser)
+        success = self.service.disable(1, by_user)
 
         assert success == False
 
     def test_disable_failed(self, monkeypatch):
 
-        def mockReturn(arg1):
+        def mock_commit(arg1):
             raise Exception()
 
-        def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='123',
-                        position='Taipei',
-                        resource='water',
-                        operator='>',
-                        value=50)
+        def mock_first(arg1):
+            return Rule(
+                id=1,
+                user_id=1,
+                name="123",
+                position="Taipei",
+                resource="water",
+                operator=">",
+                value=50,
+            )
 
-        monkeypatch.setattr(MockSession, "commit", mockReturn)
-        monkeypatch.setattr(MockResult, "first", mockGetRule)
+        monkeypatch.setattr(MockSession, "commit", mock_commit)
+        monkeypatch.setattr(MockResult, "first", mock_first)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
 
         with pytest.raises(Exception):
-            self.service.disable(1, byUser)
+            self.service.disable(1, by_user)
 
     def test_disable(self, monkeypatch):
 
         def mockGetRule(arg1):
-            return Rule(id=1,
-                        user_id=1,
-                        name='1234',
-                        position='Taipei2',
-                        resource='water2',
-                        operator='=',
-                        value=60)
+            return Rule(
+                id=1,
+                user_id=1,
+                name="1234",
+                position="Taipei2",
+                resource="water2",
+                operator="=",
+                value=60,
+            )
 
         monkeypatch.setattr(MockResult, "first", mockGetRule)
         self.service = RuleService(MockSession())
 
-        byUser = User(
+        by_user = User(
             id=1,
-            name='foo',
-            email='foo@foo.com',
-            password_digest='somefakedigest',
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
         )
 
-        success = self.service.disable(1, byUser)
+        success = self.service.disable(1, by_user)
         assert success == True
