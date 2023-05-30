@@ -20,6 +20,8 @@ jobs:
       - name: Install Dependency
         run: poetry install
       - name: Format
-        run: poetry run yapf -- --recursive --parallel --diff .
+        run: |
+          poetry run black -- --check --diff .
+          poetry run isort -- --check --diff .
       - name: Unit test
         run: poetry run pytest -- --cov=./ --cov-config=.coveragerc
