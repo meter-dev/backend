@@ -1,6 +1,6 @@
 # Meter-Crawler
 
-This tool can crwal the websites and generate a formatted report (JSON).
+This tool can crawl the websites and generate a formatted report (JSON).
 
 ## Supported website
 
