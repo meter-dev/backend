@@ -9,6 +9,7 @@ from meter.config import MeterConfig
 from meter.domain import get_engine as _get_engine
 from meter.domain.auth import AuthService
 from meter.domain.user import UserService
+from meter.domain.rule import RuleService
 from jose import JWTError
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl='/auth/token', scheme_name="JWT")
@@ -33,6 +34,10 @@ def get_user_service(session: Annotated[Session, Depends(get_session)]):
 
 def get_auth_service(cfg: Annotated[MeterConfig, Depends(get_config)]):
     return AuthService(cfg.auth)
+
+
+def get_rule_service(session: Annotated[Session, Depends(get_session)]):
+    return RuleService(session)
 
 
 def get_current_user(

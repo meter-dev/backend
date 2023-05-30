@@ -13,7 +13,7 @@ class SignupResponse(BaseModel):
     id: str
 
 
-@router.post('/signup', status_code=status.HTTP_201_CREATED)
+@router.post("/signup", status_code=status.HTTP_201_CREATED)
 async def signup(
     input: UserSignup,
     svc: Annotated[UserService, Depends(get_user_service)],
@@ -27,14 +27,14 @@ async def get_user(current_user: Annotated[User, Depends(get_current_user)]):
     return current_user
 
 
-@router.patch('/{id}')
+@router.patch("/{id}")
 async def update_user(id: str):
-    '''
+    """
     Update user properties
-    '''
+    """
     pass
 
 
-@router.post('/verify-email')
+@router.post("/verify-email")
 async def verify_email():
     pass

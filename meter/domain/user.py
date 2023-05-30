@@ -17,7 +17,7 @@ def get_password_digest(password: str):
 
 
 class UserBase(SQLModel):
-    name: str = Field(index=True, unique=True, regex='^[a-zA-Z0-9_-]{2,32}$')
+    name: str = Field(index=True, unique=True, regex="^[a-zA-Z0-9_-]{2,32}$")
     email: EmailStr = Field(unique=True)
 
 
