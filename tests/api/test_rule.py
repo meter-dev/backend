@@ -7,13 +7,9 @@ from tests.helper import register_and_login
 
 
 class TestRuleClass:
-
-    def __get_authorization_header(self, test_client: TestClient,
-                                   user: UserSignup):
+    def __get_authorization_header(self, test_client: TestClient, user: UserSignup):
         token = register_and_login(test_client, user)
-        return {
-            "Authorization": f'{token["token_type"]} {token["access_token"]}'
-        }
+        return {"Authorization": f'{token["token_type"]} {token["access_token"]}'}
 
     def test_create_rule_unauthorized(self, test_client: TestClient):
         res = test_client.post("/rule")
@@ -52,7 +48,6 @@ class TestRuleClass:
         }
 
     def test_create_rule_failed(self, test_client: TestClient, monkeypatch):
-
         def mock_create(arg1, arg2, arg3):
             return None
 
