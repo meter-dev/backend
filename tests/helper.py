@@ -20,3 +20,8 @@ def register_and_login(test_client: TestClient, user: UserSignup):
         },
     )
     return resp.json()
+
+
+def get_authorization_header(test_client: TestClient, user: UserSignup):
+    token = register_and_login(test_client, user)
+    return {"Authorization": f'{token["token_type"]} {token["access_token"]}'}

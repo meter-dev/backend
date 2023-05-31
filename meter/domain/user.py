@@ -24,6 +24,7 @@ class UserBase(SQLModel):
 class User(UserBase, table=True):
     id: Optional[int] = Field(primary_key=True, default=None)
     password_digest: str
+    active: bool = Field(default=False)
 
 
 class UserSignup(UserBase):
@@ -89,3 +90,9 @@ class UserService:
         if not verify_password(input.password, user.password_digest):
             return None
         return user
+
+    def activate(self, user: User) -> None:
+        user.active = True
+        self.session.add(user)
+        self.session.commit()
+        self.session.refresh(user)

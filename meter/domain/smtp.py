@@ -18,7 +18,8 @@ def send(from_addr, password, to_addrs, subject, text, html):
     if SMTP_SERVER is None:
         return
     with SMTP(SMTP_SERVER, 587) as server:
-        server.login(from_addr, password)
+        if password is not None:
+            server.login(from_addr, password)
         msg = MIMEMultipart('alternative')
         msg['From'] = from_addr
         msg['To'] = ', '.join(to_addrs)
