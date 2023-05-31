@@ -2,16 +2,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 
-from meter.api import (
-    auth,
-    comment,
-    get_config,
-    group,
-    issue,
-    rule,
-    upload,
-    user,
-)
+from meter.api import auth, comment, get_config, group, issue, rule, upload, user
 from meter.domain import create_db_and_tables, get_engine
 
 app = FastAPI()

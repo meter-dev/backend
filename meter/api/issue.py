@@ -3,21 +3,21 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get('/')
+@router.get("/")
 async def get_issues():
     pass
 
 
-@router.get('/{id}')
+@router.get("/{id}")
 async def get_issue():
     pass
 
 
-@router.post('/')
+@router.post("/")
 async def new_issue():
     pass
 
 
-@router.patch('/{id}')
+@router.patch("/{id}")
 async def update_issue(id: str):
     pass

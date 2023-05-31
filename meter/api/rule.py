@@ -1,10 +1,10 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 
-from meter.api import get_rule_service, get_current_user
+from meter.api import get_current_user, get_rule_service
+from meter.domain.rule import CreateRule, ReadRule, RuleService, UpdateRule
 from meter.domain.user import User
-from meter.domain.rule import RuleService, CreateRule, UpdateRule, ReadRule
 
 router = APIRouter()
 

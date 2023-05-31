@@ -1,19 +1,20 @@
 import pytest
 from fastapi.testclient import TestClient
-from meter.main import app
-from meter.api import get_session, get_config
+from sqlmodel import Session, SQLModel, create_engine
+from sqlmodel.pool import StaticPool
+
+from meter.api import get_config, get_session
 from meter.config import MeterConfig
 from meter.domain import SQLEngineParam
 from meter.domain.auth import AuthConfig
-from sqlmodel import create_engine, SQLModel, Session
-from sqlmodel.pool import StaticPool
+from meter.main import app
 
 
 # https://sqlmodel.tiangolo.com/tutorial/fastapi/tests/#configure-the-in-memory-database
 def get_in_memory_engine():
     return create_engine(
-        'sqlite://',
-        connect_args={'check_same_thread': False},
+        "sqlite://",
+        connect_args={"check_same_thread": False},
         poolclass=StaticPool,
     )
 
@@ -21,12 +22,12 @@ def get_in_memory_engine():
 def get_test_config():
     return MeterConfig(
         sql=SQLEngineParam(
-            url='sqlite://',
-            connect_args={'check_same_thread': False},
+            url="sqlite://",
+            connect_args={"check_same_thread": False},
         ),
         auth=AuthConfig(
-            secret_key='i-am-example-secret-key',
-            algorithm='HS256',
+            secret_key="i-am-example-secret-key",
+            algorithm="HS256",
             default_ttl_sec=900,
         ),
     )
@@ -42,7 +43,6 @@ def test_session():
 
 @pytest.fixture
 def test_client(test_session: Session):
-
     def get_session_override():
         return test_session
 
