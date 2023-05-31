@@ -12,7 +12,6 @@ class AuthConfig(BaseModel):
 
 
 class AuthService:
-
     def __init__(self, config: AuthConfig) -> None:
         self.config = config
 
@@ -24,7 +23,7 @@ class AuthService:
         if expires_after is None:
             expires_after = timedelta(seconds=self.config.default_ttl_sec)
         expires_at = datetime.now() + expires_after
-        to_encode = data.copy() | {'exp': expires_at}
+        to_encode = data.copy() | {"exp": expires_at}
         return jwt.encode(
             to_encode,
             self.config.secret_key,
@@ -32,7 +31,7 @@ class AuthService:
         )
 
     def decode_jwt(self, token):
-        payload = jwt.decode(token,
-                             self.config.secret_key,
-                             algorithms=self.config.algorithm)
+        payload = jwt.decode(
+            token, self.config.secret_key, algorithms=self.config.algorithm
+        )
         return payload

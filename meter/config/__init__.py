@@ -18,7 +18,7 @@ class MeterConfig(BaseSettings):
     auth: AuthConfig
 
     class Config:
-        path = 'meter.toml'
+        path = "meter.toml"
 
         @classmethod
         def customise_sources(

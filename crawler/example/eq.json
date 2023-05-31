@@ -1,0 +1,380 @@
+[
+  {
+    "timestamp": 1685306337,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        122.1608,
+        24.6582
+      ]
+    },
+    "scale": 3.8,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023052904385738",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023052904385738_H.png"
+  },
+  {
+    "timestamp": 1685190143,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.4037,
+        24.4345
+      ]
+    },
+    "scale": 3.4,
+    "intensity": [
+      1,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023052720222334",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023052720222334_H.png"
+  },
+  {
+    "timestamp": 1685185599,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.0557,
+        24.7427
+      ]
+    },
+    "scale": 2.4,
+    "intensity": [
+      2,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023052719063924",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023052719063924_H.png"
+  },
+  {
+    "timestamp": 1685146853,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.4035,
+        24.437
+      ]
+    },
+    "scale": 3.7,
+    "intensity": [
+      1,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023052708205337",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023052708205337_H.png"
+  },
+  {
+    "timestamp": 1685130978,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.6735,
+        23.9083
+      ]
+    },
+    "scale": 4,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023052703561840",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023052703561840_H.png"
+  },
+  {
+    "timestamp": 1684700744,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.7418,
+        24.3755
+      ]
+    },
+    "scale": 3.3,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023052204254433",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023052204254433_H.png"
+  },
+  {
+    "timestamp": 1684653219,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.2903,
+        23.6437
+      ]
+    },
+    "scale": 3.7,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023052115133937",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023052115133937_H.png"
+  },
+  {
+    "timestamp": 1684189722,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.627,
+        21.9125
+      ]
+    },
+    "scale": 3.7,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023051606284237",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023051606284237_H.png"
+  },
+  {
+    "timestamp": 1684175650,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.5342,
+        24.0515
+      ]
+    },
+    "scale": 3.9,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023051602341039",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023051602341039_H.png"
+  },
+  {
+    "timestamp": 1684019959,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        120.2898,
+        23.3945
+      ]
+    },
+    "scale": 3.3,
+    "intensity": [
+      0,
+      0,
+      1
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023051407191933",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023051407191933_H.png"
+  },
+  {
+    "timestamp": 1683912620,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.5783,
+        23.1833
+      ]
+    },
+    "scale": 4.7,
+    "intensity": [
+      1,
+      0,
+      1
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023051301302047036",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023051301302047036_H.png"
+  },
+  {
+    "timestamp": 1683840318,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.0315,
+        21.6898
+      ]
+    },
+    "scale": 4.4,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023051205251844",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023051205251844_H.png"
+  },
+  {
+    "timestamp": 1683756455,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        120.804,
+        23.1078
+      ]
+    },
+    "scale": 3.7,
+    "intensity": [
+      0,
+      0,
+      1
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023051106073537",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023051106073537_H.png"
+  },
+  {
+    "timestamp": 1683537792,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        122.6693,
+        24.6735
+      ]
+    },
+    "scale": 5.3,
+    "intensity": [
+      1,
+      1,
+      1
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050817231253",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050817231253_H.png"
+  },
+  {
+    "timestamp": 1683511372,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.385,
+        23.4052
+      ]
+    },
+    "scale": 4.3,
+    "intensity": [
+      0,
+      0,
+      1
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050810025243",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050810025243_H.png"
+  },
+  {
+    "timestamp": 1683474898,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.9387,
+        24.8263
+      ]
+    },
+    "scale": 3.5,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050723545835",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050723545835_H.png"
+  },
+  {
+    "timestamp": 1683427054,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.2675,
+        24.2315
+      ]
+    },
+    "scale": 3.2,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050710373432",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050710373432_H.png"
+  },
+  {
+    "timestamp": 1683214701,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.3217,
+        23.4445
+      ]
+    },
+    "scale": 5.1,
+    "intensity": [
+      1,
+      1,
+      2
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050423382151035",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050423382151035_H.png"
+  },
+  {
+    "timestamp": 1683190521,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.7168,
+        23.7462
+      ]
+    },
+    "scale": 4,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050416552140",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050416552140_H.png"
+  },
+  {
+    "timestamp": 1683188147,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        120.9177,
+        22.7558
+      ]
+    },
+    "scale": 3.9,
+    "intensity": [
+      0,
+      0,
+      1
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050416154739",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050416154739_H.png"
+  },
+  {
+    "timestamp": 1682907177,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.4558,
+        23.9047
+      ]
+    },
+    "scale": 3.8,
+    "intensity": [
+      0,
+      0,
+      0
+    ],
+    "link": "https://scweb.cwb.gov.tw/zh-tw/earthquake/imgs/2023050110125738",
+    "img": "https://scweb.cwb.gov.tw/webdata/OLDEQ/202305/2023050110125738_H.png"
+  }
+]
