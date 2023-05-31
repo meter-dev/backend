@@ -1,0 +1,1566 @@
+[
+  {
+    "timestamp": 1685289600,
+    "east": {
+      "load": 40.1,
+      "max_supply": 89.17,
+      "recv_rate": 122.37
+    },
+    "south": {
+      "load": 950.2,
+      "max_supply": 1297.02,
+      "recv_rate": 36.5
+    },
+    "central": {
+      "load": 773.9,
+      "max_supply": 1337.56,
+      "recv_rate": 72.83
+    },
+    "north": {
+      "load": 867.1,
+      "max_supply": 1418.62,
+      "recv_rate": 63.61
+    }
+  },
+  {
+    "timestamp": 1685290200,
+    "east": {
+      "load": 39.7,
+      "max_supply": 89.17,
+      "recv_rate": 124.61
+    },
+    "south": {
+      "load": 957.9,
+      "max_supply": 1297.02,
+      "recv_rate": 35.4
+    },
+    "central": {
+      "load": 770.4,
+      "max_supply": 1337.56,
+      "recv_rate": 73.62
+    },
+    "north": {
+      "load": 854.4,
+      "max_supply": 1418.62,
+      "recv_rate": 66.04
+    }
+  },
+  {
+    "timestamp": 1685290800,
+    "east": {
+      "load": 39,
+      "max_supply": 89.17,
+      "recv_rate": 128.64
+    },
+    "south": {
+      "load": 941.5,
+      "max_supply": 1297.02,
+      "recv_rate": 37.76
+    },
+    "central": {
+      "load": 770.6,
+      "max_supply": 1337.56,
+      "recv_rate": 73.57
+    },
+    "north": {
+      "load": 850.6,
+      "max_supply": 1418.62,
+      "recv_rate": 66.78
+    }
+  },
+  {
+    "timestamp": 1685291400,
+    "east": {
+      "load": 39,
+      "max_supply": 89.17,
+      "recv_rate": 128.64
+    },
+    "south": {
+      "load": 939.7,
+      "max_supply": 1297.02,
+      "recv_rate": 38.03
+    },
+    "central": {
+      "load": 765.3,
+      "max_supply": 1337.56,
+      "recv_rate": 74.78
+    },
+    "north": {
+      "load": 835.8,
+      "max_supply": 1418.62,
+      "recv_rate": 69.73
+    }
+  },
+  {
+    "timestamp": 1685292000,
+    "east": {
+      "load": 38.8,
+      "max_supply": 89.17,
+      "recv_rate": 129.82
+    },
+    "south": {
+      "load": 936.1,
+      "max_supply": 1297.02,
+      "recv_rate": 38.56
+    },
+    "central": {
+      "load": 759,
+      "max_supply": 1337.56,
+      "recv_rate": 76.23
+    },
+    "north": {
+      "load": 827.6,
+      "max_supply": 1418.62,
+      "recv_rate": 71.41
+    }
+  },
+  {
+    "timestamp": 1685292600,
+    "east": {
+      "load": 38.2,
+      "max_supply": 89.17,
+      "recv_rate": 133.43
+    },
+    "south": {
+      "load": 922,
+      "max_supply": 1297.02,
+      "recv_rate": 40.68
+    },
+    "central": {
+      "load": 743.6,
+      "max_supply": 1337.56,
+      "recv_rate": 79.88
+    },
+    "north": {
+      "load": 821.5,
+      "max_supply": 1418.62,
+      "recv_rate": 72.69
+    }
+  },
+  {
+    "timestamp": 1685293200,
+    "east": {
+      "load": 38,
+      "max_supply": 89.17,
+      "recv_rate": 134.66
+    },
+    "south": {
+      "load": 918.4,
+      "max_supply": 1297.02,
+      "recv_rate": 41.23
+    },
+    "central": {
+      "load": 747.2,
+      "max_supply": 1337.56,
+      "recv_rate": 79.01
+    },
+    "north": {
+      "load": 814.5,
+      "max_supply": 1418.62,
+      "recv_rate": 74.17
+    }
+  },
+  {
+    "timestamp": 1685293800,
+    "east": {
+      "load": 37.8,
+      "max_supply": 89.17,
+      "recv_rate": 135.9
+    },
+    "south": {
+      "load": 926.5,
+      "max_supply": 1297.02,
+      "recv_rate": 39.99
+    },
+    "central": {
+      "load": 748.7,
+      "max_supply": 1337.56,
+      "recv_rate": 78.65
+    },
+    "north": {
+      "load": 804.5,
+      "max_supply": 1418.62,
+      "recv_rate": 76.34
+    }
+  },
+  {
+    "timestamp": 1685294400,
+    "east": {
+      "load": 37.6,
+      "max_supply": 89.17,
+      "recv_rate": 137.16
+    },
+    "south": {
+      "load": 917,
+      "max_supply": 1297.02,
+      "recv_rate": 41.44
+    },
+    "central": {
+      "load": 733.3,
+      "max_supply": 1337.56,
+      "recv_rate": 82.4
+    },
+    "north": {
+      "load": 796.9,
+      "max_supply": 1418.62,
+      "recv_rate": 78.02
+    }
+  },
+  {
+    "timestamp": 1685295000,
+    "east": {
+      "load": 37.4,
+      "max_supply": 89.17,
+      "recv_rate": 138.42
+    },
+    "south": {
+      "load": 903.7,
+      "max_supply": 1297.02,
+      "recv_rate": 43.52
+    },
+    "central": {
+      "load": 742.8,
+      "max_supply": 1337.56,
+      "recv_rate": 80.07
+    },
+    "north": {
+      "load": 784.9,
+      "max_supply": 1418.62,
+      "recv_rate": 80.74
+    }
+  },
+  {
+    "timestamp": 1685295600,
+    "east": {
+      "load": 36.3,
+      "max_supply": 89.17,
+      "recv_rate": 145.65
+    },
+    "south": {
+      "load": 912.1,
+      "max_supply": 1297.02,
+      "recv_rate": 42.2
+    },
+    "central": {
+      "load": 736.6,
+      "max_supply": 1337.56,
+      "recv_rate": 81.59
+    },
+    "north": {
+      "load": 788.4,
+      "max_supply": 1418.62,
+      "recv_rate": 79.94
+    }
+  },
+  {
+    "timestamp": 1685296200,
+    "east": {
+      "load": 36.5,
+      "max_supply": 89.17,
+      "recv_rate": 144.3
+    },
+    "south": {
+      "load": 902.1,
+      "max_supply": 1297.02,
+      "recv_rate": 43.78
+    },
+    "central": {
+      "load": 728.8,
+      "max_supply": 1337.56,
+      "recv_rate": 83.53
+    },
+    "north": {
+      "load": 782.3,
+      "max_supply": 1418.62,
+      "recv_rate": 81.34
+    }
+  },
+  {
+    "timestamp": 1685296800,
+    "east": {
+      "load": 36,
+      "max_supply": 89.17,
+      "recv_rate": 147.7
+    },
+    "south": {
+      "load": 892.6,
+      "max_supply": 1297.02,
+      "recv_rate": 45.31
+    },
+    "central": {
+      "load": 728.2,
+      "max_supply": 1337.56,
+      "recv_rate": 83.68
+    },
+    "north": {
+      "load": 775.9,
+      "max_supply": 1418.62,
+      "recv_rate": 82.84
+    }
+  },
+  {
+    "timestamp": 1685297400,
+    "east": {
+      "load": 36,
+      "max_supply": 89.17,
+      "recv_rate": 147.7
+    },
+    "south": {
+      "load": 882.3,
+      "max_supply": 1297.02,
+      "recv_rate": 47
+    },
+    "central": {
+      "load": 724.9,
+      "max_supply": 1337.56,
+      "recv_rate": 84.52
+    },
+    "north": {
+      "load": 767.4,
+      "max_supply": 1418.62,
+      "recv_rate": 84.86
+    }
+  },
+  {
+    "timestamp": 1685298000,
+    "east": {
+      "load": 35.5,
+      "max_supply": 89.17,
+      "recv_rate": 151.18
+    },
+    "south": {
+      "load": 879.9,
+      "max_supply": 1297.02,
+      "recv_rate": 47.41
+    },
+    "central": {
+      "load": 722.8,
+      "max_supply": 1337.56,
+      "recv_rate": 85.05
+    },
+    "north": {
+      "load": 768.8,
+      "max_supply": 1418.62,
+      "recv_rate": 84.52
+    }
+  },
+  {
+    "timestamp": 1685298600,
+    "east": {
+      "load": 35.7,
+      "max_supply": 89.17,
+      "recv_rate": 149.78
+    },
+    "south": {
+      "load": 883.8,
+      "max_supply": 1297.02,
+      "recv_rate": 46.76
+    },
+    "central": {
+      "load": 717,
+      "max_supply": 1337.56,
+      "recv_rate": 86.55
+    },
+    "north": {
+      "load": 758.4,
+      "max_supply": 1418.62,
+      "recv_rate": 87.05
+    }
+  },
+  {
+    "timestamp": 1685299200,
+    "east": {
+      "load": 35.4,
+      "max_supply": 89.17,
+      "recv_rate": 151.89
+    },
+    "south": {
+      "load": 875.7,
+      "max_supply": 1297.02,
+      "recv_rate": 48.11
+    },
+    "central": {
+      "load": 699.4,
+      "max_supply": 1337.56,
+      "recv_rate": 91.24
+    },
+    "north": {
+      "load": 756.5,
+      "max_supply": 1418.62,
+      "recv_rate": 87.52
+    }
+  },
+  {
+    "timestamp": 1685299800,
+    "east": {
+      "load": 35.5,
+      "max_supply": 89.17,
+      "recv_rate": 151.18
+    },
+    "south": {
+      "load": 876.3,
+      "max_supply": 1297.02,
+      "recv_rate": 48.01
+    },
+    "central": {
+      "load": 709.8,
+      "max_supply": 1337.56,
+      "recv_rate": 88.44
+    },
+    "north": {
+      "load": 755.3,
+      "max_supply": 1418.62,
+      "recv_rate": 87.82
+    }
+  },
+  {
+    "timestamp": 1685300400,
+    "east": {
+      "load": 35.2,
+      "max_supply": 89.17,
+      "recv_rate": 153.32
+    },
+    "south": {
+      "load": 875.5,
+      "max_supply": 1297.02,
+      "recv_rate": 48.15
+    },
+    "central": {
+      "load": 704,
+      "max_supply": 1337.56,
+      "recv_rate": 89.99
+    },
+    "north": {
+      "load": 744.9,
+      "max_supply": 1418.62,
+      "recv_rate": 90.44
+    }
+  },
+  {
+    "timestamp": 1685301000,
+    "east": {
+      "load": 35.5,
+      "max_supply": 89.17,
+      "recv_rate": 151.18
+    },
+    "south": {
+      "load": 865.4,
+      "max_supply": 1297.02,
+      "recv_rate": 49.88
+    },
+    "central": {
+      "load": 689.9,
+      "max_supply": 1337.56,
+      "recv_rate": 93.88
+    },
+    "north": {
+      "load": 746.6,
+      "max_supply": 1418.62,
+      "recv_rate": 90.01
+    }
+  },
+  {
+    "timestamp": 1685301600,
+    "east": {
+      "load": 34.8,
+      "max_supply": 89.17,
+      "recv_rate": 156.24
+    },
+    "south": {
+      "load": 870.2,
+      "max_supply": 1297.02,
+      "recv_rate": 49.05
+    },
+    "central": {
+      "load": 710.9,
+      "max_supply": 1337.56,
+      "recv_rate": 88.15
+    },
+    "north": {
+      "load": 743.6,
+      "max_supply": 1418.62,
+      "recv_rate": 90.78
+    }
+  },
+  {
+    "timestamp": 1685302200,
+    "east": {
+      "load": 34.8,
+      "max_supply": 89.17,
+      "recv_rate": 156.24
+    },
+    "south": {
+      "load": 869.2,
+      "max_supply": 1297.02,
+      "recv_rate": 49.22
+    },
+    "central": {
+      "load": 704.2,
+      "max_supply": 1337.56,
+      "recv_rate": 89.94
+    },
+    "north": {
+      "load": 737.5,
+      "max_supply": 1418.62,
+      "recv_rate": 92.36
+    }
+  },
+  {
+    "timestamp": 1685302800,
+    "east": {
+      "load": 34.8,
+      "max_supply": 89.17,
+      "recv_rate": 156.24
+    },
+    "south": {
+      "load": 867.5,
+      "max_supply": 1297.02,
+      "recv_rate": 49.51
+    },
+    "central": {
+      "load": 705.8,
+      "max_supply": 1337.56,
+      "recv_rate": 89.51
+    },
+    "north": {
+      "load": 736.9,
+      "max_supply": 1418.62,
+      "recv_rate": 92.51
+    }
+  },
+  {
+    "timestamp": 1685303400,
+    "east": {
+      "load": 34.4,
+      "max_supply": 89.17,
+      "recv_rate": 159.22
+    },
+    "south": {
+      "load": 871.7,
+      "max_supply": 1297.02,
+      "recv_rate": 48.79
+    },
+    "central": {
+      "load": 701.7,
+      "max_supply": 1337.56,
+      "recv_rate": 90.62
+    },
+    "north": {
+      "load": 738.9,
+      "max_supply": 1418.62,
+      "recv_rate": 91.99
+    }
+  },
+  {
+    "timestamp": 1685304000,
+    "east": {
+      "load": 34.9,
+      "max_supply": 89.17,
+      "recv_rate": 155.5
+    },
+    "south": {
+      "load": 864.8,
+      "max_supply": 1297.02,
+      "recv_rate": 49.98
+    },
+    "central": {
+      "load": 701.3,
+      "max_supply": 1337.56,
+      "recv_rate": 90.73
+    },
+    "north": {
+      "load": 733.9,
+      "max_supply": 1418.62,
+      "recv_rate": 93.3
+    }
+  },
+  {
+    "timestamp": 1685304600,
+    "east": {
+      "load": 34.9,
+      "max_supply": 89.17,
+      "recv_rate": 155.5
+    },
+    "south": {
+      "load": 861.1,
+      "max_supply": 1297.02,
+      "recv_rate": 50.62
+    },
+    "central": {
+      "load": 701.6,
+      "max_supply": 1337.56,
+      "recv_rate": 90.64
+    },
+    "north": {
+      "load": 729.2,
+      "max_supply": 1418.62,
+      "recv_rate": 94.54
+    }
+  },
+  {
+    "timestamp": 1685305200,
+    "east": {
+      "load": 34.9,
+      "max_supply": 89.17,
+      "recv_rate": 155.5
+    },
+    "south": {
+      "load": 867.6,
+      "max_supply": 1297.02,
+      "recv_rate": 49.5
+    },
+    "central": {
+      "load": 697.4,
+      "max_supply": 1337.56,
+      "recv_rate": 91.79
+    },
+    "north": {
+      "load": 732,
+      "max_supply": 1418.62,
+      "recv_rate": 93.8
+    }
+  },
+  {
+    "timestamp": 1685305800,
+    "east": {
+      "load": 34.5,
+      "max_supply": 89.17,
+      "recv_rate": 158.46
+    },
+    "south": {
+      "load": 867.2,
+      "max_supply": 1297.02,
+      "recv_rate": 49.56
+    },
+    "central": {
+      "load": 705.9,
+      "max_supply": 1337.56,
+      "recv_rate": 89.48
+    },
+    "north": {
+      "load": 727.1,
+      "max_supply": 1418.62,
+      "recv_rate": 95.11
+    }
+  },
+  {
+    "timestamp": 1685306400,
+    "east": {
+      "load": 34.8,
+      "max_supply": 89.17,
+      "recv_rate": 156.24
+    },
+    "south": {
+      "load": 859.1,
+      "max_supply": 1297.02,
+      "recv_rate": 50.97
+    },
+    "central": {
+      "load": 708,
+      "max_supply": 1337.56,
+      "recv_rate": 88.92
+    },
+    "north": {
+      "load": 729.3,
+      "max_supply": 1418.62,
+      "recv_rate": 94.52
+    }
+  },
+  {
+    "timestamp": 1685307000,
+    "east": {
+      "load": 34.7,
+      "max_supply": 89.17,
+      "recv_rate": 156.98
+    },
+    "south": {
+      "load": 855.6,
+      "max_supply": 1297.02,
+      "recv_rate": 51.59
+    },
+    "central": {
+      "load": 707,
+      "max_supply": 1337.56,
+      "recv_rate": 89.19
+    },
+    "north": {
+      "load": 728.8,
+      "max_supply": 1418.62,
+      "recv_rate": 94.65
+    }
+  },
+  {
+    "timestamp": 1685307600,
+    "east": {
+      "load": 35.1,
+      "max_supply": 89.17,
+      "recv_rate": 154.05
+    },
+    "south": {
+      "load": 862.2,
+      "max_supply": 1297.02,
+      "recv_rate": 50.43
+    },
+    "central": {
+      "load": 710,
+      "max_supply": 1337.56,
+      "recv_rate": 88.39
+    },
+    "north": {
+      "load": 727.8,
+      "max_supply": 1418.62,
+      "recv_rate": 94.92
+    }
+  },
+  {
+    "timestamp": 1685308200,
+    "east": {
+      "load": 35.2,
+      "max_supply": 89.17,
+      "recv_rate": 153.32
+    },
+    "south": {
+      "load": 851.7,
+      "max_supply": 1297.02,
+      "recv_rate": 52.29
+    },
+    "central": {
+      "load": 693.7,
+      "max_supply": 1337.56,
+      "recv_rate": 92.81
+    },
+    "north": {
+      "load": 729.7,
+      "max_supply": 1418.62,
+      "recv_rate": 94.41
+    }
+  },
+  {
+    "timestamp": 1685308800,
+    "east": {
+      "load": 34.6,
+      "max_supply": 89.17,
+      "recv_rate": 157.72
+    },
+    "south": {
+      "load": 854.9,
+      "max_supply": 1297.02,
+      "recv_rate": 51.72
+    },
+    "central": {
+      "load": 699.8,
+      "max_supply": 1337.56,
+      "recv_rate": 91.13
+    },
+    "north": {
+      "load": 725.8,
+      "max_supply": 1418.62,
+      "recv_rate": 95.46
+    }
+  },
+  {
+    "timestamp": 1685309400,
+    "east": {
+      "load": 34.1,
+      "max_supply": 89.17,
+      "recv_rate": 161.5
+    },
+    "south": {
+      "load": 845.8,
+      "max_supply": 1297.02,
+      "recv_rate": 53.35
+    },
+    "central": {
+      "load": 700.6,
+      "max_supply": 1337.56,
+      "recv_rate": 90.92
+    },
+    "north": {
+      "load": 726.4,
+      "max_supply": 1418.62,
+      "recv_rate": 95.29
+    }
+  },
+  {
+    "timestamp": 1685310000,
+    "east": {
+      "load": 34.3,
+      "max_supply": 89.17,
+      "recv_rate": 159.97
+    },
+    "south": {
+      "load": 853.3,
+      "max_supply": 1297.02,
+      "recv_rate": 52
+    },
+    "central": {
+      "load": 703.2,
+      "max_supply": 1337.56,
+      "recv_rate": 90.21
+    },
+    "north": {
+      "load": 733,
+      "max_supply": 1418.62,
+      "recv_rate": 93.54
+    }
+  },
+  {
+    "timestamp": 1685310600,
+    "east": {
+      "load": 34.4,
+      "max_supply": 89.17,
+      "recv_rate": 159.22
+    },
+    "south": {
+      "load": 844,
+      "max_supply": 1297.02,
+      "recv_rate": 53.68
+    },
+    "central": {
+      "load": 708.1,
+      "max_supply": 1337.56,
+      "recv_rate": 88.89
+    },
+    "north": {
+      "load": 740.2,
+      "max_supply": 1418.62,
+      "recv_rate": 91.65
+    }
+  },
+  {
+    "timestamp": 1685311200,
+    "east": {
+      "load": 35,
+      "max_supply": 89.17,
+      "recv_rate": 154.77
+    },
+    "south": {
+      "load": 853.2,
+      "max_supply": 1297.02,
+      "recv_rate": 52.02
+    },
+    "central": {
+      "load": 706.3,
+      "max_supply": 1337.56,
+      "recv_rate": 89.38
+    },
+    "north": {
+      "load": 743.5,
+      "max_supply": 1418.62,
+      "recv_rate": 90.8
+    }
+  },
+  {
+    "timestamp": 1685311800,
+    "east": {
+      "load": 34.4,
+      "max_supply": 89.17,
+      "recv_rate": 159.22
+    },
+    "south": {
+      "load": 861.9,
+      "max_supply": 1297.02,
+      "recv_rate": 50.48
+    },
+    "central": {
+      "load": 717.3,
+      "max_supply": 1337.56,
+      "recv_rate": 86.47
+    },
+    "north": {
+      "load": 758.3,
+      "max_supply": 1418.62,
+      "recv_rate": 87.08
+    }
+  },
+  {
+    "timestamp": 1685312400,
+    "east": {
+      "load": 34.3,
+      "max_supply": 89.17,
+      "recv_rate": 159.97
+    },
+    "south": {
+      "load": 863.6,
+      "max_supply": 1297.02,
+      "recv_rate": 50.19
+    },
+    "central": {
+      "load": 706.3,
+      "max_supply": 1337.56,
+      "recv_rate": 89.38
+    },
+    "north": {
+      "load": 764.1,
+      "max_supply": 1418.62,
+      "recv_rate": 85.66
+    }
+  },
+  {
+    "timestamp": 1685313000,
+    "east": {
+      "load": 34.4,
+      "max_supply": 89.17,
+      "recv_rate": 159.22
+    },
+    "south": {
+      "load": 854.5,
+      "max_supply": 1297.02,
+      "recv_rate": 51.79
+    },
+    "central": {
+      "load": 714.4,
+      "max_supply": 1337.56,
+      "recv_rate": 87.23
+    },
+    "north": {
+      "load": 775.8,
+      "max_supply": 1418.62,
+      "recv_rate": 82.86
+    }
+  },
+  {
+    "timestamp": 1685313600,
+    "east": {
+      "load": 35.9,
+      "max_supply": 89.17,
+      "recv_rate": 148.39
+    },
+    "south": {
+      "load": 870.9,
+      "max_supply": 1297.02,
+      "recv_rate": 48.93
+    },
+    "central": {
+      "load": 719.2,
+      "max_supply": 1337.56,
+      "recv_rate": 85.98
+    },
+    "north": {
+      "load": 789.2,
+      "max_supply": 1418.62,
+      "recv_rate": 79.75
+    }
+  },
+  {
+    "timestamp": 1685314200,
+    "east": {
+      "load": 36.7,
+      "max_supply": 89.17,
+      "recv_rate": 142.97
+    },
+    "south": {
+      "load": 868.8,
+      "max_supply": 1297.02,
+      "recv_rate": 49.29
+    },
+    "central": {
+      "load": 726.6,
+      "max_supply": 1337.56,
+      "recv_rate": 84.08
+    },
+    "north": {
+      "load": 798.6,
+      "max_supply": 1418.62,
+      "recv_rate": 77.64
+    }
+  },
+  {
+    "timestamp": 1685314800,
+    "east": {
+      "load": 36.6,
+      "max_supply": 89.17,
+      "recv_rate": 143.63
+    },
+    "south": {
+      "load": 881.5,
+      "max_supply": 1297.02,
+      "recv_rate": 47.14
+    },
+    "central": {
+      "load": 721.7,
+      "max_supply": 1337.56,
+      "recv_rate": 85.33
+    },
+    "north": {
+      "load": 815.2,
+      "max_supply": 1418.62,
+      "recv_rate": 74.02
+    }
+  },
+  {
+    "timestamp": 1685315400,
+    "east": {
+      "load": 36.6,
+      "max_supply": 89.17,
+      "recv_rate": 143.63
+    },
+    "south": {
+      "load": 893.1,
+      "max_supply": 1297.02,
+      "recv_rate": 45.23
+    },
+    "central": {
+      "load": 735.8,
+      "max_supply": 1337.56,
+      "recv_rate": 81.78
+    },
+    "north": {
+      "load": 835.8,
+      "max_supply": 1418.62,
+      "recv_rate": 69.73
+    }
+  },
+  {
+    "timestamp": 1685316000,
+    "east": {
+      "load": 36.1,
+      "max_supply": 89.17,
+      "recv_rate": 147.01
+    },
+    "south": {
+      "load": 908.4,
+      "max_supply": 1297.02,
+      "recv_rate": 42.78
+    },
+    "central": {
+      "load": 751.4,
+      "max_supply": 1337.56,
+      "recv_rate": 78.01
+    },
+    "north": {
+      "load": 853.4,
+      "max_supply": 1418.62,
+      "recv_rate": 66.23
+    }
+  },
+  {
+    "timestamp": 1685316600,
+    "east": {
+      "load": 37.1,
+      "max_supply": 89.17,
+      "recv_rate": 140.35
+    },
+    "south": {
+      "load": 919.4,
+      "max_supply": 1297.02,
+      "recv_rate": 41.07
+    },
+    "central": {
+      "load": 751.3,
+      "max_supply": 1337.56,
+      "recv_rate": 78.03
+    },
+    "north": {
+      "load": 867.6,
+      "max_supply": 1418.62,
+      "recv_rate": 63.51
+    }
+  },
+  {
+    "timestamp": 1685317200,
+    "east": {
+      "load": 37.9,
+      "max_supply": 89.17,
+      "recv_rate": 135.28
+    },
+    "south": {
+      "load": 935.5,
+      "max_supply": 1297.02,
+      "recv_rate": 38.65
+    },
+    "central": {
+      "load": 772.5,
+      "max_supply": 1337.56,
+      "recv_rate": 73.15
+    },
+    "north": {
+      "load": 896,
+      "max_supply": 1418.62,
+      "recv_rate": 58.33
+    }
+  },
+  {
+    "timestamp": 1685317800,
+    "east": {
+      "load": 38.7,
+      "max_supply": 89.17,
+      "recv_rate": 130.41
+    },
+    "south": {
+      "load": 962.9,
+      "max_supply": 1297.02,
+      "recv_rate": 34.7
+    },
+    "central": {
+      "load": 798.1,
+      "max_supply": 1337.56,
+      "recv_rate": 67.59
+    },
+    "north": {
+      "load": 936,
+      "max_supply": 1418.62,
+      "recv_rate": 51.56
+    }
+  },
+  {
+    "timestamp": 1685318400,
+    "east": {
+      "load": 38.8,
+      "max_supply": 89.17,
+      "recv_rate": 129.82
+    },
+    "south": {
+      "load": 990.7,
+      "max_supply": 1297.02,
+      "recv_rate": 30.92
+    },
+    "central": {
+      "load": 837.1,
+      "max_supply": 1337.56,
+      "recv_rate": 59.78
+    },
+    "north": {
+      "load": 978.3,
+      "max_supply": 1418.62,
+      "recv_rate": 45.01
+    }
+  },
+  {
+    "timestamp": 1685319000,
+    "east": {
+      "load": 39.1,
+      "max_supply": 89.17,
+      "recv_rate": 128.06
+    },
+    "south": {
+      "load": 1022.5,
+      "max_supply": 1297.02,
+      "recv_rate": 26.85
+    },
+    "central": {
+      "load": 888.1,
+      "max_supply": 1337.56,
+      "recv_rate": 50.61
+    },
+    "north": {
+      "load": 1025.8,
+      "max_supply": 1418.62,
+      "recv_rate": 38.29
+    }
+  },
+  {
+    "timestamp": 1685319600,
+    "east": {
+      "load": 38.9,
+      "max_supply": 89.17,
+      "recv_rate": 129.23
+    },
+    "south": {
+      "load": 1048.7,
+      "max_supply": 1297.02,
+      "recv_rate": 23.68
+    },
+    "central": {
+      "load": 911.8,
+      "max_supply": 1337.56,
+      "recv_rate": 46.69
+    },
+    "north": {
+      "load": 1062.4,
+      "max_supply": 1418.62,
+      "recv_rate": 33.53
+    }
+  },
+  {
+    "timestamp": 1685320200,
+    "east": {
+      "load": 42.2,
+      "max_supply": 89.17,
+      "recv_rate": 111.3
+    },
+    "south": {
+      "load": 1069.3,
+      "max_supply": 1297.02,
+      "recv_rate": 21.3
+    },
+    "central": {
+      "load": 929.7,
+      "max_supply": 1337.56,
+      "recv_rate": 43.87
+    },
+    "north": {
+      "load": 1086.8,
+      "max_supply": 1418.62,
+      "recv_rate": 30.53
+    }
+  },
+  {
+    "timestamp": 1685320800,
+    "east": {
+      "load": 40.3,
+      "max_supply": 89.17,
+      "recv_rate": 121.27
+    },
+    "south": {
+      "load": 1089.9,
+      "max_supply": 1297.02,
+      "recv_rate": 19
+    },
+    "central": {
+      "load": 948.2,
+      "max_supply": 1337.56,
+      "recv_rate": 41.06
+    },
+    "north": {
+      "load": 1118.1,
+      "max_supply": 1418.62,
+      "recv_rate": 26.88
+    }
+  },
+  {
+    "timestamp": 1685321400,
+    "east": {
+      "load": 41.7,
+      "max_supply": 89.17,
+      "recv_rate": 113.84
+    },
+    "south": {
+      "load": 1083.4,
+      "max_supply": 1297.02,
+      "recv_rate": 19.72
+    },
+    "central": {
+      "load": 961.3,
+      "max_supply": 1337.56,
+      "recv_rate": 39.14
+    },
+    "north": {
+      "load": 1133.8,
+      "max_supply": 1418.62,
+      "recv_rate": 25.12
+    }
+  },
+  {
+    "timestamp": 1685322000,
+    "east": {
+      "load": 42.3,
+      "max_supply": 89.17,
+      "recv_rate": 110.8
+    },
+    "south": {
+      "load": 1084.4,
+      "max_supply": 1297.02,
+      "recv_rate": 19.61
+    },
+    "central": {
+      "load": 952.5,
+      "max_supply": 1337.56,
+      "recv_rate": 40.43
+    },
+    "north": {
+      "load": 1151.3,
+      "max_supply": 1418.62,
+      "recv_rate": 23.22
+    }
+  },
+  {
+    "timestamp": 1685322600,
+    "east": {
+      "load": 41,
+      "max_supply": 89.17,
+      "recv_rate": 117.49
+    },
+    "south": {
+      "load": 1102.9,
+      "max_supply": 1297.02,
+      "recv_rate": 17.6
+    },
+    "central": {
+      "load": 966,
+      "max_supply": 1337.56,
+      "recv_rate": 38.46
+    },
+    "north": {
+      "load": 1161.5,
+      "max_supply": 1418.62,
+      "recv_rate": 22.14
+    }
+  },
+  {
+    "timestamp": 1685323200,
+    "east": {
+      "load": 38.8,
+      "max_supply": 89.17,
+      "recv_rate": 129.82
+    },
+    "south": {
+      "load": 1098.6,
+      "max_supply": 1297.02,
+      "recv_rate": 18.06
+    },
+    "central": {
+      "load": 966.8,
+      "max_supply": 1337.56,
+      "recv_rate": 38.35
+    },
+    "north": {
+      "load": 1168.6,
+      "max_supply": 1418.62,
+      "recv_rate": 21.39
+    }
+  },
+  {
+    "timestamp": 1685323800,
+    "east": {
+      "load": 37.8,
+      "max_supply": 89.17,
+      "recv_rate": 135.9
+    },
+    "south": {
+      "load": 1095.8,
+      "max_supply": 1297.02,
+      "recv_rate": 18.36
+    },
+    "central": {
+      "load": 972.5,
+      "max_supply": 1337.56,
+      "recv_rate": 37.54
+    },
+    "north": {
+      "load": 1180.3,
+      "max_supply": 1418.62,
+      "recv_rate": 20.19
+    }
+  },
+  {
+    "timestamp": 1685324400,
+    "east": {
+      "load": 39,
+      "max_supply": 89.17,
+      "recv_rate": 128.64
+    },
+    "south": {
+      "load": 1116.4,
+      "max_supply": 1297.02,
+      "recv_rate": 16.18
+    },
+    "central": {
+      "load": 962.6,
+      "max_supply": 1337.56,
+      "recv_rate": 38.95
+    },
+    "north": {
+      "load": 1184.4,
+      "max_supply": 1418.62,
+      "recv_rate": 19.78
+    }
+  },
+  {
+    "timestamp": 1685325000,
+    "east": {
+      "load": 39.7,
+      "max_supply": 89.17,
+      "recv_rate": 124.61
+    },
+    "south": {
+      "load": 1115.5,
+      "max_supply": 1297.02,
+      "recv_rate": 16.27
+    },
+    "central": {
+      "load": 955.1,
+      "max_supply": 1337.56,
+      "recv_rate": 40.04
+    },
+    "north": {
+      "load": 1197,
+      "max_supply": 1418.62,
+      "recv_rate": 18.51
+    }
+  },
+  {
+    "timestamp": 1685325600,
+    "east": {
+      "load": 38.7,
+      "max_supply": 89.17,
+      "recv_rate": 130.41
+    },
+    "south": {
+      "load": 1122.2,
+      "max_supply": 1297.02,
+      "recv_rate": 15.58
+    },
+    "central": {
+      "load": 961.9,
+      "max_supply": 1337.56,
+      "recv_rate": 39.05
+    },
+    "north": {
+      "load": 1204.4,
+      "max_supply": 1418.62,
+      "recv_rate": 17.79
+    }
+  },
+  {
+    "timestamp": 1685326200,
+    "east": {
+      "load": 38.6,
+      "max_supply": 89.17,
+      "recv_rate": 131.01
+    },
+    "south": {
+      "load": 1119.6,
+      "max_supply": 1297.02,
+      "recv_rate": 15.85
+    },
+    "central": {
+      "load": 971.6,
+      "max_supply": 1337.56,
+      "recv_rate": 37.67
+    },
+    "north": {
+      "load": 1212.9,
+      "max_supply": 1418.62,
+      "recv_rate": 16.96
+    }
+  },
+  {
+    "timestamp": 1685326800,
+    "east": {
+      "load": 38.5,
+      "max_supply": 89.17,
+      "recv_rate": 131.61
+    },
+    "south": {
+      "load": 1133.3,
+      "max_supply": 1297.02,
+      "recv_rate": 14.45
+    },
+    "central": {
+      "load": 988.3,
+      "max_supply": 1337.56,
+      "recv_rate": 35.34
+    },
+    "north": {
+      "load": 1219.1,
+      "max_supply": 1418.62,
+      "recv_rate": 16.37
+    }
+  },
+  {
+    "timestamp": 1685327400,
+    "east": {
+      "load": 39.2,
+      "max_supply": 89.17,
+      "recv_rate": 127.48
+    },
+    "south": {
+      "load": 1146.2,
+      "max_supply": 1297.02,
+      "recv_rate": 13.16
+    },
+    "central": {
+      "load": 988.7,
+      "max_supply": 1337.56,
+      "recv_rate": 35.28
+    },
+    "north": {
+      "load": 1230.9,
+      "max_supply": 1418.62,
+      "recv_rate": 15.25
+    }
+  },
+  {
+    "timestamp": 1685328000,
+    "east": {
+      "load": 39.2,
+      "max_supply": 89.17,
+      "recv_rate": 127.48
+    },
+    "south": {
+      "load": 1148.9,
+      "max_supply": 1297.02,
+      "recv_rate": 12.89
+    },
+    "central": {
+      "load": 988.3,
+      "max_supply": 1337.56,
+      "recv_rate": 35.34
+    },
+    "north": {
+      "load": 1237.8,
+      "max_supply": 1418.62,
+      "recv_rate": 14.61
+    }
+  },
+  {
+    "timestamp": 1685328600,
+    "east": {
+      "load": 40.2,
+      "max_supply": 89.17,
+      "recv_rate": 121.82
+    },
+    "south": {
+      "load": 1148.8,
+      "max_supply": 1297.02,
+      "recv_rate": 12.9
+    },
+    "central": {
+      "load": 982.8,
+      "max_supply": 1337.56,
+      "recv_rate": 36.1
+    },
+    "north": {
+      "load": 1245.7,
+      "max_supply": 1418.62,
+      "recv_rate": 13.88
+    }
+  },
+  {
+    "timestamp": 1685329200,
+    "east": {
+      "load": 39.1,
+      "max_supply": 89.17,
+      "recv_rate": 128.06
+    },
+    "south": {
+      "load": 1157.2,
+      "max_supply": 1297.02,
+      "recv_rate": 12.08
+    },
+    "central": {
+      "load": 991.7,
+      "max_supply": 1337.56,
+      "recv_rate": 34.88
+    },
+    "north": {
+      "load": 1253.7,
+      "max_supply": 1418.62,
+      "recv_rate": 13.15
+    }
+  },
+  {
+    "timestamp": 1685329800,
+    "east": {
+      "load": 42.5,
+      "max_supply": 89.17,
+      "recv_rate": 109.81
+    },
+    "south": {
+      "load": 1161.5,
+      "max_supply": 1297.02,
+      "recv_rate": 11.67
+    },
+    "central": {
+      "load": 994.1,
+      "max_supply": 1337.56,
+      "recv_rate": 34.55
+    },
+    "north": {
+      "load": 1259.6,
+      "max_supply": 1418.62,
+      "recv_rate": 12.62
+    }
+  }
+]
