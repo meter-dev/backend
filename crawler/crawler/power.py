@@ -1,19 +1,17 @@
 from datetime import datetime
 
-from .crawler import Crawler, SSLCTX
+from .crawler import Crawler
 
-import http.client
-import json
 import time
+
+import httpx
 
 
 def mxpowersply():
-    conn = http.client.HTTPSConnection('www.taipower.com.tw', context=SSLCTX)
-    conn.request('GET',
-                 '/d006/loadGraph/loadGraph/data/loadpara.json',
-                 headers={'User-Agent': 'cn-meter'})
-    res = conn.getresponse()
-    data = json.loads(res.read())
+    r = httpx.get(
+        'https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadpara.json'
+    )
+    data = r.json()
     mxsply = float(data['records'][1]['fore_maxi_sply_capacity'])
 
     # https://github.com/TaiwanStat/real.taiwanstat.com/blob/a88daf06f6e34df99ed048c1f5376e3188dd0d4a/power/js/index.js#L16

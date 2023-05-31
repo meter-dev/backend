@@ -1,10 +1,6 @@
 import abc
 
-import aiohttp
-import certifi
-import ssl
-
-SSLCTX = ssl.create_default_context(cafile=certifi.where())
+import httpx
 
 
 class Crawler(metaclass=abc.ABCMeta):
@@ -46,11 +42,11 @@ class Crawler(metaclass=abc.ABCMeta):
             yield from self._report(data)
 
     async def crawl(self):
-        async with aiohttp.ClientSession() as session:
-            for url, data in zip(self.urls, self.data):
-                async with session.request(self.METHOD,
-                                           url,
-                                           data=data,
-                                           headers=self.HEADERS,
-                                           ssl=SSLCTX) as resp:
-                    self.done.append(await resp.text())
+        client = httpx.AsyncClient()
+        for url, data in zip(self.urls, self.data):
+            r = await client.request(self.METHOD,
+                                     url,
+                                     content=data,
+                                     headers=self.HEADERS)
+            self.done.append(r.text)
+        await client.aclose()

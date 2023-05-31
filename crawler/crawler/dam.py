@@ -1,10 +1,11 @@
 from datetime import datetime
 from urllib.parse import urlencode
 
-from .crawler import Crawler, SSLCTX
+from .crawler import Crawler
 
-import http.client
 import time
+
+import httpx
 
 
 def getval(data, name):
@@ -15,10 +16,8 @@ def getval(data, name):
 
 
 def payload():
-    conn = http.client.HTTPSConnection('fhy.wra.gov.tw', context=SSLCTX)
-    conn.request('GET', '/ReservoirPage_2011/Statistics.aspx')
-    res = conn.getresponse()
-    data = res.read().decode()
+    r = httpx.get('https://fhy.wra.gov.tw/ReservoirPage_2011/Statistics.aspx')
+    data = r.text
     return urlencode({
         '__EVENTTARGET':
         'ctl00$cphMain$btnQuery',
