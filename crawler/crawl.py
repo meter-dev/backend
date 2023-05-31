@@ -1,10 +1,9 @@
+import asyncio
 from pprint import pprint
 
-from crawler.eq import EqCrawler
 from crawler.dam import DamCrawler
+from crawler.eq import EqCrawler
 from crawler.power import PowerCrawler
-
-import asyncio
 
 if __name__ == "__main__":
     # Earthquake

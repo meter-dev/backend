@@ -1,12 +1,11 @@
+import time
 from datetime import datetime
 from typing import TypedDict
 from urllib.parse import urlencode
 
-from .crawler import Crawler
-
-import time
-
 import httpx
+
+from .crawler import Crawler
 
 
 class DamReport(TypedDict):

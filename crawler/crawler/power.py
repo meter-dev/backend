@@ -1,11 +1,10 @@
+import time
 from datetime import datetime
 from typing import Any, TypedDict
 
-from .crawler import Crawler
-
-import time
-
 import httpx
+
+from .crawler import Crawler
 
 
 class PowerAreaReport(TypedDict):

@@ -1,11 +1,10 @@
+import json
+import math
+import time
 from datetime import datetime
 from typing import Literal, TypedDict
 
 from .crawler import Crawler
-
-import json
-import math
-import time
 
 Point = tuple[float, float]
 Intensity = tuple[int, int, int]

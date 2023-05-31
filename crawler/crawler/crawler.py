@@ -1,13 +1,10 @@
-from typing import Optional
-from typing import Iterable, Iterator, TypeVar, Generic
-
-from httpx._types import HeaderTypes, RequestContent, URLTypes
-from httpx import Response
-
 import abc
 import asyncio
+from typing import Generic, Iterable, Iterator, Optional, TypeVar
 
 import httpx
+from httpx import Response
+from httpx._types import HeaderTypes, RequestContent, URLTypes
 
 Report = TypeVar("Report")
 Query = TypeVar("Query")
