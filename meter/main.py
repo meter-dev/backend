@@ -1,9 +1,22 @@
-from fastapi import FastAPI, Request, status
+from typing import Annotated
+
+from fastapi import Depends, FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 
-from meter.api import auth, comment, get_config, group, issue, rule, upload, user
+from meter.api import (
+    auth,
+    comment,
+    get_config,
+    get_current_user,
+    group,
+    issue,
+    rule,
+    upload,
+    user,
+)
 from meter.domain import create_db_and_tables, get_engine
+from meter.domain.user import User
 
 app = FastAPI()
 
@@ -22,6 +35,11 @@ def health_check():
 @app.get("/readyz")
 def readiness_check():
     return "ok"
+
+
+@app.get("/me")
+async def get_user(current_user: Annotated[User, Depends(get_current_user)]):
+    return current_user
 
 
 @app.on_event("startup")
