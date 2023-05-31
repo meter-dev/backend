@@ -5,6 +5,7 @@ from meter.domain.user import User
 
 
 class MockResult:
+
     def all(self):
         return []
 
@@ -13,6 +14,7 @@ class MockResult:
 
 
 class MockSession:
+
     def exec(self, arg1):
         return MockResult()
 
@@ -33,6 +35,7 @@ class MockSession:
 
 
 class TestRuleDomainClass:
+
     def setup_method(self) -> None:
         self.service = RuleService(MockSession())
 
@@ -63,6 +66,7 @@ class TestRuleDomainClass:
         )
 
     def test_create_failed(self, monkeypatch):
+
         def mock_commit(arg1):
             raise Exception()
 
@@ -153,6 +157,7 @@ class TestRuleDomainClass:
         assert rules == None
 
     def test_update_failed(self, monkeypatch):
+
         def mock_commit(arg1):
             raise Exception()
 
@@ -189,6 +194,7 @@ class TestRuleDomainClass:
             self.service.update(1, resource, by_user)
 
     def test_update(self, monkeypatch):
+
         def mockGetRule(arg1):
             return Rule(
                 id=1,
@@ -250,6 +256,7 @@ class TestRuleDomainClass:
         assert success == False
 
     def test_delete_failed(self, monkeypatch):
+
         def mock_commit(arg1):
             raise Exception()
 
@@ -279,6 +286,7 @@ class TestRuleDomainClass:
             self.service.delete(1, by_user)
 
     def test_delete(self, monkeypatch):
+
         def mockGetRule(arg1):
             return Rule(
                 id=1,
@@ -325,6 +333,7 @@ class TestRuleDomainClass:
         assert success == False
 
     def test_enable_failed(self, monkeypatch):
+
         def mock_commit(arg1):
             raise Exception()
 
@@ -354,6 +363,7 @@ class TestRuleDomainClass:
             self.service.enable(1, by_user)
 
     def test_enable(self, monkeypatch):
+
         def mockGetRule(arg1):
             return Rule(
                 id=1,
@@ -400,6 +410,7 @@ class TestRuleDomainClass:
         assert success == False
 
     def test_disable_failed(self, monkeypatch):
+
         def mock_commit(arg1):
             raise Exception()
 
@@ -429,6 +440,7 @@ class TestRuleDomainClass:
             self.service.disable(1, by_user)
 
     def test_disable(self, monkeypatch):
+
         def mockGetRule(arg1):
             return Rule(
                 id=1,

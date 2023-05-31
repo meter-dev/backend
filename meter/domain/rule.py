@@ -45,6 +45,7 @@ class ReadRule(RuleBase):
 
 
 class RuleService:
+
     def __init__(self, session: Session) -> None:
         self.session = session
 
@@ -53,7 +54,8 @@ class RuleService:
         id: int,
         userId: int,
     ) -> Rule | None:
-        statement = select(Rule).where(Rule.id == id).where(Rule.user_id == userId)
+        statement = select(Rule).where(Rule.id == id).where(
+            Rule.user_id == userId)
         results = self.session.exec(statement)
         return results.first()
 
@@ -72,7 +74,8 @@ class RuleService:
         try:
             self.session.commit()
         except Exception as e:
-            logging.error(f"[create_rule] failed: input = {input}, exception = {e}!")
+            logging.error(
+                f"[create_rule] failed: input = {input}, exception = {e}!")
             self.session.rollback()
             raise e
 
@@ -164,7 +167,8 @@ class RuleService:
         try:
             self.session.commit()
         except Exception as e:
-            logging.error(f"[disable_rule] failed: id = {id}, exception = {e}!")
+            logging.error(
+                f"[disable_rule] failed: id = {id}, exception = {e}!")
             raise e
 
         return True

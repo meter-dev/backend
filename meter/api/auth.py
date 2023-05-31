@@ -32,8 +32,7 @@ async def new_access_token(
         UserLogin(
             name=form_data.username,
             password=form_data.password,
-        )
-    )
+        ))
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

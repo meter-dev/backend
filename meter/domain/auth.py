@@ -12,6 +12,7 @@ class AuthConfig(BaseModel):
 
 
 class AuthService:
+
     def __init__(self, config: AuthConfig) -> None:
         self.config = config
 
@@ -31,7 +32,7 @@ class AuthService:
         )
 
     def decode_jwt(self, token):
-        payload = jwt.decode(
-            token, self.config.secret_key, algorithms=self.config.algorithm
-        )
+        payload = jwt.decode(token,
+                             self.config.secret_key,
+                             algorithms=self.config.algorithm)
         return payload

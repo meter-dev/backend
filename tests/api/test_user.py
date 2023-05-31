@@ -17,21 +17,25 @@ def test_signup_and_login(test_client: TestClient):
     assert resp.status_code == status.HTTP_201_CREATED, resp.json()
     resp = test_client.post(
         "/auth/token",
-        data={"username": "foo", "password": "foo"},
+        data={
+            "username": "foo",
+            "password": "foo"
+        },
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
 
     resp = test_client.get(
         "/user/me",
-        headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
+        headers={
+            "Authorization": f'{token["token_type"]} {token["access_token"]}'
+        },
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()["name"] == "foo", resp.json()
 
     resp = test_client.get(
-        "/user/me", headers={"Authorization": f'{token["token_type"]} lol'}
-    )
+        "/user/me", headers={"Authorization": f'{token["token_type"]} lol'})
     assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
 
 
@@ -65,7 +69,8 @@ def test_signup_wrong_password(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
     assert resp.json()["detail"][0]["loc"][1] == "email", resp.json()
 
 
@@ -78,7 +83,8 @@ def test_signup_wrong_name(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
     assert resp.json()["detail"][0]["loc"][1] == "name", resp.json()
 
     resp = test_client.post(
@@ -89,7 +95,8 @@ def test_signup_wrong_name(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
     assert resp.json()["detail"][0]["loc"][1] == "name", resp.json()
 
 
@@ -112,8 +119,10 @@ def test_signup_duplicated(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
-    assert "UNIQUE constraint failed: user.name" in resp.json()["message"], resp.json()
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
+    assert "UNIQUE constraint failed: user.name" in resp.json(
+    )["message"], resp.json()
 
     resp = test_client.post(
         "/user/signup",
@@ -123,8 +132,10 @@ def test_signup_duplicated(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
-    assert "UNIQUE constraint failed: user.email" in resp.json()["message"], resp.json()
+    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json(
+    )
+    assert "UNIQUE constraint failed: user.email" in resp.json(
+    )["message"], resp.json()
 
 
 def test_login_by_email(test_client: TestClient):
@@ -139,13 +150,18 @@ def test_login_by_email(test_client: TestClient):
     assert resp.status_code == status.HTTP_201_CREATED, resp.json()
     resp = test_client.post(
         "/auth/token",
-        data={"username": "foo@bar.com", "password": "foo"},
+        data={
+            "username": "foo@bar.com",
+            "password": "foo"
+        },
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
     resp = test_client.get(
         "/user/me",
-        headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
+        headers={
+            "Authorization": f'{token["token_type"]} {token["access_token"]}'
+        },
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()["name"] == "foo", resp.json()
@@ -163,13 +179,18 @@ def test_login_by_email_case_insensitive(test_client: TestClient):
     assert resp.status_code == status.HTTP_201_CREATED, resp.json()
     resp = test_client.post(
         "/auth/token",
-        data={"username": "fOo@bAr.com", "password": "foo"},
+        data={
+            "username": "fOo@bAr.com",
+            "password": "foo"
+        },
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
     resp = test_client.get(
         "/user/me",
-        headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
+        headers={
+            "Authorization": f'{token["token_type"]} {token["access_token"]}'
+        },
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()["name"] == "foo", resp.json()
@@ -200,4 +221,3 @@ def test_send_email_and_active(test_client: TestClient):
     resp = test_client.get('/user/me', headers=headers)
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()['active'] == True, resp.json()
-    

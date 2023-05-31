@@ -14,7 +14,10 @@ def register_and_login(test_client: TestClient, user: UserSignup):
     )
     resp = test_client.post(
         "/auth/token",
-        data={"username": user.name, "password": user.password},
+        data={
+            "username": user.name,
+            "password": user.password
+        },
     )
     return resp.json()
 
