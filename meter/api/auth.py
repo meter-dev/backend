@@ -32,7 +32,8 @@ async def new_access_token(
         UserLogin(
             name=form_data.username,
             password=form_data.password,
-        ))
+        )
+    )
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -51,37 +52,34 @@ async def new_access_token(
     )
 
 
-@router.post('/send_email')
+@router.post("/send_email")
 async def send_email(
     user: Annotated[User, Depends(get_current_user)],
     auth_svc: Annotated[AuthService, Depends(get_auth_service)],
 ):
     if user.active:
-        return HTTPException(status.HTTP_400_BAD_REQUEST,
-                             'User Has Been Actived')
+        return HTTPException(status.HTTP_400_BAD_REQUEST, "User Has Been Actived")
     access_token_expires = timedelta(minutes=10)
     access_token = auth_svc.sign(
-        data={'sub': user.name},
+        data={"sub": user.name},
         expires_after=access_token_expires,
     )
     # TODO: need to be changed to the real address
-    verify_link = f'https://noj.tw/api/auth/active/{access_token}'
-    send_noreply([user.email], '[Meter] Varify Your Email', verify_link)
+    verify_link = f"https://noj.tw/api/auth/active/{access_token}"
+    send_noreply([user.email], "[Meter] Varify Your Email", verify_link)
     return access_token
 
 
-@router.get('/active')
+@router.get("/active")
 async def active(
     token: str,
     user: Annotated[User, Depends(get_current_user)],
     user_svc: Annotated[UserService, Depends(get_user_service)],
     auth_svc: Annotated[AuthService, Depends(get_auth_service)],
 ):
-    '''Activate a user.
-    '''
+    """Activate a user."""
     if user.active:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST,
-                            'User Has Been Actived')
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "User Has Been Actived")
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
