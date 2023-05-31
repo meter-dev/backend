@@ -9,18 +9,15 @@ import asyncio
 
 import httpx
 
-Report = TypeVar('Report')
-Query = TypeVar('Query')
+Report = TypeVar("Report")
+Query = TypeVar("Query")
 
 
 class Crawler(Generic[Report, Query], metaclass=abc.ABCMeta):
-
     METHOD: str
     HEADERS: Optional[HeaderTypes]
 
-    def __init_subclass__(cls,
-                          method: str,
-                          headers: Optional[HeaderTypes] = None):
+    def __init_subclass__(cls, method: str, headers: Optional[HeaderTypes] = None):
         cls.METHOD = method
         cls.HEADERS = headers
 
@@ -56,10 +53,9 @@ class Crawler(Generic[Report, Query], metaclass=abc.ABCMeta):
 
     async def crawl(self):
         async with httpx.AsyncClient() as client:
-            reqs = (client.request(self.METHOD,
-                                   url,
-                                   content=data,
-                                   headers=self.HEADERS)
-                    for url, data in zip(self.urls, self.data))
+            reqs = (
+                client.request(self.METHOD, url, content=data, headers=self.HEADERS)
+                for url, data in zip(self.urls, self.data)
+            )
             resps: list[Response] = await asyncio.gather(*reqs)
             self.done.extend(map(lambda r: r.content, resps))
