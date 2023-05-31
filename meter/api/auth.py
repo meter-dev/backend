@@ -3,13 +3,13 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
+from jose import JWTError
 from pydantic import BaseModel
 
-from meter.api import get_auth_service, get_user_service, get_current_user
+from meter.api import get_auth_service, get_current_user, get_user_service
 from meter.domain.auth import AuthService
-from meter.domain.user import UserLogin, UserService, User
 from meter.domain.smtp import send_noreply
-from jose import JWTError
+from meter.domain.user import User, UserLogin, UserService
 
 router = APIRouter()
 

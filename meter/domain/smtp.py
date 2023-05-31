@@ -1,9 +1,8 @@
+import os
+import threading
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTP
-
-import os
-import threading
 
 __all__ = ["send_noreply"]
 
