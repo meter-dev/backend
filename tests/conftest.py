@@ -5,7 +5,7 @@ from sqlmodel.pool import StaticPool
 
 from meter.api import get_config, get_session
 from meter.config import MeterConfig
-from meter.domain import SQLEngineParam
+from meter.domain import SMTPServerParam, SQLEngineParam, VerifyEmailParam
 from meter.domain.auth import AuthConfig
 from meter.main import app
 
@@ -29,6 +29,17 @@ def get_test_config():
             secret_key="i-am-example-secret-key",
             algorithm="HS256",
             default_ttl_sec=900,
+        ),
+        verify_email=VerifyEmailParam(
+            subject="Hi",
+            content="Verify here: https://noj.tw/auth/active?token={access_token}",
+        ),
+        SMTP=SMTPServerParam(
+            server=None,
+            admin="",
+            admin_password="",
+            noreply="",
+            noreply_password="",
         ),
     )
 

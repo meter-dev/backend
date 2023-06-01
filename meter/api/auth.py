@@ -6,9 +6,16 @@ from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError
 from pydantic import BaseModel
 
-from meter.api import get_auth_service, get_current_user, get_user_service
+from meter.api import (
+    MeterConfig,
+    get_auth_service,
+    get_config,
+    get_current_user,
+    get_email_service,
+    get_user_service,
+)
 from meter.domain.auth import AuthService
-from meter.domain.smtp import send_noreply
+from meter.domain.smtp import EmailService
 from meter.domain.user import User, UserLogin, UserService
 
 router = APIRouter()
@@ -56,30 +63,33 @@ async def new_access_token(
 async def send_email(
     user: Annotated[User, Depends(get_current_user)],
     auth_svc: Annotated[AuthService, Depends(get_auth_service)],
+    cfg: Annotated[MeterConfig, Depends(get_config)],
+    email_svc: Annotated[EmailService, Depends(get_email_service)],
 ):
     if user.active:
         return HTTPException(status.HTTP_400_BAD_REQUEST, "User Has Been Actived")
-    access_token_expires = timedelta(minutes=10)
+    access_token_expires = timedelta(minutes=60)
     access_token = auth_svc.sign(
         data={"sub": user.name},
         expires_after=access_token_expires,
     )
     # TODO: need to be changed to the real address
-    verify_link = f"https://noj.tw/api/auth/active/{access_token}"
-    send_noreply([user.email], "[Meter] Varify Your Email", verify_link)
+    verify_email = cfg.verify_email
+    email_svc.send_noreply(
+        [user.email],
+        verify_email.subject,
+        verify_email.content.format(access_token=access_token),
+    )
     return access_token
 
 
 @router.get("/active")
 async def active(
     token: str,
-    user: Annotated[User, Depends(get_current_user)],
     user_svc: Annotated[UserService, Depends(get_user_service)],
     auth_svc: Annotated[AuthService, Depends(get_auth_service)],
 ):
     """Activate a user."""
-    if user.active:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "User Has Been Actived")
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -92,6 +102,9 @@ async def active(
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    if user.name != username:
+    user = user_svc._get_by_name(username)
+    if user.active:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "User Has Been Actived")
+    if user is None:
         raise credentials_exception
     user_svc.activate(user)
