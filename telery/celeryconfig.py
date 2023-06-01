@@ -6,25 +6,24 @@ result_backend = "rpc://"
 task_serializer = "json"
 result_serializer = "json"
 accept_content = ["json"]
-# TODO: Asia/Taipei doesn't work
-timezone = "UTC"
+timezone = "Asia/Taipei"
 
-imports = ["telery.crawler_tasks"]
+imports = ["telery.crawler_tasks", "telery.save_tasks"]
 
 beat_schedule = {
-    "Earthquake": {
-        "task": "telery.crawler_tasks.Earthquake",
-        "schedule": crontab(minute="5"),
-        "args": (2020, 5),
+    "SaveEarthquake": {
+        "task": "telery.save_tasks.SaveNowEarthquake",
+        "schedule": crontab(minute="*/1"),
+        "args": (),
     },
-    "Reservoir": {
-        "task": "telery.crawler_tasks.Reservoir",
-        "schedule": crontab(minute="5"),
-        "args": (2020, 5, 1),
+    "SaveReservoir": {
+        "task": "telery.save_tasks.SaveNowReservoir",
+        "schedule": crontab(minute="*/1"),
+        "args": (),
     },
-    "Power": {
-        "task": "telery.crawler_tasks.Power",
-        "schedule": crontab(minute="5"),
+    "SavePower": {
+        "task": "telery.save_tasks.SaveNowPower",
+        "schedule": crontab(minute="*/1"),
         "args": (),
     },
 }

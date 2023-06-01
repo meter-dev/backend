@@ -1,4 +1,5 @@
 import asyncio
+import time
 
 from crawler.crawler.dam import DamCrawler
 from crawler.crawler.eq import EqCrawler
@@ -31,9 +32,8 @@ def Power():
 
 
 @app.task
-def nowEarthquake():
+def NowEarthquake():
     now_time = time.localtime()
-    now_time.tm_mon = 5  # for test
     eq = EqCrawler([{"year": now_time.tm_year, "month": now_time.tm_mon}])
     asyncio.run(eq.crawl())
     report = list(eq.report())
@@ -41,9 +41,8 @@ def nowEarthquake():
 
 
 @app.task
-def nowReservoir():
+def NowReservoir():
     now_time = time.localtime()
-    now_time.tm_mon = 5  # for test
     dam = DamCrawler(
         [{"year": now_time.tm_year, "month": now_time.tm_mon, "day": now_time.tm_mday}]
     )
