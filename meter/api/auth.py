@@ -73,7 +73,6 @@ async def send_email(
         data={"sub": user.name},
         expires_after=access_token_expires,
     )
-    # TODO: need to be changed to the real address
     verify_email = cfg.verify_email
     email_svc.send_noreply(
         [user.email],

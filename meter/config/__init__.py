@@ -17,7 +17,7 @@ class MeterConfig(BaseSettings):
     sql: SQLEngineParam
     auth: AuthConfig
     verify_email: VerifyEmailParam
-    SMTP: SMTPServerParam
+    smtp: SMTPServerParam
 
     class Config:
         path = "meter.toml"

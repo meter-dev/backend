@@ -38,7 +38,7 @@ def get_auth_service(cfg: Annotated[MeterConfig, Depends(get_config)]):
 
 
 def get_email_service(cfg: Annotated[MeterConfig, Depends(get_config)]):
-    return EmailService(cfg.SMTP)
+    return EmailService(cfg.smtp)
 
 
 def get_rule_service(session: Annotated[Session, Depends(get_session)]):

@@ -12,8 +12,6 @@ class EmailService:
         self.config = config
 
     def send(self, from_addr, password, to_addrs, subject, text, html):
-        if self.config.server is None:
-            return
         with SMTP(self.config.server, 587) as server:
             if password is not None:
                 server.login(from_addr, password)
