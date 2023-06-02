@@ -38,7 +38,7 @@ def get_test_config():
         smtp=SMTPServerParam(
             server="msa.hinet.net",
             noreply="test@gmail.com",
-            noreply_password="",
+            noreply_password=None,
         ),
     )
 
