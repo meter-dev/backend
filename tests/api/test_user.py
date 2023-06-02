@@ -183,7 +183,7 @@ def test_send_email_and_active(test_client: TestClient):
     )
     headers = get_authorization_header(test_client, user)
 
-    # if SMTP_SERVER is not set, it should not try to send anything while returning 200
+    # Mock email server should not try to send anything while returning 200
     resp = test_client.post("/auth/send_email", headers=headers)
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
