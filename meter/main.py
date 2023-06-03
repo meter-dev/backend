@@ -9,8 +9,6 @@ from meter.exception import CustomErrorException
 from meter.helper import get_message_by_response_code
 
 app = FastAPI()
-# FIXME: make config mockable
-set_cors(app, get_config().cors)
 
 
 @app.get("/")
@@ -31,9 +29,9 @@ def readiness_check():
 
 @app.on_event("startup")
 def on_startup():
-    # FIXME: we might need to mock the config, but startup event can't use Depends
     cfg = get_config()
     create_db_and_tables(get_engine(cfg.sql))
+    set_cors(app, cfg.cors)
 
 
 @app.exception_handler(IntegrityError)
