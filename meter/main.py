@@ -4,6 +4,8 @@ from sqlalchemy.exc import IntegrityError
 
 from meter.api import auth, comment, get_config, group, issue, rule, upload, user
 from meter.domain import create_db_and_tables, get_engine
+from meter.exception import CustomErrorException
+from meter.helper import get_message_by_response_code
 
 app = FastAPI()
 
@@ -32,10 +34,21 @@ def on_startup():
 
 
 @app.exception_handler(IntegrityError)
-async def unicorn_exception_handler(request: Request, exc: IntegrityError):
+async def integrity_exception_handler(request: Request, exc: IntegrityError):
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content={"message": exc.args[0]},
+    )
+
+
+@app.exception_handler(CustomErrorException)
+async def custom_exception_handler(request: Request, exc: CustomErrorException):
+    return JSONResponse(
+        status_code=400,
+        content={
+            "message": get_message_by_response_code(exc.response_code),
+            "code": exc.response_code.value,
+        },
     )
 
 
