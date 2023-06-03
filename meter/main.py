@@ -9,6 +9,7 @@ from meter.exception import CustomErrorException
 from meter.helper import get_message_by_response_code
 
 app = FastAPI()
+set_cors(app, get_config().cors)
 
 
 @app.get("/")
@@ -31,7 +32,6 @@ def readiness_check():
 def on_startup():
     cfg = get_config()
     create_db_and_tables(get_engine(cfg.sql))
-    set_cors(app, cfg.cors)
 
 
 @app.exception_handler(IntegrityError)
