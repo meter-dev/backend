@@ -2,4 +2,9 @@ from enum import Enum
 
 
 class ResponseCode(Enum):
-    pass
+    RULE_CREATE_FAILED_1001 = "1001"
+    RULE_UPDATE_FAILED_1002 = "1002"
+    RULE_DELETE_FAILED_1003 = "1003"
+    RULE_ENABLE_FAILED_1004 = "1004"
+    RULE_DISABLE_FAILED_1005 = "1005"
+    RULE_TRIGGER_FAILED_1006 = "1006"

@@ -57,7 +57,7 @@ class RuleService:
         results = self.session.exec(statement)
         return results.first()
 
-    def create(self, input: CreateRule, user: User) -> Rule | None:
+    def create(self, input: CreateRule, user: User) -> Rule:
         rule = Rule(
             user_id=user.id,
             name=input.name,

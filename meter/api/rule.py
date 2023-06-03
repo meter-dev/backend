@@ -5,6 +5,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from meter.api import get_current_user, get_rule_service
 from meter.domain.rule import CreateRule, ReadRule, RuleService, UpdateRule
 from meter.domain.user import User
+from meter.helper import raise_custom_exception, raise_not_found_exception
+from meter.constant.response_code import ResponseCode
 
 router = APIRouter()
 
@@ -19,10 +21,10 @@ async def create_rule(
     user: Annotated[User, Depends(get_current_user)],
     input: CreateRule,
 ):
-    rule = svc.create(input, user)
-    if rule is None:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
-    return rule
+    try:
+        return svc.create(input, user)
+    except Exception:
+        raise_custom_exception(ResponseCode.RULE_CREATE_FAILED_1001)
 
 
 # TODO: pagination
@@ -48,7 +50,7 @@ async def show_rule(
 ):
     rule = svc.show(user, id)
     if rule is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        raise_not_found_exception()
 
     return rule
 
@@ -63,9 +65,15 @@ async def update_rule(
     id: int,
     input: UpdateRule,
 ):
-    rule = svc.update(id, input, user)
+    rule = None
+
+    try:
+        rule = svc.update(id, input, user)
+    except Exception:
+        raise_custom_exception(ResponseCode.RULE_UPDATE_FAILED_1002)
+
     if rule is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        raise_not_found_exception()
 
     return rule
 
@@ -76,9 +84,15 @@ async def delete_rule(
     user: Annotated[User, Depends(get_current_user)],
     id: int,
 ):
-    success = svc.delete(id, user)
+    success = False
+
+    try:
+        success = svc.delete(id, user)
+    except Exception:
+        raise_custom_exception(ResponseCode.RULE_DELETE_FAILED_1003)
+
     if not success:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        raise_not_found_exception()
 
 
 @router.put("/{id}/enable", status_code=status.HTTP_204_NO_CONTENT)
@@ -87,9 +101,15 @@ async def enable_rule(
     user: Annotated[User, Depends(get_current_user)],
     id: int,
 ):
-    success = svc.enable(id, user)
+    success = False
+
+    try:
+        success = svc.enable(id, user)
+    except Exception:
+        raise_custom_exception(ResponseCode.RULE_ENABLE_FAILED_1004)
+
     if not success:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        raise_not_found_exception()
 
 
 @router.put("/{id}/disable", status_code=status.HTTP_204_NO_CONTENT)
@@ -98,9 +118,15 @@ async def disable_rule(
     user: Annotated[User, Depends(get_current_user)],
     id: int,
 ):
-    success = svc.disable(id, user)
+    success = False
+
+    try:
+        success = svc.disable(id, user)
+    except Exception:
+        raise_custom_exception(ResponseCode.RULE_DISABLE_FAILED_1005)
+
     if not success:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        raise_not_found_exception()
 
 
 @router.put("/{id}/trigger", status_code=status.HTTP_204_NO_CONTENT)
