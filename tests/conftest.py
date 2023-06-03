@@ -11,7 +11,7 @@ from meter.api import get_config, get_session
 from meter.config import MeterConfig
 from meter.domain import SQLEngineParam, create_db_and_tables
 from meter.domain.auth import AuthConfig
-from meter.main import app
+from meter.main import create_app
 
 
 # https://sqlmodel.tiangolo.com/tutorial/fastapi/tests/#configure-the-in-memory-database
@@ -54,6 +54,7 @@ def test_app(tmp_path: Path, test_session: Session):
     toml.dump(get_test_config().dict(), tmp_config_path.open("w"))
     os.environ["METER_CONFIG"] = str(tmp_config_path.absolute())
 
+    app = create_app()
     app.dependency_overrides[get_session] = get_test_session
     yield app
     app.dependency_overrides.clear()
