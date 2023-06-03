@@ -46,7 +46,7 @@ def test_session():
 
 
 @pytest.fixture
-def test_client(tmp_path: Path, test_session: Session):
+def test_app(tmp_path: Path, test_session: Session):
     def get_test_session():
         return test_session
 
@@ -55,8 +55,13 @@ def test_client(tmp_path: Path, test_session: Session):
     os.environ["METER_CONFIG"] = str(tmp_config_path.absolute())
 
     app.dependency_overrides[get_session] = get_test_session
-    with TestClient(app) as client:
-        yield client
+    yield app
     app.dependency_overrides.clear()
 
     del os.environ["METER_CONFIG"]
+
+
+@pytest.fixture
+def test_client(test_app):
+    with TestClient(test_app) as client:
+        yield client
