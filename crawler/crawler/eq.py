@@ -4,6 +4,8 @@ import time
 from datetime import datetime
 from typing import Literal, TypedDict
 
+from sqlmodel import SQLModel
+
 from .crawler import Crawler
 
 Point = tuple[float, float]
@@ -15,7 +17,7 @@ class Geometry(TypedDict):
     coordinates: Point
 
 
-class EqReport(TypedDict):
+class EqReport(SQLModel):
     timestamp: int
     geometry: Geometry
     scale: float

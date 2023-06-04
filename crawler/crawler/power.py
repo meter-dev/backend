@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Any, TypedDict
 
 import httpx
+from sqlmodel import SQLModel
 
 from .crawler import Crawler
 
@@ -13,7 +14,7 @@ class PowerAreaReport(TypedDict):
     recv_rate: float
 
 
-class PowerReport(TypedDict):
+class PowerReport(SQLModel):
     timestamp: int
     east: PowerAreaReport
     south: PowerAreaReport
