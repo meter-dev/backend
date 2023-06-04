@@ -9,12 +9,14 @@ from sqlmodel.pool import StaticPool
 
 from meter.api import get_config, get_email_service, get_session
 from meter.config import MeterConfig
-from meter.domain import SMTPServerParam, SQLEngineParam, VerifyEmailParam
+from meter.domain import (
+    SMTPServerParam,
+    SQLEngineParam,
+    VerifyEmailParam,
+    create_db_and_tables,
+)
 from meter.domain.auth import AuthConfig
 from meter.domain.smtp import EmailService
-from meter.main import app
-from meter.domain import SQLEngineParam, create_db_and_tables
-from meter.domain.auth import AuthConfig
 from meter.main import create_app
 
 
@@ -74,7 +76,6 @@ def test_app(tmp_path: Path, test_session: Session):
     def get_test_session():
         return test_session
 
-    yield TestClient(app)
     tmp_config_path = tmp_path / "meter.toml"
     toml.dump(get_test_config().dict(), tmp_config_path.open("w"))
     os.environ["METER_CONFIG"] = str(tmp_config_path.absolute())

@@ -3,9 +3,8 @@ import os
 import toml
 from pydantic import BaseSettings
 
-from meter.domain import SMTPServerParam, SQLEngineParam, VerifyEmailParam
 from meter.api.cors import CORSConfig
-from meter.domain import SQLEngineParam
+from meter.domain import SMTPServerParam, SQLEngineParam, VerifyEmailParam
 from meter.domain.auth import AuthConfig
 
 
