@@ -8,3 +8,8 @@ connect_args = { check_same_thread = false }
 secret_key = "i-am-example-secret-key"
 algorithm = "HS256"
 default_ttl_sec = 900
+
+# https://fastapi.tiangolo.com/tutorial/cors/#use-corsmiddleware
+[cors]
+# allow_origins = []
+allow_origin_regex = "http://localhost(:\\d+)?"
