@@ -17,3 +17,8 @@ content = "Verify here: https://noj.tw/auth/active?token={access_token}"
 server = "msa.hinet.net"
 noreply = "test@gmail.com"
 noreply_password = None
+
+# https://fastapi.tiangolo.com/tutorial/cors/#use-corsmiddleware
+[cors]
+# allow_origins = []
+allow_origin_regex = "http://localhost(:\\d+)?"

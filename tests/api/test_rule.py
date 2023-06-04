@@ -45,7 +45,7 @@ class TestRuleClass:
 
     def test_create_rule_failed(self, test_client: TestClient, monkeypatch):
         def mock_create(arg1, arg2, arg3):
-            return None
+            raise Exception
 
         monkeypatch.setattr(RuleService, "create", mock_create)
 

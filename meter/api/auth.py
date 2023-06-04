@@ -1,4 +1,3 @@
-from datetime import timedelta
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -47,12 +46,7 @@ async def new_access_token(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    # TODO: config
-    access_token_expires = timedelta(minutes=15)
-    access_token = auth_svc.sign(
-        data={"sub": user.name},
-        expires_after=access_token_expires,
-    )
+    access_token = auth_svc.sign(data={"sub": user.name})
     return Token(
         access_token=access_token,
         token_type="bearer",
