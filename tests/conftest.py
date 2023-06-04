@@ -41,7 +41,9 @@ def get_test_config():
             default_ttl_sec=900,
         ),
         verify_email=VerifyEmailParam(
-            subject="Hi", template_path="./templates/verify_mail.html", expire=60
+            subject="Hi",
+            template_path="./template/verify_mail.template",
+            expire=60,
         ),
         smtp=SMTPServerParam(
             server="msa.hinet.net",
