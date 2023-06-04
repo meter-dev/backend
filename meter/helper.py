@@ -15,5 +15,5 @@ def raise_custom_exception(response_code: ResponseCode):
 
 def get_message_by_response_code(response_code: ResponseCode) -> str:
     if not response_code.name in Message._member_names_:
-        return ResponseCode.name.__str__()
+        return response_code.name.__str__()
     return Message[response_code.name].value.__str__()
