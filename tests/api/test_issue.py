@@ -1,12 +1,8 @@
-from typing import Annotated
-
-from fastapi import Depends, status
+from fastapi import status
 from fastapi.testclient import TestClient
 
-from meter.api import get_issue_service
 from meter.constant.issue_status import IssueStatus
 from meter.domain.issue import IssueService
-from meter.domain.rule import CreateRule, RuleService
 from meter.domain.user import UserSignup
 from tests.helper import register_and_login
 
