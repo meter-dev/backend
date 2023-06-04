@@ -19,9 +19,9 @@ jobs:
           cache: "poetry"
       - name: Install Dependency
         run: poetry install
-      - name: Format
+      - name: Format checking
         run: |
           poetry run black -- --check --diff .
           poetry run isort -- --check --diff .
       - name: Unit test
-        run: poetry run pytest -- --cov=./ --cov-config=.coveragerc
+        run: poetry run pytest -- --cov=./meter
