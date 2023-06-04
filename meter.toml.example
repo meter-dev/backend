@@ -25,5 +25,5 @@ noreply_password = None
 # allow_origins = []
 allow_origin_regex = "http://localhost(:\\d+)?"
 
-[host]
+
 host = "https://noj.tw"
