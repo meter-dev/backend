@@ -82,7 +82,7 @@ async def send_email(
     return access_token
 
 
-@router.get("/active")
+@router.get("/active", status_code=status.HTTP_204_NO_CONTENT)
 async def active(
     token: str,
     user_svc: Annotated[UserService, Depends(get_user_service)],
@@ -102,4 +102,3 @@ async def active(
     if user is None:
         raise_unauthorized_exception()
     user_svc.activate(user)
-    raise HTTPException(status_code=status.HTTP_204_NO_CONTENT)
