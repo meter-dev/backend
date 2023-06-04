@@ -94,4 +94,3 @@ class UserService:
         user.active = True
         self.session.add(user)
         self.session.commit()
-        self.session.refresh(user)

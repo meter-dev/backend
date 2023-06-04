@@ -43,7 +43,7 @@ WORKDIR /app
 COPY . .
 
 EXPOSE 8000
-CMD ["uvicorn", "meter.main:app", "--host", "0.0.0.0"]
+CMD ["uvicorn", "meter.main:create_app", "--factory", "--host", "0.0.0.0"]
 
 # 'production' stage uses the clean 'python-base' stage and copyies
 # in only our runtime deps that were installed in the 'builder-base'
@@ -54,4 +54,4 @@ COPY ./ /app
 
 WORKDIR /app
 EXPOSE 8000
-CMD ["uvicorn", "meter.main:app", "--host", "0.0.0.0"]
+CMD ["uvicorn", "meter.main:create_app", "--factory", "--host", "0.0.0.0"]

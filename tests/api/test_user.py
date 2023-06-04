@@ -183,18 +183,18 @@ def test_send_email_and_active(test_client: TestClient):
     )
     headers = get_authorization_header(test_client, user)
 
-    # if SMTP_SERVER is not set, it should not try to send anything while returning 200
+    # Mock email server should not try to send anything while returning 200
     resp = test_client.post("/auth/send_email", headers=headers)
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
 
-    resp = test_client.get(f"/auth/active?token=lalala", headers=headers)
+    resp = test_client.get(f"/auth/active?token=lalala")
     assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
 
-    resp = test_client.get(f"/auth/active?token={token}", headers=headers)
-    assert resp.status_code == status.HTTP_200_OK, resp.json()
+    resp = test_client.get(f"/auth/active?token={token}")
+    assert resp.status_code == status.HTTP_204_NO_CONTENT, resp.json()
 
-    resp = test_client.get(f"/auth/active?token={token}", headers=headers)
+    resp = test_client.get(f"/auth/active?token={token}")
     assert resp.status_code == status.HTTP_400_BAD_REQUEST, resp.json()
 
     resp = test_client.get("/me", headers=headers)

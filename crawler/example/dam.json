@@ -1,0 +1,122 @@
+[
+  {
+    "name": "石門水庫",
+    "timestamp": 1685242800,
+    "storage": 7570.13,
+    "percent": 36.88
+  },
+  {
+    "name": "翡翠水庫",
+    "timestamp": 1685242800,
+    "storage": 17224.03,
+    "percent": 51.34
+  },
+  {
+    "name": "寶山第二水庫",
+    "timestamp": 1685242800,
+    "storage": 2841.71,
+    "percent": 90.29
+  },
+  {
+    "name": "永和山水庫",
+    "timestamp": 1685228400,
+    "storage": 2219.2,
+    "percent": 74.14
+  },
+  {
+    "name": "明德水庫",
+    "timestamp": 1685228400,
+    "storage": 1212.86,
+    "percent": 97.82
+  },
+  {
+    "name": "鯉魚潭水庫",
+    "timestamp": 1685242800,
+    "storage": 6596.11,
+    "percent": 57.08
+  },
+  {
+    "name": "德基水庫",
+    "timestamp": 1685228400,
+    "storage": 10725.02,
+    "percent": 56.85
+  },
+  {
+    "name": "石岡壩",
+    "timestamp": 1685242800,
+    "storage": 150.85,
+    "percent": 100
+  },
+  {
+    "name": "霧社水庫",
+    "timestamp": 1685228400,
+    "storage": 2340.74,
+    "percent": 63.56
+  },
+  {
+    "name": "日月潭水庫",
+    "timestamp": 1685228400,
+    "storage": 11057.67,
+    "percent": 85.3
+  },
+  {
+    "name": "集集攔河堰",
+    "timestamp": 1685242800,
+    "storage": 39.87,
+    "percent": 7.5
+  },
+  {
+    "name": "湖山水庫",
+    "timestamp": 1685242800,
+    "storage": 1803.5,
+    "percent": 35.65
+  },
+  {
+    "name": "仁義潭水庫",
+    "timestamp": 1685228400,
+    "storage": 636.28,
+    "percent": 25.65
+  },
+  {
+    "name": "白河水庫",
+    "timestamp": 1685232000,
+    "storage": 225,
+    "percent": 16.22
+  },
+  {
+    "name": "烏山頭水庫",
+    "timestamp": 1685228400,
+    "storage": 4840,
+    "percent": 61.1
+  },
+  {
+    "name": "曾文水庫",
+    "timestamp": 1685242800,
+    "storage": 3160,
+    "percent": 6.23
+  },
+  {
+    "name": "南化水庫",
+    "timestamp": 1685228400,
+    "storage": 2423.07,
+    "percent": 27.08
+  },
+  {
+    "name": "阿公店水庫",
+    "timestamp": 1685242800,
+    "storage": 161,
+    "percent": 10.59
+  },
+  {
+    "name": "高屏溪攔河堰",
+    "timestamp": 1685242800,
+    "storage": -1,
+    "percent": -1
+  },
+  {
+    "name": "牡丹水庫",
+    "timestamp": 1685242800,
+    "storage": 856,
+    "percent": 32.29
+  }
+]
