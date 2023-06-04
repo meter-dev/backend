@@ -32,7 +32,7 @@ def create_app():
         create_db_and_tables(get_engine(cfg.sql))
 
     @app.exception_handler(IntegrityError)
-    async def unicorn_exception_handler(request: Request, exc: IntegrityError):
+    async def non_unique_exception_handler(request: Request, exc: IntegrityError):
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             content={"message": exc.args[0]},

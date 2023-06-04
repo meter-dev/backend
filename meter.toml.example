@@ -9,7 +9,21 @@ secret_key = "i-am-example-secret-key"
 algorithm = "HS256"
 default_ttl_sec = 900
 
+[verify_email]
+subject = "Hi"
+template_path = "./templates/verify_mail.html"
+expire = 60
+
+[smtp]
+server = "msa.hinet.net"
+port = 587
+noreply = "test@gmail.com"
+noreply_password = None
+
 # https://fastapi.tiangolo.com/tutorial/cors/#use-corsmiddleware
 [cors]
 # allow_origins = []
 allow_origin_regex = "http://localhost(:\\d+)?"
+
+
+host = "https://noj.tw"

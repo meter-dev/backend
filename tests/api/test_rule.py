@@ -4,14 +4,10 @@ from fastapi.testclient import TestClient
 from meter.domain.issue import IssueService
 from meter.domain.rule import RuleService
 from meter.domain.user import UserSignup
-from tests.helper import register_and_login
+from tests.helper import get_authorization_header
 
 
 class TestRuleClass:
-    def __get_authorization_header(self, test_client: TestClient, user: UserSignup):
-        token = register_and_login(test_client, user)
-        return {"Authorization": f'{token["token_type"]} {token["access_token"]}'}
-
     def test_create_rule_unauthorized(self, test_client: TestClient):
         res = test_client.post("/rule")
 
@@ -23,7 +19,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -59,7 +55,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -87,7 +83,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         test_client.post(
             "/rule",
             json={
@@ -105,7 +101,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         test_client.post(
             "/rule",
@@ -165,7 +161,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -200,7 +196,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         res = test_client.post(
             "/rule",
             json={
@@ -219,7 +215,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.get(f"/rule/{json['id']}", headers=header)
 
@@ -236,7 +232,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -279,7 +275,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         res = test_client.post(
             "/rule",
             json={
@@ -298,7 +294,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.patch(
             f"/rule/{json['id']}",
@@ -326,7 +322,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         monkeypatch.setattr(RuleService, "update", mock_update)
 
@@ -354,7 +350,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -381,7 +377,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         res = test_client.post(
             "/rule",
             json={
@@ -400,7 +396,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.delete(f"/rule/{json['id']}", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -414,7 +410,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         monkeypatch.setattr(RuleService, "delete", mock_delete)
 
@@ -449,7 +445,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -478,7 +474,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -499,7 +495,7 @@ class TestRuleClass:
             email="foo2@foo.com",
             password="foo2",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/{id}/enable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -513,7 +509,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         monkeypatch.setattr(RuleService, "enable", mock_enable)
 
@@ -531,7 +527,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -559,7 +555,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -580,7 +576,7 @@ class TestRuleClass:
             email="foo2@foo.com",
             password="foo2",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/{id}/disable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -594,7 +590,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         monkeypatch.setattr(RuleService, "disable", mock_disable)
 
@@ -612,7 +608,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -640,7 +636,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -661,7 +657,7 @@ class TestRuleClass:
             email="foo2@foo.com",
             password="foo2",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/{id}/trigger", headers=header)
 
@@ -676,7 +672,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         monkeypatch.setattr(IssueService, "create", mock_create)
 

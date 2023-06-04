@@ -4,13 +4,19 @@ from pathlib import Path
 import pytest
 import toml
 from fastapi.testclient import TestClient
-from sqlmodel import Session, SQLModel, create_engine
+from sqlmodel import Session, create_engine
 from sqlmodel.pool import StaticPool
 
-from meter.api import get_config, get_session
+from meter.api import get_config, get_email_service, get_session
 from meter.config import MeterConfig
-from meter.domain import SQLEngineParam, create_db_and_tables
+from meter.domain import (
+    SMTPServerParam,
+    SQLEngineParam,
+    VerifyEmailParam,
+    create_db_and_tables,
+)
 from meter.domain.auth import AuthConfig
+from meter.domain.smtp import EmailService
 from meter.main import create_app
 
 
@@ -34,6 +40,18 @@ def get_test_config():
             algorithm="HS256",
             default_ttl_sec=900,
         ),
+        verify_email=VerifyEmailParam(
+            subject="Hi",
+            template_path="./template/verify_mail.template",
+            expire=60,
+        ),
+        smtp=SMTPServerParam(
+            server="msa.hinet.net",
+            port=587,
+            noreply="test@gmail.com",
+            noreply_password=None,
+        ),
+        host="https://noj.tw",
     )
 
 
@@ -43,6 +61,17 @@ def test_session():
     create_db_and_tables(engine)
     with Session(engine) as session:
         yield session
+
+
+def get_email_service_override():
+    class NewEmailService(EmailService):
+        def __init__(self, *args, **kargs) -> None:
+            super(NewEmailService, self).__init__(*args, **kargs)
+
+        def send(self, *args, **kargs):
+            pass
+
+    return NewEmailService(get_test_config().smtp)
 
 
 @pytest.fixture
@@ -55,6 +84,9 @@ def test_app(tmp_path: Path, test_session: Session):
     os.environ["METER_CONFIG"] = str(tmp_config_path.absolute())
 
     app = create_app()
+    app.dependency_overrides[get_config] = get_test_config
+    app.dependency_overrides[get_session] = get_test_session
+    app.dependency_overrides[get_email_service] = get_email_service_override
     app.dependency_overrides[get_session] = get_test_session
     yield app
     app.dependency_overrides.clear()
