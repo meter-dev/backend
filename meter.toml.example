@@ -11,10 +11,12 @@ default_ttl_sec = 900
 
 [verify_email]
 subject = "Hi"
-content = "Verify here: https://noj.tw/auth/active?token={access_token}"
+template_path = "./templates/verify_mail.html"
+expire = 60
 
 [smtp]
 server = "msa.hinet.net"
+port = 587
 noreply = "test@gmail.com"
 noreply_password = None
 
@@ -22,3 +24,6 @@ noreply_password = None
 [cors]
 # allow_origins = []
 allow_origin_regex = "http://localhost(:\\d+)?"
+
+[host]
+host = "https://noj.tw"
