@@ -11,7 +11,7 @@ default_ttl_sec = 900
 
 [verify_email]
 subject = "Hi"
-template_path = "./templates/verify_mail.html"
+template_path = "./meter/template/verify_mail.html"
 expire = 60
 
 [smtp]
