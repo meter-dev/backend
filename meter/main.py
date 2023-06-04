@@ -1,10 +1,23 @@
-from fastapi import FastAPI, Request, status
+from typing import Annotated
+
+from fastapi import Depends, FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 
-from meter.api import auth, comment, get_config, group, issue, rule, upload, user
+from meter.api import (
+    auth,
+    comment,
+    get_config,
+    get_current_user,
+    group,
+    issue,
+    rule,
+    upload,
+    user,
+)
 from meter.api.cors import set_cors
 from meter.domain import create_db_and_tables, get_engine
+from meter.domain.user import User
 from meter.exception import CustomErrorException
 from meter.helper import get_message_by_response_code
 
@@ -47,6 +60,10 @@ def create_app():
                 "code": exc.response_code.value,
             },
         )
+
+    @app.get("/me")
+    async def get_user(current_user: Annotated[User, Depends(get_current_user)]):
+        return current_user
 
     apis = (
         ("/rule", rule),

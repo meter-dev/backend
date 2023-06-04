@@ -23,14 +23,14 @@ def test_signup_and_login(test_client: TestClient):
     token = resp.json()
 
     resp = test_client.get(
-        "/user/me",
+        "/me",
         headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()["name"] == "foo", resp.json()
 
     resp = test_client.get(
-        "/user/me", headers={"Authorization": f'{token["token_type"]} lol'}
+        "/me", headers={"Authorization": f'{token["token_type"]} lol'}
     )
     assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
 
@@ -144,7 +144,7 @@ def test_login_by_email(test_client: TestClient):
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
     resp = test_client.get(
-        "/user/me",
+        "/me",
         headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
@@ -168,7 +168,7 @@ def test_login_by_email_case_insensitive(test_client: TestClient):
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     token = resp.json()
     resp = test_client.get(
-        "/user/me",
+        "/me",
         headers={"Authorization": f'{token["token_type"]} {token["access_token"]}'},
     )
     assert resp.status_code == status.HTTP_200_OK, resp.json()
@@ -197,6 +197,6 @@ def test_send_email_and_active(test_client: TestClient):
     resp = test_client.get(f"/auth/active?token={token}")
     assert resp.status_code == status.HTTP_400_BAD_REQUEST, resp.json()
 
-    resp = test_client.get("/user/me", headers=headers)
+    resp = test_client.get("/me", headers=headers)
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()["active"] == True, resp.json()
