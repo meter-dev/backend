@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 import toml
 from fastapi.testclient import TestClient
-from sqlmodel import Session, SQLModel, create_engine
+from sqlmodel import Session, create_engine
 from sqlmodel.pool import StaticPool
 
 from meter.api import get_config, get_email_service, get_session
@@ -41,14 +41,15 @@ def get_test_config():
             default_ttl_sec=900,
         ),
         verify_email=VerifyEmailParam(
-            subject="Hi",
-            content="Verify here: https://noj.tw/auth/active?token={access_token}",
+            subject="Hi", template_path="./templates/verify_mail.html", expire=60
         ),
         smtp=SMTPServerParam(
             server="msa.hinet.net",
+            port=587,
             noreply="test@gmail.com",
             noreply_password=None,
         ),
+        host="https://noj.tw",
     )
 
 

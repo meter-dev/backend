@@ -17,6 +17,7 @@ from meter.api import (
 from meter.domain.auth import AuthService
 from meter.domain.smtp import EmailService
 from meter.domain.user import User, UserLogin, UserService
+from meter.helper import raise_unauthorized_exception
 
 router = APIRouter()
 
@@ -63,16 +64,20 @@ async def send_email(
 ):
     if user.active:
         return HTTPException(status.HTTP_400_BAD_REQUEST, "User Has Been Actived")
-    access_token_expires = timedelta(minutes=60)
+    verify_email = cfg.verify_email
+    access_token_expires = timedelta(minutes=verify_email.expire)
     access_token = auth_svc.sign(
         data={"sub": user.name},
         expires_after=access_token_expires,
     )
-    verify_email = cfg.verify_email
+    callback_url = f'{cfg.host}{router.url_path_for("active")}?token={access_token}'
+    with open(verify_email.template_path, "r") as f:
+        template = f.read()
+    content = template.format(callback_url=callback_url)
     email_svc.send_noreply(
         [user.email],
         verify_email.subject,
-        verify_email.content.format(access_token=access_token),
+        content,
     )
     return access_token
 
@@ -84,21 +89,17 @@ async def active(
     auth_svc: Annotated[AuthService, Depends(get_auth_service)],
 ):
     """Activate a user."""
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
     try:
         payload = auth_svc.decode_jwt(token)
         username: str = payload.get("sub")
         if username is None:
-            raise credentials_exception
+            raise_unauthorized_exception()
     except JWTError:
-        raise credentials_exception
+        raise_unauthorized_exception()
     user = user_svc._get_by_name(username)
     if user.active:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "User Has Been Actived")
     if user is None:
-        raise credentials_exception
+        raise_unauthorized_exception()
     user_svc.activate(user)
+    raise HTTPException(status_code=status.HTTP_204_NO_CONTENT)

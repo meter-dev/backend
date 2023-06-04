@@ -22,6 +22,7 @@ class MeterConfig(BaseSettings):
     verify_email: VerifyEmailParam
     smtp: SMTPServerParam
     cors: CORSConfig | None
+    host: str
 
     class Config:
         @classmethod

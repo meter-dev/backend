@@ -12,7 +12,7 @@ class EmailService:
         self.config = config
 
     def send(self, from_addr, password, to_addrs, subject, text, html):
-        with SMTP(self.config.server, 587) as server:
+        with SMTP(self.config.server, self.config.port) as server:
             if password is not None:
                 server.login(from_addr, password)
             msg = MIMEMultipart("alternative")

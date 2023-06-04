@@ -10,11 +10,13 @@ class SQLEngineParam(BaseModel):
 
 class VerifyEmailParam(BaseModel):
     subject: str
-    content: str
+    template_path: str
+    expire: int
 
 
 class SMTPServerParam(BaseModel):
     server: str
+    port: int
     noreply: EmailStr
     noreply_password: str | None
 

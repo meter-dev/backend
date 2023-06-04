@@ -192,7 +192,7 @@ def test_send_email_and_active(test_client: TestClient):
     assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
 
     resp = test_client.get(f"/auth/active?token={token}")
-    assert resp.status_code == status.HTTP_200_OK, resp.json()
+    assert resp.status_code == status.HTTP_204_NO_CONTENT, resp.json()
 
     resp = test_client.get(f"/auth/active?token={token}")
     assert resp.status_code == status.HTTP_400_BAD_REQUEST, resp.json()
