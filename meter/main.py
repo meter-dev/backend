@@ -15,11 +15,9 @@ from meter.api import (
     upload,
     user,
 )
-from meter.domain import create_db_and_tables, get_engine
-from meter.domain.user import User
-from meter.api import auth, comment, get_config, group, issue, rule, upload, user
 from meter.api.cors import set_cors
 from meter.domain import create_db_and_tables, get_engine
+from meter.domain.user import User
 from meter.exception import CustomErrorException
 from meter.helper import get_message_by_response_code
 
@@ -66,7 +64,6 @@ def create_app():
     @app.get("/me")
     async def get_user(current_user: Annotated[User, Depends(get_current_user)]):
         return current_user
-
 
     apis = (
         ("/rule", rule),
