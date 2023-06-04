@@ -9,6 +9,7 @@ from sqlmodel import Session
 from meter.config import MeterConfig
 from meter.domain import get_engine as _get_engine
 from meter.domain.auth import AuthService
+from meter.domain.issue import IssueService
 from meter.domain.rule import RuleService
 from meter.domain.user import UserService
 
@@ -38,6 +39,10 @@ def get_auth_service(cfg: Annotated[MeterConfig, Depends(get_config)]):
 
 def get_rule_service(session: Annotated[Session, Depends(get_session)]):
     return RuleService(session)
+
+
+def get_issue_service(session: Annotated[Session, Depends(get_session)]):
+    return IssueService(session)
 
 
 def get_current_user(
