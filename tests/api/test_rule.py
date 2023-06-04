@@ -3,14 +3,10 @@ from fastapi.testclient import TestClient
 
 from meter.domain.rule import RuleService
 from meter.domain.user import UserSignup
-from tests.helper import register_and_login
+from tests.helper import get_authorization_header
 
 
 class TestRuleClass:
-    def __get_authorization_header(self, test_client: TestClient, user: UserSignup):
-        token = register_and_login(test_client, user)
-        return {"Authorization": f'{token["token_type"]} {token["access_token"]}'}
-
     def test_create_rule_unauthorized(self, test_client: TestClient):
         res = test_client.post("/rule")
 
@@ -22,7 +18,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -58,7 +54,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -86,7 +82,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         test_client.post(
             "/rule",
             json={
@@ -104,7 +100,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         test_client.post(
             "/rule",
@@ -164,7 +160,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -199,7 +195,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         res = test_client.post(
             "/rule",
             json={
@@ -218,7 +214,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.get(f"/rule/{json['id']}", headers=header)
 
@@ -235,7 +231,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -278,7 +274,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         res = test_client.post(
             "/rule",
             json={
@@ -297,7 +293,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.patch(
             f"/rule/{json['id']}",
@@ -321,7 +317,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.patch(
             f"/rule/999",
@@ -347,7 +343,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -371,7 +367,7 @@ class TestRuleClass:
             email="foo1@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
         res = test_client.post(
             "/rule",
             json={
@@ -390,7 +386,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.delete(f"/rule/{json['id']}", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -401,7 +397,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.delete(f"/rule/999", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -417,7 +413,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -446,7 +442,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -467,7 +463,7 @@ class TestRuleClass:
             email="foo2@foo.com",
             password="foo2",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/{id}/enable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -478,7 +474,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/1/disable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -494,7 +490,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -522,7 +518,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -543,7 +539,7 @@ class TestRuleClass:
             email="foo2@foo.com",
             password="foo2",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/{id}/disable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -554,7 +550,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/1/disable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
@@ -570,7 +566,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -597,7 +593,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.post(
             "/rule",
@@ -618,7 +614,7 @@ class TestRuleClass:
             email="foo2@foo.com",
             password="foo2",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/{id}/trigger", headers=header)
         # TODO: more assertion after API done
@@ -630,7 +626,7 @@ class TestRuleClass:
             email="foo@foo.com",
             password="foo",
         )
-        header = self.__get_authorization_header(test_client, user)
+        header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/1/trigger", headers=header)
         # assert res.status_code == status.HTTP_404_NOT_FOUND # TODO: uncomment this after API done
