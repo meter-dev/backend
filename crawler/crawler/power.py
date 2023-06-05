@@ -1,25 +1,11 @@
 import time
 from datetime import datetime
-from typing import Any, TypedDict
+from typing import Any
 
 import httpx
-from sqlmodel import SQLModel
+from model import PowerAreaReport, PowerReport
 
 from .crawler import Crawler
-
-
-class PowerAreaReport(TypedDict):
-    load: float
-    max_supply: float
-    recv_rate: float
-
-
-class PowerReport(SQLModel):
-    timestamp: int
-    east: PowerAreaReport
-    south: PowerAreaReport
-    central: PowerAreaReport
-    north: PowerAreaReport
 
 
 def mxpowersply():
