@@ -1,5 +1,7 @@
 # example config
 
+host = "https://noj.tw"
+
 [sql]
 url = "sqlite:///database.db"
 connect_args = { check_same_thread = false }
@@ -18,12 +20,9 @@ expire = 60
 server = "msa.hinet.net"
 port = 587
 noreply = "test@gmail.com"
-noreply_password = None
+# noreply_password = "i-am-example-password"
 
 # https://fastapi.tiangolo.com/tutorial/cors/#use-corsmiddleware
 [cors]
 # allow_origins = []
 allow_origin_regex = "http://localhost(:\\d+)?"
-
-
-host = "https://noj.tw"
