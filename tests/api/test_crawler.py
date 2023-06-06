@@ -7,7 +7,7 @@ from sqlmodel import Session
 from crawler.model import Dam, Eq, Power
 
 
-class TestCrawlerClass:
+class TestReportClass:
     # TODO: make this auto-execute at the start of the testing
     def load_data(self, test_session: Session) -> None:
         for c in (Power, Eq, Dam):

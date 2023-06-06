@@ -3,7 +3,7 @@ from sqlmodel import Session, select
 from crawler.model import Dam, Eq, Power, PowerReturn
 
 
-class CrawlerService:
+class ReportService:
     def __init__(self, session: Session) -> None:
         self.session = session
 
