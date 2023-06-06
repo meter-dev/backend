@@ -158,13 +158,6 @@ async def trigger_alert(
         if issue is None:
             raise Exception
 
-        subject = get_formatted_string_from_template(
-            TemplatePath.ISSUE_TITLE.value,
-            rule_name=rule.name or rule.id,
-        )
-        content = get_formatted_string_from_template(
-            TemplatePath.ISSUE_CONTENT.value,
-        )
-        email_svc.send_noreply([user.email], subject, content)
+        email_svc.send_noreply([user.email], issue.title, issue.content)
     except Exception:
         raise_custom_exception(ResponseCode.RULE_TRIGGER_FAILED_1006)
