@@ -62,5 +62,5 @@ def crawl_now_reservoir():
     asyncio.run(dam.crawl())
     report = list(dam.report())
     engine = create_engine(db_url)
-    save_crawler_report(engine, Eq, report)
+    save_crawler_report(engine, Dam, report)
     return len(report)

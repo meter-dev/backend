@@ -1,11 +1,11 @@
 import asyncio
 
-from model import Dam, Eq, Power, save_crawler_report
 from sqlmodel import Session, SQLModel, create_engine, select
 
-from crawler.dam import DamCrawler
-from crawler.eq import EqCrawler
-from crawler.power import PowerCrawler
+from .crawler.dam import DamCrawler
+from .crawler.eq import EqCrawler
+from .crawler.power import PowerCrawler
+from .model import Dam, Eq, Power, save_crawler_report
 
 if __name__ == "__main__":
     # TODO: get the engine from elsewhere
