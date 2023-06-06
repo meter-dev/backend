@@ -1,6 +1,7 @@
 from fastapi import status
 from fastapi.testclient import TestClient
 
+from meter.constant.response_code import ResponseCode
 from meter.domain.user import UserSignup
 from tests.helper import get_authorization_header
 
@@ -112,8 +113,8 @@ def test_signup_duplicated(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
-    assert "UNIQUE constraint failed: user.name" in resp.json()["message"], resp.json()
+    assert resp.status_code == status.HTTP_400_BAD_REQUEST, resp.json()
+    assert resp.json()["code"] == ResponseCode.USER_SIGNUP_DUPLICATE_USERNAME_1301.value
 
     resp = test_client.post(
         "/user/signup",
@@ -123,8 +124,8 @@ def test_signup_duplicated(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
-    assert "UNIQUE constraint failed: user.email" in resp.json()["message"], resp.json()
+    assert resp.status_code == status.HTTP_400_BAD_REQUEST, resp.json()
+    assert resp.json()["code"] == ResponseCode.USER_SIGNUP_DUPLICATE_EMAIL_1302.value
 
 
 def test_login_by_email(test_client: TestClient):
@@ -200,3 +201,25 @@ def test_send_email_and_active(test_client: TestClient):
     resp = test_client.get("/me", headers=headers)
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()["active"] == True, resp.json()
+
+
+def test_login_failed(test_client: TestClient):
+    user = UserSignup(
+        name="foo",
+        email="foo@google.com",
+        password="foo",
+    )
+    resp = test_client.post("/user/signup", json=user.dict())
+    assert resp.status_code == status.HTTP_201_CREATED, resp.json()
+
+    resp = test_client.post("/auth/token", data={"username": "foo", "password": "fo0"})
+    assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
+    assert (
+        resp.json()["code"] == ResponseCode.AUTH_WRONG_USERNAME_OR_PASSWORD_1201.value
+    )
+
+    resp = test_client.post("/auth/token", data={"username": "fo0", "password": "foo"})
+    assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
+    assert (
+        resp.json()["code"] == ResponseCode.AUTH_WRONG_USERNAME_OR_PASSWORD_1201.value
+    )

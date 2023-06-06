@@ -14,11 +14,13 @@ from meter.api import (
     get_email_service,
     get_user_service,
 )
+from meter.constant.response_code import ResponseCode
 from meter.domain.auth import AuthService
 from meter.domain.smtp import EmailService
 from meter.domain.user import User, UserLogin, UserService
 from meter.helper import (
     get_formatted_string_from_template,
+    raise_custom_exception,
     raise_unauthorized_exception,
 )
 
@@ -32,10 +34,7 @@ class Token(BaseModel):
 
 @router.post("/token")
 async def new_access_token(
-    form_data: Annotated[
-        OAuth2PasswordRequestForm,
-        Depends(),
-    ],
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     user_svc: Annotated[UserService, Depends(get_user_service)],
     auth_svc: Annotated[AuthService, Depends(get_auth_service)],
 ):
@@ -46,10 +45,9 @@ async def new_access_token(
         )
     )
     if not user:
-        raise HTTPException(
+        raise_custom_exception(
+            ResponseCode.AUTH_WRONG_USERNAME_OR_PASSWORD_1201,
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
         )
     access_token = auth_svc.sign(data={"sub": user.name})
     return Token(
