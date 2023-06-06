@@ -2,6 +2,9 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 from meter.constant.issue_status import IssueStatus
+from meter.constant.rule_operator import RuleOperator
+from meter.constant.rule_position import RulePosition
+from meter.constant.rule_resource import RuleResource
 from meter.domain.issue import IssueService
 from meter.domain.user import UserSignup
 from tests.helper import get_authorization_header
@@ -25,9 +28,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo2",
-                "position": "Tainan2",
-                "resource": "water2",
-                "operator": "<=",
+                "position": RulePosition.AGONGDIAN_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.EQUAL_TO,
                 "value": 0,
             },
             headers=header,
@@ -48,9 +51,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo",
-                "position": "Tainan",
-                "resource": "water",
-                "operator": "<",
+                "position": RulePosition.BAIHE_RESERVOIR,
+                "resource": RuleResource.STORAGE,
+                "operator": RuleOperator.GREATER_THAN,
                 "value": 50,
             },
             headers=header,
@@ -63,9 +66,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo2",
-                "position": "Taipei",
-                "resource": "eqk",
-                "operator": ">",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 60,
             },
             headers=header,
@@ -119,9 +122,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo",
-                "position": "Tainan",
-                "resource": "water",
-                "operator": "<",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 50,
             },
             headers=header,
@@ -158,9 +161,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo2",
-                "position": "Tainan2",
-                "resource": "water2",
-                "operator": "<=",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 0,
             },
             headers=header,
@@ -198,9 +201,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo",
-                "position": "Tainan",
-                "resource": "water",
-                "operator": "<",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 50,
             },
             headers=header,
@@ -236,9 +239,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo2",
-                "position": "Tainan2",
-                "resource": "water2",
-                "operator": "<=",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 0,
             },
             headers=header,
@@ -283,9 +286,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo",
-                "position": "Tainan",
-                "resource": "water",
-                "operator": "<",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 50,
             },
             headers=header,
@@ -319,9 +322,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo",
-                "position": "Tainan",
-                "resource": "water",
-                "operator": "<",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 50,
             },
             headers=header,
@@ -348,9 +351,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo2",
-                "position": "Tainan2",
-                "resource": "water2",
-                "operator": "<=",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 0,
             },
             headers=header,
@@ -387,9 +390,9 @@ class TestIssueClass:
             "/rule",
             json={
                 "name": "foo",
-                "position": "Tainan",
-                "resource": "water",
-                "operator": "<",
+                "position": RulePosition.DEJI_RESERVOIR,
+                "resource": RuleResource.PERCENT,
+                "operator": RuleOperator.LESS_THAN,
                 "value": 50,
             },
             headers=header,

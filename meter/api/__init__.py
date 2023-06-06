@@ -15,6 +15,7 @@ from meter.domain.rule import RuleService
 from meter.domain.smtp import EmailService
 from meter.domain.user import UserService
 from meter.helper import raise_unauthorized_exception
+from meter.job.trigger_rule import TriggerRuleJob
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="/auth/token", scheme_name="JWT")
 
@@ -54,6 +55,14 @@ def get_issue_service(session: Annotated[Session, Depends(get_session)]):
 
 def get_report_service(session: Annotated[Session, Depends(get_session)]):
     return ReportService(session)
+
+
+def get_trigger_rule_job(
+    session: Annotated[Session, Depends(get_session)],
+    email_svc: Annotated[EmailService, Depends(get_email_service)],
+    issue_svc: Annotated[IssueService, Depends(get_issue_service)],
+):
+    return TriggerRuleJob(session, email_svc, issue_svc)
 
 
 def get_current_user(

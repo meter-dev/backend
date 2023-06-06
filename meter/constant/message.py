@@ -1,5 +1,4 @@
 from meter.constant import ExtendedEnum
-from meter.constant.response_code import *
 
 
 class Message(ExtendedEnum):

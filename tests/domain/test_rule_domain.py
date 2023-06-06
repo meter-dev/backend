@@ -1,5 +1,8 @@
 import pytest
 
+from meter.constant.rule_operator import RuleOperator
+from meter.constant.rule_position import RulePosition
+from meter.constant.rule_resource import RuleResource
 from meter.domain.rule import CreateRule, Rule, RuleService, UpdateRule
 from meter.domain.user import User
 
@@ -39,9 +42,9 @@ class TestRuleDomainClass:
     def test_create(self):
         resource = CreateRule(
             name="foo",
-            position="Taipei",
-            resource="foo",
-            operator=">",
+            position=RulePosition.DEJI_RESERVOIR,
+            resource=RuleResource.PERCENT,
+            operator=RuleOperator.LESS_THAN,
             value=12,
         )
         by_user = User(
@@ -71,9 +74,9 @@ class TestRuleDomainClass:
 
         resource = CreateRule(
             name="foo",
-            position="Taipei",
-            resource="foo",
-            operator=">",
+            position=RulePosition.DEJI_RESERVOIR,
+            resource=RuleResource.PERCENT,
+            operator=RuleOperator.LESS_THAN,
             value=12,
         )
         by_user = User(
@@ -125,9 +128,9 @@ class TestRuleDomainClass:
         )
         resource = UpdateRule(
             name="123",
-            position="Taipei",
-            resource="water",
-            operator=">",
+            position=RulePosition.DEJI_RESERVOIR,
+            resource=RuleResource.PERCENT,
+            operator=RuleOperator.LESS_THAN,
             value=50,
         )
         rules = self.service.update(1, resource, by_user)
@@ -143,9 +146,9 @@ class TestRuleDomainClass:
         )
         resource = UpdateRule(
             name="123",
-            position="Taipei",
-            resource="water",
-            operator=">",
+            position=RulePosition.DEJI_RESERVOIR,
+            resource=RuleResource.PERCENT,
+            operator=RuleOperator.LESS_THAN,
             value=50,
         )
         rules = self.service.update(1, resource, by_user)
@@ -161,9 +164,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="123",
-                position="Taipei",
-                resource="water",
-                operator=">",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=50,
             )
 
@@ -179,9 +182,9 @@ class TestRuleDomainClass:
         )
         resource = UpdateRule(
             name="123",
-            position="Taipei",
-            resource="water",
-            operator=">",
+            position=RulePosition.DEJI_RESERVOIR,
+            resource=RuleResource.PERCENT,
+            operator=RuleOperator.LESS_THAN,
             value=50,
         )
 
@@ -194,9 +197,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="1234",
-                position="Taipei2",
-                resource="water2",
-                operator="=",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=60,
             )
 
@@ -211,9 +214,9 @@ class TestRuleDomainClass:
         )
         resource = UpdateRule(
             name="123",
-            position="Taipei",
-            resource="water",
-            operator=">",
+            position=RulePosition.AGONGDIAN_RESERVOIR,
+            resource=RuleResource.STORAGE,
+            operator=RuleOperator.GREATER_THAN,
             value=50,
         )
 
@@ -222,9 +225,9 @@ class TestRuleDomainClass:
             id=1,
             user_id=by_user.id,
             name="123",
-            position="Taipei",
-            resource="water",
-            operator=">",
+            position=RulePosition.AGONGDIAN_RESERVOIR,
+            resource=RuleResource.STORAGE,
+            operator=RuleOperator.GREATER_THAN,
             value=50,
         )
 
@@ -258,9 +261,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="123",
-                position="Taipei",
-                resource="water",
-                operator=">",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=50,
             )
 
@@ -284,9 +287,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="1234",
-                position="Taipei2",
-                resource="water2",
-                operator="=",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=60,
             )
 
@@ -333,9 +336,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="123",
-                position="Taipei",
-                resource="water",
-                operator=">",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=50,
             )
 
@@ -359,9 +362,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="1234",
-                position="Taipei2",
-                resource="water2",
-                operator="=",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=60,
             )
 
@@ -408,9 +411,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="123",
-                position="Taipei",
-                resource="water",
-                operator=">",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=50,
             )
 
@@ -434,9 +437,9 @@ class TestRuleDomainClass:
                 id=1,
                 user_id=1,
                 name="1234",
-                position="Taipei2",
-                resource="water2",
-                operator="=",
+                position=RulePosition.DEJI_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.LESS_THAN,
                 value=60,
             )
 
