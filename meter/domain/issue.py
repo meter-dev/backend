@@ -32,7 +32,7 @@ class Issue(IssueBase, table=True):
     )
     rule: Optional[Rule] = Relationship(back_populates="issues")
 
-    created_at: datetime = Field(default=datetime.utcnow(), nullable=False)
+    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
     processing_at: datetime = Field(default=None, nullable=True)
     solved_at: datetime = Field(default=None, nullable=True)
     updated_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
@@ -67,6 +67,12 @@ class ReadIssueDetail(ReadIssue):
 class IssueService:
     def __init__(self, session: Session) -> None:
         self.session = session
+
+    def __is_dirty(self, obj: object) -> bool:
+        for key in obj.__dict__:
+            if obj.__dict__[key] is not None:
+                return True
+        return False
 
     def __get_by_id_and_user_id(
         self,
@@ -137,6 +143,10 @@ class IssueService:
             issue.processing_at = datetime.utcnow()
         elif input.status == IssueStatus.SOLVED:
             issue.solved_at = datetime.utcnow()
+
+        # update `updated_at`
+        if self.__is_dirty(input):
+            issue.updated_at = datetime.utcnow()
 
         self.session.add(issue)
         try:

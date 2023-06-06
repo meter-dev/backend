@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pytest
 
 from meter.constant.issue_status import IssueStatus
@@ -184,6 +186,8 @@ class TestIssueDomainClass:
             self.service.update(1, resource, by_user)
 
     def test_update(self, monkeypatch):
+        now_time = datetime.utcnow()
+
         def mockGetIssue(arg1):
             return Issue(
                 id=1,
@@ -192,6 +196,8 @@ class TestIssueDomainClass:
                 title="foo",
                 content="ooo",
                 status=IssueStatus.CREATED,
+                created_at=now_time,
+                updated_at=now_time,
             )
 
         monkeypatch.setattr(MockResult, "first", mockGetIssue)
@@ -218,6 +224,8 @@ class TestIssueDomainClass:
             and issue.content == "content"
             and issue.status.value == IssueStatus.PROCESSING.value
             and issue.processing_at is not None
+            and issue.created_at == now_time
+            and issue.updated_at != now_time
         )
 
         # and try to update to solved
@@ -229,6 +237,48 @@ class TestIssueDomainClass:
         assert (
             issue.status.value == IssueStatus.SOLVED.value
             and issue.solved_at is not None
+        )
+
+    def test_update_nothing(self, monkeypatch):
+        now_time = datetime.utcnow()
+
+        def mockGetIssue(arg1):
+            return Issue(
+                id=1,
+                user_id=1,
+                rule_id=1,
+                title="foo",
+                content="ooo",
+                status=IssueStatus.CREATED,
+                created_at=now_time,
+                updated_at=now_time,
+            )
+
+        monkeypatch.setattr(MockResult, "first", mockGetIssue)
+        self.service = IssueService(MockSession())
+
+        by_user = User(
+            id=1,
+            name="foo",
+            email="foo@foo.com",
+            password_digest="somefakedigest",
+        )
+        resource = UpdateIssue(
+            title=None,
+            content=None,
+            status=None,
+        )
+
+        issue = self.service.update(1, resource, by_user)
+        assert issue is not None
+        assert (
+            issue.user_id == 1
+            and issue.rule_id == 1
+            and issue.title == "foo"
+            and issue.content == "ooo"
+            and issue.status.value == IssueStatus.CREATED.value
+            and issue.created_at == now_time
+            and issue.updated_at == now_time
         )
 
     def test_delete_no_user_id(self):
