@@ -1,7 +1,7 @@
 import logging
-from typing import Optional
+from typing import List, Optional
 
-from sqlmodel import Field, Session, SQLModel, select
+from sqlmodel import Field, Relationship, Session, SQLModel, select
 
 from meter.domain.user import User
 
@@ -22,6 +22,8 @@ class Rule(RuleBase, table=True):
         default=None,
         foreign_key="user.id",
     )
+
+    issues: List["Issue"] = Relationship(back_populates="rule")
 
 
 class CreateRule(SQLModel):
@@ -57,7 +59,7 @@ class RuleService:
         results = self.session.exec(statement)
         return results.first()
 
-    def create(self, input: CreateRule, user: User) -> Rule | None:
+    def create(self, input: CreateRule, user: User) -> Rule:
         rule = Rule(
             user_id=user.id,
             name=input.name,

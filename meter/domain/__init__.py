@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from sqlalchemy.engine import Engine
 from sqlmodel import SQLModel, create_engine
 
@@ -6,6 +6,19 @@ from sqlmodel import SQLModel, create_engine
 class SQLEngineParam(BaseModel):
     url: str
     connect_args: dict
+
+
+class VerifyEmailParam(BaseModel):
+    subject: str
+    template_path: str
+    expire: int
+
+
+class SMTPServerParam(BaseModel):
+    server: str
+    port: int
+    noreply: EmailStr
+    noreply_password: str | None
 
 
 def get_engine(param: SQLEngineParam):

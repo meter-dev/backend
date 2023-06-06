@@ -2,26 +2,11 @@ import json
 import math
 import time
 from datetime import datetime
-from typing import Literal, TypedDict
+from typing import TypedDict
+
+from model import EqReport, Geometry, Intensity, Point
 
 from .crawler import Crawler
-
-Point = tuple[float, float]
-Intensity = tuple[int, int, int]
-
-
-class Geometry(TypedDict):
-    type: Literal["Point"]
-    coordinates: Point
-
-
-class EqReport(TypedDict):
-    timestamp: int
-    geometry: Geometry
-    scale: float
-    intensity: Intensity
-    link: str
-    img: str
 
 
 class EqQuery(TypedDict):
