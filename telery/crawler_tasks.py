@@ -12,7 +12,7 @@ from telery import app
 
 
 @app.task
-def CrawlEarthquake(year: int, month: int):
+def crawl_earthquake(year: int, month: int):
     eq = EqCrawler([{"year": year, "month": month}])
     asyncio.run(eq.crawl())
     report = list(eq.report())
@@ -22,7 +22,7 @@ def CrawlEarthquake(year: int, month: int):
 
 
 @app.task
-def CrawlReservoir(year: int, month: int, day: int):
+def crawl_reservoir(year: int, month: int, day: int):
     dam = DamCrawler([{"year": year, "month": month, "day": day}])
     asyncio.run(dam.crawl())
     report = list(dam.report())
@@ -32,7 +32,7 @@ def CrawlReservoir(year: int, month: int, day: int):
 
 
 @app.task
-def CrawlPower():
+def crawl_power():
     power = PowerCrawler()
     asyncio.run(power.crawl())
     report = list(power.report())
@@ -42,7 +42,7 @@ def CrawlPower():
 
 
 @app.task
-def CrawlNowEarthquake():
+def crawl_now_earthquake():
     now_time = time.localtime()
     eq = EqCrawler([{"year": now_time.tm_year, "month": now_time.tm_mon}])
     asyncio.run(eq.crawl())
@@ -53,7 +53,7 @@ def CrawlNowEarthquake():
 
 
 @app.task
-def CrawlNowReservoir():
+def crawl_now_reservoir():
     now_time = time.localtime()
     dam = DamCrawler(
         [{"year": now_time.tm_year, "month": now_time.tm_mon, "day": now_time.tm_mday}]

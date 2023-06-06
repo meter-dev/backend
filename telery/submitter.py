@@ -2,15 +2,15 @@ import time
 from pprint import pprint
 
 from telery.crawler_tasks import (
-    CrawlEarthquake,
-    CrawlReservoir,
-    CrawlPower,
-    CrawlNowEarthquake,
-    CrawlNowReservoir,
+    crawl_earthquake,
+    crawl_now_earthquake,
+    crawl_now_reservoir,
+    crawl_power,
+    crawl_reservoir,
 )
 
 if __name__ == "__main__":
-    result = CrawlPower.delay()
+    result = crawl_power.delay()
     while not result.ready():
         time.sleep(1)
     pprint(result.get())
