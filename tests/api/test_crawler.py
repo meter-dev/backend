@@ -19,29 +19,17 @@ class TestCrawlerClass:
     def test_get_power(self, test_client: TestClient, test_session: Session):
         self.load_data(test_session)
 
-        resp = test_client.get("/crawler/power")
-        assert resp.status_code == status.HTTP_200_OK, resp.json()
-        id = resp.json()[0]["id"]
-
-        resp = test_client.get(f"/crawler/power/{id}")
+        resp = test_client.get("/report/power")
         assert resp.status_code == status.HTTP_200_OK, resp.json()
 
     def test_get_eq(self, test_client: TestClient, test_session: Session):
         self.load_data(test_session)
 
-        resp = test_client.get("/crawler/eq")
-        assert resp.status_code == status.HTTP_200_OK, resp.json()
-        id = resp.json()[0]["id"]
-
-        resp = test_client.get(f"/crawler/eq/{id}")
+        resp = test_client.get("/report/eq")
         assert resp.status_code == status.HTTP_200_OK, resp.json()
 
     def test_get_dam(self, test_client: TestClient, test_session: Session):
         self.load_data(test_session)
 
-        resp = test_client.get("/crawler/dam")
-        assert resp.status_code == status.HTTP_200_OK, resp.json()
-        id = resp.json()[0]["id"]
-
-        resp = test_client.get(f"/crawler/dam/{id}")
+        resp = test_client.get("/report/dam")
         assert resp.status_code == status.HTTP_200_OK, resp.json()

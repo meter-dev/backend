@@ -74,7 +74,7 @@ def create_app():
         ("/upload", upload),
         ("/user", user),
         ("/group", group),
-        ("/crawler", crawler),
+        ("/report", crawler),
     )
 
     for prefix, api in apis:
