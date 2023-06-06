@@ -8,12 +8,9 @@ from meter.constant.dam_chinese_name import DamChineseName
 from meter.constant.rule_operator import RuleOperator
 from meter.constant.rule_position import RulePosition
 from meter.constant.rule_resource import RuleResource
-from meter.constant.template_path import TemplatePath
-from meter.domain.rule import Rule
-from meter.domain.issue import Issue
-from meter.domain.smtp import EmailService
 from meter.domain.issue import IssueService
-from meter.helper import get_formatted_string_from_template
+from meter.domain.rule import Rule
+from meter.domain.smtp import EmailService
 
 
 class TriggerRuleJob:
