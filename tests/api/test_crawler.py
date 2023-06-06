@@ -29,4 +29,4 @@ class TestReportClass:
     def test_get_dam(self, test_client: TestClient):
         resp = test_client.get("/report/dam")
         assert resp.status_code == status.HTTP_200_OK, resp.json()
-        assert next(filter(lambda d: d["name"] == "竹", resp.json())), resp.json()
+        assert any(filter(lambda d: d["name"] == "竹", resp.json())), resp.json()
