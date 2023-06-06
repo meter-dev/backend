@@ -4,15 +4,9 @@ from typing import TypedDict
 from urllib.parse import urlencode
 
 import httpx
+from model import DamReport
 
 from .crawler import Crawler
-
-
-class DamReport(TypedDict):
-    name: str
-    timestamp: int
-    storage: float
-    percent: float
 
 
 class DamQuery(TypedDict):
