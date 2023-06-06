@@ -2,12 +2,23 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, status
 
-from meter.api import get_current_user, get_issue_service, get_rule_service
+from meter.api import (
+    get_current_user,
+    get_email_service,
+    get_issue_service,
+    get_rule_service,
+)
 from meter.constant.response_code import ResponseCode
+from meter.constant.template_path import TemplatePath
 from meter.domain.issue import IssueService
 from meter.domain.rule import CreateRule, ReadRule, RuleService, UpdateRule
+from meter.domain.smtp import EmailService
 from meter.domain.user import User
-from meter.helper import raise_custom_exception, raise_not_found_exception
+from meter.helper import (
+    get_formatted_string_from_template,
+    raise_custom_exception,
+    raise_not_found_exception,
+)
 
 router = APIRouter()
 
@@ -134,6 +145,7 @@ async def disable_rule(
 async def trigger_alert(
     rule_svc: Annotated[RuleService, Depends(get_rule_service)],
     issue_svc: Annotated[IssueService, Depends(get_issue_service)],
+    email_svc: Annotated[EmailService, Depends(get_email_service)],
     user: Annotated[User, Depends(get_current_user)],
     id: int,
 ):
@@ -142,6 +154,17 @@ async def trigger_alert(
         raise_not_found_exception()
 
     try:
-        return issue_svc.create(rule)
+        issue = issue_svc.create(rule)
+        if issue is None:
+            raise Exception
+
+        subject = get_formatted_string_from_template(
+            TemplatePath.ISSUE_TITLE.value,
+            rule_name=rule.name or rule.id,
+        )
+        content = get_formatted_string_from_template(
+            TemplatePath.ISSUE_CONTENT.value,
+        )
+        email_svc.send_noreply([user.email], subject, content)
     except Exception:
         raise_custom_exception(ResponseCode.RULE_TRIGGER_FAILED_1006)
