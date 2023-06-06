@@ -12,4 +12,4 @@ meter.toml
 
 dbconfig.py
 celeryconfig.py
-celerybeat-schedule.db
+celerybeat-schedule.*
