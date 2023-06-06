@@ -22,7 +22,9 @@ class ReportService:
                 if k != "east":
                     whole["max_supply"] += power[k]["max_supply"]
 
-            whole["recv_rate"] = (whole["max_supply"] - whole["load"]) / whole["load"]
+            whole["recv_rate"] = (
+                (whole["max_supply"] - whole["load"]) / whole["load"] * 100
+            )
             power["whole"] = whole
             new_powers.append(PowerReturn(**power))
 
