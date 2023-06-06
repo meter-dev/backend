@@ -5,6 +5,7 @@
 ```bash
 cp meter.toml.example meter.toml
 cp telery/celeryconfig.py.example telery/celeryconfig.py
+cp telery/dbconfig.py.example telery/dbconfig.py
 docker build . -t meter-web
 docker run --rm -p 8000:8000 meter-web
 # 然後就能在這邊看到 API 文件了，可以用 swagger 直接戳幾下試試

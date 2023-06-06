@@ -3,8 +3,8 @@ from datetime import datetime
 from typing import Any
 
 import httpx
-from model import PowerAreaReport, PowerReport
 
+from ..model import PowerAreaReport, PowerReport
 from .crawler import Crawler
 
 

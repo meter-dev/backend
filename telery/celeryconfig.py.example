@@ -1,0 +1,29 @@
+from celery.schedules import crontab
+
+broker_url = "pyamqp://localhost"
+result_backend = "rpc://"
+
+task_serializer = "json"
+result_serializer = "json"
+accept_content = ["json"]
+timezone = "Asia/Taipei"
+
+imports = ["telery.crawler_tasks"]
+
+beat_schedule = {
+    "Earthquake": {
+        "task": "telery.crawler_tasks.crawl_now_earthquake",
+        "schedule": crontab(minute="*/5"),
+        "args": (),
+    },
+    "Reservoir": {
+        "task": "telery.crawler_tasks.crawl_now_reservoir",
+        "schedule": crontab(minute="*/5"),
+        "args": (),
+    },
+    "SavePower": {
+        "task": "telery.crawler_tasks.crawl_power",
+        "schedule": crontab(minute="*/5"),
+        "args": (),
+    },
+}

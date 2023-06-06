@@ -15,6 +15,7 @@ pydantic = {extras = ["email"], version = "^1.10.7"}
 python-multipart = "^0.0.6"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 toml = "^0.10.2"
+celery = "^5.2.7"
 # TODO: replace it with psycopg2
 # https://www.psycopg.org/docs/install.html#psycopg-vs-psycopg-binary
 psycopg2-binary = "^2.9.6"
