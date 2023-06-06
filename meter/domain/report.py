@@ -19,7 +19,8 @@ class ReportService:
             }
             for k in ("east", "central", "south", "north"):
                 whole["load"] += power[k]["load"]
-                whole["max_supply"] += power[k]["max_supply"]
+                if k != "east":
+                    whole["max_supply"] += power[k]["max_supply"]
 
             whole["recv_rate"] = (whole["max_supply"] - whole["load"]) / whole["load"]
             power["whole"] = whole

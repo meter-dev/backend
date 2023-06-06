@@ -20,7 +20,18 @@ class TestReportClass:
     def test_get_power(self, test_client: TestClient):
         resp = test_client.get("/report/power")
         assert resp.status_code == status.HTTP_200_OK, resp.json()
-        assert "whole" in resp.json()[0].keys(), resp.json()
+        power = resp.json()[0]
+        assert "whole" in power.keys(), resp.json()
+        assert (
+            power["whole"]["max_supply"]
+            - sum(power[k]["max_supply"] for k in ("north", "central", "south"))
+            < 0.01
+        )
+        assert (
+            power["whole"]["load"]
+            - sum(power[k]["load"] for k in ("north", "central", "south", "east"))
+            < 0.01
+        )
 
     def test_get_eq(self, test_client: TestClient):
         resp = test_client.get("/report/eq")
