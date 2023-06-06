@@ -1,6 +1,5 @@
 import json
 import time
-from pprint import pprint
 
 from celery import chain
 
@@ -10,7 +9,6 @@ from telery.crawler_tasks import NowEarthquake, NowReservoir, Power
 
 @app.task
 def SavePower(data):
-    pprint(data)
     with open(
         "Power " + time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + ".json", "w"
     ) as f:
