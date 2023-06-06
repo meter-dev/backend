@@ -23,7 +23,9 @@ class ReportService:
                     whole["max_supply"] += power[k]["max_supply"]
 
             whole["recv_rate"] = (
-                (whole["max_supply"] - whole["load"]) / whole["load"] * 100
+                ((whole["max_supply"] - whole["load"]) / whole["load"] * 100)
+                if whole["load"] != 0
+                else 1000
             )
             power["whole"] = whole
             new_powers.append(PowerReturn(**power))
@@ -46,13 +48,14 @@ class ReportService:
                 ).first()
                 if dam is not None:
                     storage += dam.storage
-                    all_storage += dam.storage / dam.percent
+                    if dam.percent != 0:
+                        all_storage += dam.storage / dam.percent
             dams.append(
                 Dam(
                     name=name,
                     timestamp=0,
                     storage=storage,
-                    percent=storage / all_storage,
+                    percent=0 if all_storage == 0 else storage / all_storage,
                 )
             )
         return dams
