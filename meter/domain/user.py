@@ -2,7 +2,7 @@ from typing import Optional
 
 from passlib.hash import bcrypt
 from pydantic import EmailStr
-from sqlmodel import Field, Session, SQLModel, select
+from sqlmodel import Field, Relationship, Session, SQLModel, select
 
 
 def verify_password(
@@ -25,6 +25,7 @@ class User(UserBase, table=True):
     id: Optional[int] = Field(primary_key=True, default=None)
     password_digest: str
     active: bool = Field(default=False)
+    rules: "Rule" = Relationship(back_populates="user")
 
 
 class UserSignup(UserBase):

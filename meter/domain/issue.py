@@ -19,22 +19,18 @@ class IssueBase(SQLModel):
 
 class Issue(IssueBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: Optional[int] = Field(
+    user_id: int = Field(
         index=True,
-        default=None,
         foreign_key="user.id",
     )
-
-    rule_id: Optional[int] = Field(
+    rule_id: int = Field(
         index=True,
-        default=None,
         foreign_key="rule.id",
     )
-    rule: Optional[Rule] = Relationship(back_populates="issues")
-
+    rule: Rule = Relationship(back_populates="issues")
     created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
-    processing_at: datetime = Field(default=None, nullable=True)
-    solved_at: datetime = Field(default=None, nullable=True)
+    processing_at: Optional[datetime] = Field(default=None, nullable=True)
+    solved_at: Optional[datetime] = Field(default=None, nullable=True)
     updated_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
 
 

@@ -3,6 +3,9 @@ from datetime import datetime
 import pytest
 
 from meter.constant.issue_status import IssueStatus
+from meter.constant.rule_operator import RuleOperator
+from meter.constant.rule_position import RulePosition
+from meter.constant.rule_resource import RuleResource
 from meter.constant.template_path import TemplatePath
 from meter.domain.issue import Issue, IssueService, UpdateIssue
 from meter.domain.rule import Rule
@@ -47,9 +50,9 @@ class TestIssueDomainClass:
             id=1,
             user_id=1,
             name="foo",
-            position="Taipei",
-            resource="foo",
-            operator=">",
+            position=RulePosition.AGONGDIAN_RESERVOIR,
+            resource=RuleResource.PERCENT,
+            operator=RuleOperator.EQUAL_TO,
             value=12,
         )
         issue = self.service.create(rule)
@@ -80,9 +83,9 @@ class TestIssueDomainClass:
             id=1,
             user_id=1,
             name="foo",
-            position="Taipei",
-            resource="foo",
-            operator=">",
+            position=RulePosition.AGONGDIAN_RESERVOIR,
+            resource=RuleResource.PERCENT,
+            operator=RuleOperator.EQUAL_TO,
             value=12,
         )
         with pytest.raises(Exception):
@@ -311,9 +314,9 @@ class TestIssueDomainClass:
                 id=1,
                 user_id=1,
                 name="123",
-                position="Taipei",
-                resource="water",
-                operator=">",
+                position=RulePosition.AGONGDIAN_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.EQUAL_TO,
                 value=50,
             )
 
@@ -337,9 +340,9 @@ class TestIssueDomainClass:
                 id=1,
                 user_id=1,
                 name="1234",
-                position="Taipei2",
-                resource="water2",
-                operator="=",
+                position=RulePosition.AGONGDIAN_RESERVOIR,
+                resource=RuleResource.PERCENT,
+                operator=RuleOperator.EQUAL_TO,
                 value=60,
             )
 
