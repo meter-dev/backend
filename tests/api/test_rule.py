@@ -1,6 +1,7 @@
 from fastapi import status
 from fastapi.testclient import TestClient
 
+from meter.domain.issue import IssueService
 from meter.domain.rule import RuleService
 from meter.domain.user import UserSignup
 from tests.helper import get_authorization_header
@@ -310,8 +311,12 @@ class TestRuleClass:
 
     def test_update_rule_failed(
         self,
+        monkeypatch,
         test_client: TestClient,
     ):
+        def mock_update():
+            raise Exception
+
         user = UserSignup(
             name="foo",
             email="foo@foo.com",
@@ -319,8 +324,10 @@ class TestRuleClass:
         )
         header = get_authorization_header(test_client, user)
 
+        monkeypatch.setattr(RuleService, "update", mock_update)
+
         res = test_client.patch(
-            f"/rule/999",
+            f"/rule/1",
             json={
                 "name": "foo2",
                 "position": "Tainan2",
@@ -330,7 +337,7 @@ class TestRuleClass:
             },
             headers=header,
         )
-        assert res.status_code == status.HTTP_404_NOT_FOUND
+        assert res.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_delete_rule_unauthorized(self, test_client: TestClient):
         res = test_client.delete(f"/rule/1")
@@ -360,6 +367,9 @@ class TestRuleClass:
 
         res = test_client.delete(f"/rule/{json['id']}", headers=header)
         assert res.status_code == status.HTTP_204_NO_CONTENT
+
+        res = test_client.get(f"/rule/{json['id']}", headers=header)
+        assert res.status_code == status.HTTP_404_NOT_FOUND
 
     def test_delete_others_rule(self, test_client: TestClient):
         user = UserSignup(
@@ -391,7 +401,10 @@ class TestRuleClass:
         res = test_client.delete(f"/rule/{json['id']}", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
 
-    def test_delete_rule_failed(self, test_client: TestClient):
+    def test_delete_rule_failed(self, monkeypatch, test_client: TestClient):
+        def mock_delete():
+            raise Exception
+
         user = UserSignup(
             name="foo",
             email="foo@foo.com",
@@ -399,8 +412,27 @@ class TestRuleClass:
         )
         header = get_authorization_header(test_client, user)
 
-        res = test_client.delete(f"/rule/999", headers=header)
-        assert res.status_code == status.HTTP_404_NOT_FOUND
+        monkeypatch.setattr(RuleService, "delete", mock_delete)
+
+        res = test_client.post(
+            "/rule",
+            json={
+                "name": "foo",
+                "position": "Tainan",
+                "resource": "water",
+                "operator": "<",
+                "value": 50,
+            },
+            headers=header,
+        )
+        json = res.json()
+        id = json["id"]
+
+        res = test_client.delete(f"/rule/{id}", headers=header)
+        assert res.status_code == status.HTTP_400_BAD_REQUEST
+
+        res = test_client.get(f"/rule/{id}", headers=header)
+        assert res.status_code == status.HTTP_200_OK
 
     def test_enable_rule_unauthorized(self, test_client: TestClient):
         res = test_client.put(f"/rule/1/enable")
@@ -468,7 +500,10 @@ class TestRuleClass:
         res = test_client.put(f"/rule/{id}/enable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
 
-    def test_enable_rule_failed(self, test_client: TestClient):
+    def test_enable_rule_failed(self, monkeypatch, test_client: TestClient):
+        def mock_enable():
+            raise Exception
+
         user = UserSignup(
             name="foo",
             email="foo@foo.com",
@@ -476,8 +511,10 @@ class TestRuleClass:
         )
         header = get_authorization_header(test_client, user)
 
-        res = test_client.put(f"/rule/1/disable", headers=header)
-        assert res.status_code == status.HTTP_404_NOT_FOUND
+        monkeypatch.setattr(RuleService, "enable", mock_enable)
+
+        res = test_client.put(f"/rule/1/enable", headers=header)
+        assert res.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_disable_rule_unauthorized(self, test_client: TestClient):
         res = test_client.put(f"/rule/1/disable")
@@ -544,7 +581,10 @@ class TestRuleClass:
         res = test_client.put(f"/rule/{id}/disable", headers=header)
         assert res.status_code == status.HTTP_404_NOT_FOUND
 
-    def test_disable_rule_failed(self, test_client: TestClient):
+    def test_disable_rule_failed(self, monkeypatch, test_client: TestClient):
+        def mock_disable():
+            raise Exception
+
         user = UserSignup(
             name="foo",
             email="foo@foo.com",
@@ -552,8 +592,10 @@ class TestRuleClass:
         )
         header = get_authorization_header(test_client, user)
 
+        monkeypatch.setattr(RuleService, "disable", mock_disable)
+
         res = test_client.put(f"/rule/1/disable", headers=header)
-        assert res.status_code == status.HTTP_404_NOT_FOUND
+        assert res.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_trigger_rule_unauthorized(self, test_client: TestClient):
         res = test_client.put(f"/rule/1/trigger")
@@ -585,7 +627,8 @@ class TestRuleClass:
         res = test_client.put(f"/rule/{id}/trigger", headers=header)
         assert res.status_code == status.HTTP_204_NO_CONTENT
 
-        # TODO: more assertion after API done
+        res = test_client.get("/issue", headers=header)
+        assert len(res.json()) == 1
 
     def test_trigger_others_rule(self, test_client: TestClient):
         user = UserSignup(
@@ -617,10 +660,13 @@ class TestRuleClass:
         header = get_authorization_header(test_client, user)
 
         res = test_client.put(f"/rule/{id}/trigger", headers=header)
-        # TODO: more assertion after API done
-        # assert res.status_code == status.HTTP_404_NOT_FOUND # TODO: uncomment this after API done
 
-    def test_trigger_rule_failed(self, test_client: TestClient):
+        assert res.status_code == status.HTTP_404_NOT_FOUND
+
+    def test_trigger_rule_failed(self, monkeypatch, test_client: TestClient):
+        def mock_create():
+            raise Exception
+
         user = UserSignup(
             name="foo",
             email="foo@foo.com",
@@ -628,5 +674,19 @@ class TestRuleClass:
         )
         header = get_authorization_header(test_client, user)
 
+        monkeypatch.setattr(IssueService, "create", mock_create)
+
+        test_client.post(
+            "/rule",
+            json={
+                "name": "foo",
+                "position": "Tainan",
+                "resource": "water",
+                "operator": "<",
+                "value": 50,
+            },
+            headers=header,
+        )
+
         res = test_client.put(f"/rule/1/trigger", headers=header)
-        # assert res.status_code == status.HTTP_404_NOT_FOUND # TODO: uncomment this after API done
+        assert res.status_code == status.HTTP_400_BAD_REQUEST

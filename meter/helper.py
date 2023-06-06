@@ -25,3 +25,9 @@ def get_message_by_response_code(response_code: ResponseCode) -> str:
     if not response_code.name in Message._member_names_:
         return response_code.name.__str__()
     return Message[response_code.name].value.__str__()
+
+
+def get_formatted_string_from_template(path: str, **kwargs) -> str:
+    with open(path, "r") as f:
+        template = f.read()
+    return template.format(**kwargs)

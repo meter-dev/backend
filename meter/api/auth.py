@@ -17,7 +17,10 @@ from meter.api import (
 from meter.domain.auth import AuthService
 from meter.domain.smtp import EmailService
 from meter.domain.user import User, UserLogin, UserService
-from meter.helper import raise_unauthorized_exception
+from meter.helper import (
+    get_formatted_string_from_template,
+    raise_unauthorized_exception,
+)
 
 router = APIRouter()
 
@@ -71,9 +74,10 @@ async def send_email(
         expires_after=access_token_expires,
     )
     callback_url = f'{cfg.host}{router.url_path_for("active")}?token={access_token}'
-    with open(verify_email.template_path, "r") as f:
-        template = f.read()
-    content = template.format(callback_url=callback_url)
+    content = get_formatted_string_from_template(
+        verify_email.template_path,
+        callback_url=callback_url,
+    )
     email_svc.send_noreply(
         [user.email],
         verify_email.subject,

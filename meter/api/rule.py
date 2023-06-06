@@ -1,9 +1,10 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 
-from meter.api import get_current_user, get_rule_service
+from meter.api import get_current_user, get_issue_service, get_rule_service
 from meter.constant.response_code import ResponseCode
+from meter.domain.issue import IssueService
 from meter.domain.rule import CreateRule, ReadRule, RuleService, UpdateRule
 from meter.domain.user import User
 from meter.helper import raise_custom_exception, raise_not_found_exception
@@ -131,8 +132,16 @@ async def disable_rule(
 
 @router.put("/{id}/trigger", status_code=status.HTTP_204_NO_CONTENT)
 async def trigger_alert(
-    svc: Annotated[RuleService, Depends(get_rule_service)],
+    rule_svc: Annotated[RuleService, Depends(get_rule_service)],
+    issue_svc: Annotated[IssueService, Depends(get_issue_service)],
     user: Annotated[User, Depends(get_current_user)],
     id: int,
 ):
-    pass
+    rule = rule_svc.show(user, id)
+    if rule is None:
+        raise_not_found_exception()
+
+    try:
+        return issue_svc.create(rule)
+    except Exception:
+        raise_custom_exception(ResponseCode.RULE_TRIGGER_FAILED_1006)

@@ -42,7 +42,7 @@ def get_test_config():
         ),
         verify_email=VerifyEmailParam(
             subject="Hi",
-            template_path="./template/verify_mail.template",
+            template_path="./meter/template/verify_mail.template",
             expire=60,
         ),
         smtp=SMTPServerParam(
