@@ -87,7 +87,6 @@ def test_app(tmp_path: Path, test_session: Session):
     app.dependency_overrides[get_config] = get_test_config
     app.dependency_overrides[get_session] = get_test_session
     app.dependency_overrides[get_email_service] = get_email_service_override
-    app.dependency_overrides[get_session] = get_test_session
     yield app
     app.dependency_overrides.clear()
 

@@ -61,6 +61,10 @@ class Power(PowerReport, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
 
+class PowerReturn(Power):
+    whole: PowerAreaReport = Field(sa_column=Column(JSON), nullable=False)
+
+
 def save_crawler_report(engine, model, report):
     with Session(engine) as session:
         for r in report:

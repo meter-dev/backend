@@ -11,6 +11,7 @@ from meter.api import (
     get_current_user,
     group,
     issue,
+    report,
     rule,
     upload,
     user,
@@ -73,6 +74,7 @@ def create_app():
         ("/upload", upload),
         ("/user", user),
         ("/group", group),
+        ("/report", report),
     )
 
     for prefix, api in apis:
