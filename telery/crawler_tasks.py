@@ -1,14 +1,15 @@
 import asyncio
 import time
 
-from dbconfig import db_url
-from sqlmodel import Session, SQLModel, create_engine, select
+from sqlmodel import create_engine
 
 from crawler.crawler.dam import DamCrawler
 from crawler.crawler.eq import EqCrawler
 from crawler.crawler.power import PowerCrawler
 from crawler.model import Dam, Eq, Power, save_crawler_report
 from telery import app
+
+from .dbconfig import db_url
 
 
 @app.task
