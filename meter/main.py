@@ -7,6 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from meter.api import (
     auth,
     comment,
+    crawler,
     get_config,
     get_current_user,
     group,
@@ -73,6 +74,7 @@ def create_app():
         ("/upload", upload),
         ("/user", user),
         ("/group", group),
+        ("/crawler", crawler),
     )
 
     for prefix, api in apis:

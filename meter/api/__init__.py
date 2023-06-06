@@ -9,6 +9,7 @@ from sqlmodel import Session
 from meter.config import MeterConfig
 from meter.domain import get_engine as _get_engine
 from meter.domain.auth import AuthService
+from meter.domain.crawler import CrawlerService
 from meter.domain.issue import IssueService
 from meter.domain.rule import RuleService
 from meter.domain.smtp import EmailService
@@ -49,6 +50,10 @@ def get_rule_service(session: Annotated[Session, Depends(get_session)]):
 
 def get_issue_service(session: Annotated[Session, Depends(get_session)]):
     return IssueService(session)
+
+
+def get_crawler_service(session: Annotated[Session, Depends(get_session)]):
+    return CrawlerService(session)
 
 
 def get_current_user(
