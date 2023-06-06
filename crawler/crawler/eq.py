@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 from typing import TypedDict
 
-from model import EqReport, Geometry, Intensity, Point
+from ..model import EqReport, Geometry, Intensity, Point
 
 from .crawler import Crawler
 

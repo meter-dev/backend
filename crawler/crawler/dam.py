@@ -4,7 +4,7 @@ from typing import TypedDict
 from urllib.parse import urlencode
 
 import httpx
-from model import DamReport
+from ..model import DamReport
 
 from .crawler import Crawler
 

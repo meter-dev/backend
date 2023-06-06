@@ -8,22 +8,22 @@ result_serializer = "json"
 accept_content = ["json"]
 timezone = "Asia/Taipei"
 
-imports = ["telery.crawler_tasks", "telery.save_tasks"]
+imports = ["telery.crawler_tasks"]
 
 beat_schedule = {
-    "SaveEarthquake": {
-        "task": "telery.save_tasks.SaveNowEarthquake",
-        "schedule": crontab(minute="*/1"),
+    "Earthquake": {
+        "task": "telery.crawler_tasks.CrawlNowEarthquake",
+        "schedule": crontab(minute="*/5"),
         "args": (),
     },
-    "SaveReservoir": {
-        "task": "telery.save_tasks.SaveNowReservoir",
-        "schedule": crontab(minute="*/1"),
+    "Reservoir": {
+        "task": "telery.crawler_tasks.CrawlNowReservoir",
+        "schedule": crontab(minute="*/5"),
         "args": (),
     },
     "SavePower": {
-        "task": "telery.save_tasks.SaveNowPower",
-        "schedule": crontab(minute="*/1"),
+        "task": "telery.crawler_tasks.Power",
+        "schedule": crontab(minute="*/5"),
         "args": (),
     },
 }
