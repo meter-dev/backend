@@ -28,8 +28,3 @@ async def update_user(id: str):
     Update user properties
     """
     pass
-
-
-@router.post("/verify-email")
-async def verify_email():
-    pass
