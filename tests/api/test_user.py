@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 
 from meter.domain.user import UserSignup
 from tests.helper import get_authorization_header
+from meter.constant.response_code import ResponseCode
 
 
 def test_signup_and_login(test_client: TestClient):
@@ -112,8 +113,8 @@ def test_signup_duplicated(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
-    assert "UNIQUE constraint failed: user.name" in resp.json()["message"], resp.json()
+    assert resp.status_code == status.HTTP_400_BAD_REQUEST, resp.json()
+    assert resp.json()["code"] == ResponseCode.USER_SIGNUP_DUPLICATE_USERNAME_1301.value
 
     resp = test_client.post(
         "/user/signup",
@@ -123,8 +124,8 @@ def test_signup_duplicated(test_client: TestClient):
             "password": "foo",
         },
     )
-    assert resp.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, resp.json()
-    assert "UNIQUE constraint failed: user.email" in resp.json()["message"], resp.json()
+    assert resp.status_code == status.HTTP_400_BAD_REQUEST, resp.json()
+    assert resp.json()["code"] == ResponseCode.USER_SIGNUP_DUPLICATE_EMAIL_1302.value
 
 
 def test_login_by_email(test_client: TestClient):
