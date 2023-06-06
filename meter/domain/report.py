@@ -34,18 +34,19 @@ class ReportService:
         dams = self.session.exec(select(Dam)).all()
         keys = [["石門", "寶山第二", "永和山"], ["鯉魚潭", "德基"], ["南化", "曾文", "烏山頭"]]
         names = ["竹", "中", "南"]
-        for i in range(3):
+        for key, name in zip(keys, names):
             storage = 0
             all_storage = 0
-            for name in keys[i]:
+            for mia in key:
                 dam = self.session.exec(
-                    select(Dam).where(Dam.name == f"{name}水庫").order_by(-Dam.timestamp)
+                    select(Dam).where(Dam.name == f"{mia}水庫").order_by(-Dam.timestamp)
                 ).first()
-                storage += dam.storage
-                all_storage += dam.storage / dam.percent
+                if dam is not None:
+                    storage += dam.storage
+                    all_storage += dam.storage / dam.percent
             dams.append(
                 Dam(
-                    name=names[i],
+                    name=name,
                     timestamp=0,
                     storage=storage,
                     percent=storage / all_storage,
