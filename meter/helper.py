@@ -17,8 +17,16 @@ def raise_unauthorized_exception():
     )
 
 
-def raise_custom_exception(response_code: ResponseCode):
-    raise CustomErrorException(response_code)
+def raise_custom_exception(response_code: ResponseCode, status_code: int | None = None):
+    args = {
+        k: v
+        for k, v in [
+            ("response_code", response_code),
+            ("status_code", status_code),
+        ]
+        if v is not None
+    }
+    raise CustomErrorException(**args)
 
 
 def get_message_by_response_code(response_code: ResponseCode) -> str:

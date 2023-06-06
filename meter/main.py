@@ -54,7 +54,7 @@ def create_app():
     @app.exception_handler(CustomErrorException)
     async def custom_exception_handler(request: Request, exc: CustomErrorException):
         return JSONResponse(
-            status_code=400,
+            status_code=exc.status_code,
             content={
                 "message": get_message_by_response_code(exc.response_code),
                 "code": exc.response_code.value,

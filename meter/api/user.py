@@ -2,12 +2,12 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, status
 from pydantic import BaseModel
+from sqlalchemy.exc import IntegrityError
 
 from meter.api import get_current_user, get_user_service
-from meter.domain.user import User, UserService, UserSignup
 from meter.constant.response_code import ResponseCode
+from meter.domain.user import User, UserService, UserSignup
 from meter.helper import raise_custom_exception
-from sqlalchemy.exc import IntegrityError
 
 router = APIRouter()
 

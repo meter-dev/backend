@@ -1,9 +1,9 @@
 from fastapi import status
 from fastapi.testclient import TestClient
 
+from meter.constant.response_code import ResponseCode
 from meter.domain.user import UserSignup
 from tests.helper import get_authorization_header
-from meter.constant.response_code import ResponseCode
 
 
 def test_signup_and_login(test_client: TestClient):
@@ -201,3 +201,25 @@ def test_send_email_and_active(test_client: TestClient):
     resp = test_client.get("/me", headers=headers)
     assert resp.status_code == status.HTTP_200_OK, resp.json()
     assert resp.json()["active"] == True, resp.json()
+
+
+def test_login_failed(test_client: TestClient):
+    user = UserSignup(
+        name="foo",
+        email="foo@google.com",
+        password="foo",
+    )
+    resp = test_client.post("/user/signup", json=user.dict())
+    assert resp.status_code == status.HTTP_201_CREATED, resp.json()
+
+    resp = test_client.post("/auth/token", data={"username": "foo", "password": "fo0"})
+    assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
+    assert (
+        resp.json()["code"] == ResponseCode.AUTH_WRONG_USERNAME_OR_PASSWORD_1201.value
+    )
+
+    resp = test_client.post("/auth/token", data={"username": "fo0", "password": "foo"})
+    assert resp.status_code == status.HTTP_401_UNAUTHORIZED, resp.json()
+    assert (
+        resp.json()["code"] == ResponseCode.AUTH_WRONG_USERNAME_OR_PASSWORD_1201.value
+    )
